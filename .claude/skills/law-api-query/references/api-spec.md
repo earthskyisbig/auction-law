@@ -1,0 +1,77 @@
+# law.go.kr Open API 상세 스펙
+
+국가법령정보 공동활용(open.law.go.kr) DRF Open API 요청/응답 참조.
+검증 완료: 2026-07-14, `scripts/law_api.py`로 실호출 확인.
+
+## 엔드포인트
+| 용도 | URL |
+|------|-----|
+| 목록 검색 | `https://www.law.go.kr/DRF/lawSearch.do` |
+| 본문 조회 | `https://www.law.go.kr/DRF/lawService.do` |
+
+## 공통 파라미터
+| 파라미터 | 필수 | 설명 |
+|----------|------|------|
+| `OC` | ✅ | 인증키 = open.law.go.kr 등록 이메일의 아이디(앞부분). 미등록 시 `test`로 제한적 조회만 가능 |
+| `target` | ✅ | 조회 대상 코드 (아래 표) |
+| `type` | ✅ | 응답 형식 `JSON` \| `XML` \| `HTML`. 파싱은 JSON 권장 |
+
+## target 코드
+| target | 대상 | 비고 |
+|--------|------|------|
+| `law` | 현행법령 | 공포일 기준 |
+| `eflaw` | 시행일법령 | 특정 시행일 기준 |
+| `lsHistory` | 법령 연혁 | 제·개정 이력 |
+| `prec` | 판례 | 대법원·하급심 |
+| `detc` | 헌재결정례 | 헌법재판소 |
+| `expc` | 법령해석례 | 법제처 유권해석 |
+| `decc` | 행정심판례 | 중앙행정심판위 등 |
+| `admrul` | 행정규칙 | 고시·훈령·예규 |
+| `ordin` | 자치법규 | 조례·규칙 |
+
+## 목록 검색 (lawSearch.do) 주요 파라미터
+| 파라미터 | 설명 |
+|----------|------|
+| `query` | 검색어 |
+| `search` | 검색범위: `1`=제목/법령명/사건명(기본), `2`=본문 전체 |
+| `display` | 페이지당 건수 (기본 20, 최대 100) |
+| `page` | 페이지 번호 |
+| `sort` | 정렬: `lasc/ldes`(가나다), `dasc/ddes`(날짜), `nasc/ndes`(번호) |
+| `prncYd` | (판례) 선고일자 범위 `20200101~20241231` |
+| `curt` | (판례) 법원명 `대법원`, `서울고등법원` … |
+| `org` | (판례) 법원종류 대법원=`400201`, 하위법원=`400202` |
+| `nb` | (판례) 사건번호 |
+| `efYd` / `ancYd` | (법령) 시행일자 / 공포일자 범위 |
+
+`scripts/law_api.py`에서는 `--extra key=value` 로 위 부가 파라미터를 전달한다.
+예: `--extra curt=대법원 prncYd=20200101~20251231`
+
+## 본문 조회 (lawService.do) 주요 파라미터
+| 파라미터 | 설명 |
+|----------|------|
+| `MST` | 법령 일련번호 (목록의 `법령일련번호`). 법령 본문 조회에 사용 |
+| `ID` | 법령ID 또는 판례일련번호/해석례일련번호 등 |
+| `JO` | 조번호 6자리. 예 `000200`=제2조, `001002`=제10조의2 |
+| `LM` | 법령명 (MST/ID 대신 명칭으로 조회) |
+
+## 응답에서 이어지는 식별자 흐름
+1. `search --target law --query "주택법"` → 결과의 `법령일련번호`(MST) 확보
+2. `body --target law --mst <MST>` → 조문 전체
+3. `body --target law --mst <MST> --jo 000200` → 특정 조문만
+- 판례: 목록의 `판례일련번호` → `body --target prec --id <판례일련번호>`
+- `판례상세링크` 필드에 `ID=...` 가 그대로 들어 있어 재사용 가능
+
+## 실호출 예시
+```
+# 판례 목록
+https://www.law.go.kr/DRF/lawSearch.do?OC=algo1744&target=prec&type=JSON&query=유치권+경매&display=10
+# 법령 본문(도정법 제39조 = 조합원 자격)
+https://www.law.go.kr/DRF/lawService.do?OC=algo1744&target=law&type=JSON&MST=284065&JO=003900
+# 법령해석례
+https://www.law.go.kr/DRF/lawSearch.do?OC=algo1744&target=expc&type=JSON&query=재건축+현금청산
+```
+
+## 주의사항
+- OC 미등록/오류 시 JSON 대신 HTML 오류 페이지가 올 수 있다 → 스크립트가 경고 후 원본 출력.
+- `query`는 자동 URL 인코딩됨. 공백은 여러 키워드 AND로 동작.
+- API는 **원문 인용 근거**를 얻기 위한 것이다. 조문·판례 요지는 반드시 응답 원문에서 인용하고 임의 요약·창작하지 않는다.

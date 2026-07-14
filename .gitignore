@@ -1,0 +1,20 @@
+# 비밀
+.env
+.env.*
+!.env.example
+
+# 데이터(DuckDB)
+data/*.duckdb
+data/*.duckdb.wal
+data/*.db
+
+# 파이썬
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 작업 산출/임시
+_workspace/
+_workspace*/
+*.log
