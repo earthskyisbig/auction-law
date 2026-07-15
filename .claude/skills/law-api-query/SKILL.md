@@ -16,7 +16,7 @@ description: >
 1. 질문의 도메인을 판별한다 → `references/domain-statute-map.md`에서 검색할 법령·키워드·조문을 특정.
 2. **법령 조사관**은 `target=law`(현행법령)으로 법령→MST→조문(JO)을 확정.
 3. **판례 조사관**은 `target=prec`(판례), `target=expc`(법령해석례), `target=decc`(행정심판례)를 병행 조회.
-4. 검색범위가 애매하면 `search=2`(본문 검색)로 재조회.
+4. 결과가 없으면 **키워드를 변형**해 재조회한다(동의어·법률용어·조문명). ⚠️ `search=2`(본문검색)는 API가 무관한 결과를 반환하므로 **사용 금지**(2026-07-15 실측, OC 무관 — `docs/ERRORS.md` 참조).
 
 ## 도구
 공용 스크립트: `scripts/law_api.py` (표준 라이브러리만 사용, 설치 불필요).
@@ -25,7 +25,7 @@ description: >
 # 목록 검색
 python scripts/law_api.py search --target prec --query "유치권 경매" --display 10
 python scripts/law_api.py search --target law  --query "도시 및 주거환경정비법"
-python scripts/law_api.py search --target expc --query "재건축 현금청산" --search 2
+python scripts/law_api.py search --target expc --query "재건축 현금청산"   # search=1(기본)만 사용
 
 # 본문 조회 (목록에서 얻은 MST/ID 사용)
 python scripts/law_api.py body --target law  --mst 284065            # 법령 전체 조문

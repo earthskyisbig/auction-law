@@ -131,7 +131,7 @@ law.go.kr API는 `OC`라는 인증값을 쓰는데, **기본값 `test`로도 법
 | `사용자 정보 검증에 실패하였습니다` | OC는 맞지만 **호출 IP 미등록** (OC 문제 아님) | IP 등록, 또는 `.env`에서 `LAW_OC` 삭제 → `test` 사용 |
 | `python: command not found` | 파이썬 미설치/PATH 누락 | Python 3.8+ 설치 (Windows는 "Add to PATH" 체크) |
 | 에이전트가 안 뜬다 | 다른 폴더에서 실행 | `cd auction-law` 후 Claude Code 실행 (`.claude/`가 있는 폴더) |
-| 법령해석례 검색이 이상 | `test` OC는 본문검색(search=2) 제한 | 제목검색(기본)을 쓰거나 본인 OC 등록 |
+| 검색 결과가 엉뚱함 | `--search 2`(본문검색) 사용 — API가 무관한 결과를 반환함(OC 무관) | 기본 검색(`search=1`)만 쓰고 **키워드를 바꿔** 재검색 |
 
 더 많은 사례: [`docs/ERRORS.md`](docs/ERRORS.md)
 
