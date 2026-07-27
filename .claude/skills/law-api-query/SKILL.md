@@ -14,9 +14,19 @@ description: >
 
 ## 언제 무엇을 조회하나
 1. 질문의 도메인을 판별한다 → `references/domain-statute-map.md`에서 검색할 법령·키워드·조문을 특정.
-2. **법령 조사관**은 `target=law`(현행법령)으로 법령→MST→조문(JO)을 확정.
-3. **판례 조사관**은 `target=prec`(판례), `target=expc`(법령해석례), `target=decc`(행정심판례)를 병행 조회.
+2. **법령 조사관**은 `target=law`(현행법령)으로 법령→MST→조문(JO)을 확정. 세율표 등 별표 수치는 `target=licbyl`.
+3. **판례 조사관**은 `target=prec`(판례), `target=expc`(법령해석례), `target=decc`(행정심판례)를 병행 조회. 세무 쟁점은 `target=ttSpecialDecc`(조세심판원 결정례)도 조회.
 4. 결과가 없으면 **키워드를 변형**해 재조회한다(동의어·법률용어·조문명). ⚠️ `search=2`(본문검색)는 API가 무관한 결과를 반환하므로 **사용 금지**(2026-07-15 실측, OC 무관 — `docs/ERRORS.md` 참조).
+
+## 기계판독 마커 (실패를 자연어로만 쓰다가 놓치는 것 방지)
+`law_api.py`는 조회가 실패하거나 결과가 0건이면 JSON 출력 **앞에** 아래 마커를 한 줄 찍는다. 조사관은 이 마커를 보고 판단하고, 사람이 읽는 자연어 요약("결과 없음" 등)만으로 스스로 재해석하지 않는다.
+- `[NOT_FOUND]` — 검색 결과 0건. API 자체는 정상 응답했다는 뜻(추측 아님). → 키워드 변형 재검색.
+- `[ERROR:HTTP_xxx]` / `[ERROR:NETWORK]` — 요청 자체가 실패(HTTP 에러·타임아웃·연결 실패). → "확인 안 됨"이 아니라 **"조회 실패"**로 구분 보고(원인이 다르면 사용자 조치가 다르다 — OC/IP 등록 확인 필요).
+- `[ERROR:PARSE_FAILED]` — JSON이 아닌 응답(HTML 등). 보통 OC/IP 미등록·파라미터 오류. → "조회 실패"로 보고.
+이 마커는 `_workspace/` 산출물에 근거 없음을 적을 때도 그대로 인용해 legal-analyst가 "결과 없음(NOT_FOUND)"과 "조회 실패(ERROR)"를 혼동하지 않게 한다.
+
+## 캐싱
+`law_api.py`는 파일 기반 캐시를 자동 적용한다 — **검색(search) TTL 1시간, 본문(body) TTL 24시간** (스크립트 옆 `.cache/`에 저장, `.gitignore` 처리됨). 조사관 2명이 병렬로 비슷한 질의를 던질 때 중복 호출을 줄인다. 인용 사후검증처럼 **최신 원문을 다시 확인해야 하는 경우**에는 `--no-cache`를 붙인다 (전역 옵션이라 서브커맨드 앞에 온다: `python law_api.py --no-cache body --target law --mst ...`).
 
 ## 도구
 공용 스크립트: `scripts/law_api.py` (표준 라이브러리만 사용, 설치 불필요).

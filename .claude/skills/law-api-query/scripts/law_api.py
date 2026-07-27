@@ -24,16 +24,32 @@
   --type JSON|XML|HTML (기본 JSON)
   --oc OC직접지정 (환경변수보다 우선)
   --raw  가공 없이 원본 응답 출력
+  --no-cache  캐시 무시(검색 1h/본문 24h TTL 자동 캐시) — 서브커맨드 앞에 붙일 것
+
+마커(자동 판정, 조사관은 이 마커를 근거로 판단할 것):
+  [NOT_FOUND]           검색 결과 0건 (API 정상 응답)
+  [ERROR:HTTP_xxx]       HTTP 요청 실패
+  [ERROR:NETWORK]        네트워크/타임아웃 실패
+  [ERROR:PARSE_FAILED]   JSON 아닌 응답(OC/IP 미등록 가능성)
 """
 import argparse
+import hashlib
 import json
 import os
 import sys
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 
 SEARCH_URL = "https://www.law.go.kr/DRF/lawSearch.do"
 BODY_URL = "https://www.law.go.kr/DRF/lawService.do"
+
+# 파일 기반 캐시 — 조사관 2명이 병렬로 유사 질의를 던져 중복 호출이 실제로 발생하므로 도입.
+# (korean-law-mcp 참고: 검색 1h / 본문 24h TTL. `_workspace/reference_comparison.md` §4.5)
+CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".cache")
+SEARCH_TTL = 3600      # 1시간
+BODY_TTL = 86400       # 24시간
 
 # target 코드 -> 사람이 읽는 이름 (참조용)
 TARGETS = {
@@ -46,6 +62,8 @@ TARGETS = {
     "decc": "행정심판례",
     "admrul": "행정규칙",
     "ordin": "자치법규",
+    "ttSpecialDecc": "조세심판원 결정례(특별행정심판)",  # 2026-07-27 추가, 실호출 검증 완료
+    "licbyl": "법령 별표·서식",  # 2026-07-27 추가. search는 정상 동작(별표명 검색), body는 HTML 위젯만 반환하므로 호출 금지 — search 결과의 별표서식파일링크/PDF파일링크를 그대로 쓸 것
 }
 
 
@@ -53,13 +71,78 @@ def get_oc(cli_oc=None):
     return cli_oc or os.environ.get("LAW_OC") or "test"
 
 
-def _request(url, params):
+def _cache_path(full_url):
+    h = hashlib.sha1(full_url.encode("utf-8")).hexdigest()
+    return os.path.join(CACHE_DIR, f"{h}.json")
+
+
+def _cache_get(full_url, ttl):
+    path = _cache_path(full_url)
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            entry = json.load(f)
+    except (OSError, json.JSONDecodeError):
+        return None
+    if time.time() - entry.get("cached_at", 0) > ttl:
+        return None
+    return entry.get("raw")
+
+
+def _cache_set(full_url, raw):
+    try:
+        os.makedirs(CACHE_DIR, exist_ok=True)
+        with open(_cache_path(full_url), "w", encoding="utf-8") as f:
+            json.dump({"cached_at": time.time(), "full_url": full_url, "raw": raw}, f, ensure_ascii=False)
+    except OSError:
+        pass  # 캐시 쓰기 실패는 치명적이지 않으므로 무시
+
+
+def _request(url, params, ttl=0, no_cache=False):
     qs = urllib.parse.urlencode(params, encoding="utf-8")
     full = f"{url}?{qs}"
+
+    if ttl and not no_cache:
+        cached = _cache_get(full, ttl)
+        if cached is not None:
+            sys.stderr.write(f"[캐시 HIT, TTL {ttl}s] {full}\n")
+            return full, cached
+
     req = urllib.request.Request(full, headers={"User-Agent": "Mozilla/5.0"})
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        raw = resp.read().decode("utf-8", errors="replace")
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            raw = resp.read().decode("utf-8", errors="replace")
+    except urllib.error.HTTPError as e:
+        print(f"[ERROR:HTTP_{e.code}] 요청 실패 — {e.reason}")
+        sys.stderr.write(f"[요청] {full}\n[에러] HTTP {e.code} {e.reason}\n")
+        sys.exit(1)
+    except (urllib.error.URLError, TimeoutError) as e:
+        print(f"[ERROR:NETWORK] 요청 실패 — {e}")
+        sys.stderr.write(f"[요청] {full}\n[에러] {e}\n")
+        sys.exit(1)
+
+    if ttl and not no_cache:
+        _cache_set(full, raw)
     return full, raw
+
+
+def _find_total_cnt(obj):
+    """응답 JSON 어디에 있든 totalCnt(검색결과 건수)를 재귀적으로 찾는다.
+    target마다 최상위 키(LawSearch/PrecSearch/...)가 달라 위치를 하드코딩하지 않는다."""
+    if isinstance(obj, dict):
+        if "totalCnt" in obj:
+            return obj["totalCnt"]
+        for v in obj.values():
+            found = _find_total_cnt(v)
+            if found is not None:
+                return found
+    elif isinstance(obj, list):
+        for v in obj:
+            found = _find_total_cnt(v)
+            if found is not None:
+                return found
+    return None
 
 
 def search(args):
@@ -78,7 +161,7 @@ def search(args):
         for kv in args.extra:
             k, _, v = kv.partition("=")
             params[k] = v
-    full, raw = _request(SEARCH_URL, params)
+    full, raw = _request(SEARCH_URL, params, ttl=SEARCH_TTL, no_cache=args.no_cache)
     _emit(full, raw, args)
 
 
@@ -100,7 +183,7 @@ def body(args):
         for kv in args.extra:
             k, _, v = kv.partition("=")
             params[k] = v
-    full, raw = _request(BODY_URL, params)
+    full, raw = _request(BODY_URL, params, ttl=BODY_TTL, no_cache=args.no_cache)
     _emit(full, raw, args)
 
 
@@ -111,11 +194,18 @@ def _emit(full, raw, args):
         return
     try:
         data = json.loads(raw)
-        print(json.dumps(data, ensure_ascii=False, indent=2))
     except json.JSONDecodeError:
         sys.stderr.write("[경고] JSON 파싱 실패 — 원본을 출력합니다 "
                          "(OC 미등록/파라미터 오류/HTML 응답 가능).\n")
+        print("[ERROR:PARSE_FAILED] JSON이 아닌 응답 — OC 미등록/IP 미등록/파라미터 오류 가능성. "
+              "아래는 원본 응답이다.")
         print(raw)
+        return
+
+    total = _find_total_cnt(data)
+    if total is not None and str(total) == "0":
+        print("[NOT_FOUND] 검색 결과 0건 — 키워드를 바꿔 재검색할 것 (search=2 본문검색은 사용 금지).")
+    print(json.dumps(data, ensure_ascii=False, indent=2))
 
 
 def main():
@@ -123,6 +213,7 @@ def main():
     p.add_argument("--oc")
     p.add_argument("--type", default="JSON", choices=["JSON", "XML", "HTML"])
     p.add_argument("--raw", action="store_true")
+    p.add_argument("--no-cache", action="store_true", help="캐시 무시하고 항상 새로 조회(인용 사후검증 등 최신성이 중요할 때)")
     p.add_argument("--extra", nargs="*", help="추가 파라미터 key=value (예: curt=대법원 prncYd=20200101~20241231)")
     sub = p.add_subparsers(dest="cmd", required=True)
 

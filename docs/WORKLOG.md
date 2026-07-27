@@ -25,6 +25,15 @@
 - **웹앱 보고서**: 경매 보고서 디자인 표준(네이비 #1e293b + 색상코딩) 적용한 HTML Artifact 게시. 라이트/다크 테마.
 - **workspace-init**: 표준 구조 부트스트랩. `.env`에 LAW_OC=myung7788 세팅.
 
+### 2026-07-27
+- **외부 레퍼런스 비교**: `nounweb/k-law`(AI 중재 연구 프로젝트, 우리와 무관)와 `korean-law-mcp`(law.go.kr을 감싼 MCP 서버, 42 API→핵심 툴로 압축)를 조사해 우리 하네스와 비교. 결과: `_workspace/reference_comparison.md`. MCP화는 보류(우리 강점=파이썬 표준 라이브러리만 씀, 컨텍스트 비용 0을 잃을 이유 없음), 대신 3가지를 하네스에 반영하기로 함.
+- **반영 1 — 인용 사후검증 게이트**: `legal-analyst`가 보고서 초안을 사용자에게 보여주기 전에, 인용한 조문·판례를 `law_api.py`로 재조회해 ✓/✗/⚠ 표시하는 단계를 `realestate-law-analysis` 스킬·`legal-analyst.md`·오케스트레이터 Phase 3에 추가.
+- **반영 2 — 기계판독 마커**: `law_api.py`에 `[NOT_FOUND]`(검색 0건)·`[ERROR:HTTP_*]`/`[ERROR:NETWORK]`/`[ERROR:PARSE_FAILED]`(조회 자체 실패) 마커를 도입. 이전엔 사람이 읽는 문장으로만 실패를 알렸는데, "결과 없음"과 "조회 실패"를 조사관이 혼동할 여지가 있어 기계가 판별 가능한 신호를 추가(korean-law-mcp의 `isError` 플래그 아이디어 차용).
+- **반영 3 — 판례 생사 확인 습관화**: `precedent-researcher`에게 판례 인용 전 "최근 5년 내 변경·파기 여부"를 별도 검색으로 확인하는 단계를 의무화(유치권·법정지상권·조합원 지위처럼 판례 변천이 잦은 쟁점에서 옛 판례를 현행 기준처럼 잘못 인용하는 사고 방지).
+- **반영 4 — 커버리지 확장(조세심판원·별표서식) + 캐싱**:
+  - `law_api.py`에 `target=ttSpecialDecc`(조세심판원 결정례)·`licbyl`(법령 별표·서식) 추가. **직접 실호출로 검증**(GitHub `ChangooLee/mcp-kr-legislation` 소스에서 target 코드명을 확인 후, 우리 OC로 재검증): `ttSpecialDecc`는 search·body 모두 정상(재결요지·이유 원문 확보 가능), `licbyl`은 **search만 정상**이고 **body는 JSON도 파일도 아닌 HTML 위젯만 반환**해 호출 금지 처리 — search 결과 필드(`별표서식파일링크`/`별표서식PDF파일링크`)를 그대로 쓰도록 문서화(`api-spec.md`, `statute-researcher.md`, `tax-advisor.md`, `realestate-tax-analysis/SKILL.md`).
+  - `law_api.py`에 파일 기반 캐시 추가(검색 TTL 1h·본문 TTL 24h, `scripts/.cache/`, `.gitignore` 처리) + `--no-cache` 플래그(인용 사후검증처럼 최신성이 중요할 때 우회). 캐시 hit/miss/무시 3가지 경로를 실측 확인.
+
 ## 부딪힌 문제와 해결 ★
 > 강의 하이라이트. 증상 → 원인 → 해결 → 교훈. (상세 로그는 docs/ERRORS.md)
 

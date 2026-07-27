@@ -18,3 +18,6 @@ venv/
 _workspace/
 _workspace*/
 *.log
+
+# law.go.kr API 응답 파일 캐시 (검색 1h/본문 24h TTL, law_api.py 자동 생성)
+.claude/skills/law-api-query/scripts/.cache/
