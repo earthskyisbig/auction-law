@@ -15,12 +15,13 @@ description: >
 에이전트 팀을 구성·조율한다.
 
 ## 실행 모드
-**에이전트 팀** (팬아웃/팬인 → 종합). 기본 3명 + 세무 쟁점 시 1명:
+**에이전트 팀** (팬아웃/팬인 → 종합 → 독립검증). 기본 4명 + 세무 쟁점 시 1명:
 | 에이전트 | 역할 | 스킬 | 포함 조건 |
 |----------|------|------|-----------|
-| `legal-analyst` (리더) | 도메인 판별·쟁점 도출·종합·보고서 | realestate-law-analysis | 항상 |
+| `legal-analyst` (리더) | 도메인 판별·쟁점 도출·종합·보고서 초안 | realestate-law-analysis | 항상 |
 | `statute-researcher` | 법령·조문(세법 포함) 조회 | law-api-query | 항상 |
 | `precedent-researcher` | 판례·법령해석례·예규 조회 | law-api-query | 항상 |
+| `citation-verifier` | 최종 보고서 인용 독립 재검증(2차 시야) | citation-verification | 항상 (최종 출력 전 필수 게이트) |
 | `tax-advisor` | 세금 이벤트 판별·세액 산출·절세 | realestate-tax-analysis | **세무 쟁점 있을 때** |
 
 **세무 쟁점 감지**: 질문에 취득세·양도세·종부세·재산세·부가세·상속증여세·중과·비과세·절세·입주권 세금·매매사업자/법인 과세 등이 있으면 `tax-advisor`를 팀에 포함한다. 세금 조사는 새 조사관을 만들지 않고 기존 `statute-researcher`(세법 조문)·`precedent-researcher`(국세 판례·예규)를 재사용한다.
@@ -37,7 +38,7 @@ description: >
   조회 제한 가능성을 사용자에게 고지.
 
 ## Phase 1: 팀 구성 & 도메인 판별
-1. 세무 쟁점 감지 → 팀원 구성 결정(기본 3명, 세무 시 tax-advisor 추가).
+1. 세무 쟁점 감지 → 팀원 구성 결정(기본 4명 — legal-analyst·statute-researcher·precedent-researcher·citation-verifier, 세무 시 tax-advisor 추가).
 2. `TeamCreate`로 `부동산법률팀` 구성.
 3. `legal-analyst`가 법률 도메인·쟁점을 판별(`law-api-query/references/domain-statute-map.md` + `realestate-law-analysis/references/issue-checklists.md`). 세무 포함 시 `tax-advisor`가 세금 이벤트·납세자 구조를 판별(`realestate-tax-analysis/references/tax-map.md`).
 
@@ -54,10 +55,14 @@ description: >
 1. `legal-analyst`가 조문↔판례 교차 검증. `tax-advisor`는 세법 근거로 세액 산출(중과·특례 반영) → `_workspace/tax_analysis.md`.
 2. **법률·세무 정합**: 재건축 입주권 성립 시점 등 공통 전제를 legal-analyst ↔ tax-advisor가 맞춘다.
 3. 근거 부족 쟁점은 조사관에게 1회 추가 검색 재요청.
-4. `legal-analyst`가 법률+세무를 `_workspace/03_analyst_report.md`에 종합.
-5. **인용 사후검증**: 사용자 출력 전, `legal-analyst`가 보고서에 인용한 조문·판례를 `law_api.py`로 재조회해 ✓/✗/⚠ 표시(`realestate-law-analysis` 스킬 참조). ✗가 나오면 보고서를 수정한 뒤에만 다음 단계로 진행.
-6. 검증 완료된 보고서를 사용자에게 요약.
-7. 팀 정리(`TeamDelete`).
+4. `legal-analyst`가 법률+세무를 `_workspace/03_analyst_report.md`에 종합(초안).
+
+## Phase 4: 독립 검증 (필수 게이트 — 생략 불가)
+1. `legal-analyst`가 `citation-verifier`에게 `_workspace/03_analyst_report.md` 경로를 `SendMessage`로 전달.
+2. `citation-verifier`는 `citation-verification` 스킬 절차대로 **작성 과정과 무관하게 처음부터 재검증**한다(보고서에 이미 붙은 ✓/✗/⚠는 참고만 하고 신뢰하지 않음). 결과를 `_workspace/04_verification_report.md`에 저장.
+3. **PASS** → 다음 단계로. **FAIL/부분PASS** → `citation-verifier`가 구체적 불일치 항목을 `legal-analyst`에게 통지 → `legal-analyst`가 보고서 수정 → `citation-verifier`가 **바뀐 항목만** 재검증(1회 반복까지만, 그 이상 반복되면 남은 불확실성을 보고서에 명시하고 진행).
+4. 검증 완료(PASS 또는 잔여 이슈 명시)된 보고서를 사용자에게 요약.
+5. 팀 정리(`TeamDelete`).
 
 ## 데이터 전달 프로토콜
 - 태스크 기반(조율) + 파일 기반(산출물, `_workspace/{phase}_{agent}_{artifact}.md`) + 메시지 기반(실시간 지시).

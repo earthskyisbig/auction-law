@@ -36,7 +36,7 @@ python scripts/check_setup.py
 아래처럼 나오면 **끝입니다**:
 ```
 [  OK  ] 파이썬 3.13.5
-[  OK  ] 하네스 파일: 에이전트 4개 · 스킬 4개
+[  OK  ] 하네스 파일: 에이전트 5개 · 스킬 5개
 [  OK  ] law.go.kr 조회 성공 — 예: '주택법' 확인됨
 준비 완료.
 ```
@@ -80,22 +80,25 @@ claude
 ```
 auction-law/
 ├─ .claude/
-│  ├─ agents/            에이전트 4명 (팀으로 협업)
-│  │   ├─ legal-analyst          팀 리더 — 쟁점 도출·종합·보고서
+│  ├─ agents/            에이전트 5명 (팀으로 협업)
+│  │   ├─ legal-analyst          팀 리더 — 쟁점 도출·종합·보고서 초안
 │  │   ├─ statute-researcher     법령·조문 조사
 │  │   ├─ precedent-researcher   판례·유권해석 조사
+│  │   ├─ citation-verifier      독립 인용 검증 (2차 시야, 최종 출력 전 필수)
 │  │   └─ tax-advisor            세무 자문 (세금 질문 시 합류)
-│  └─ skills/            스킬 4개
+│  └─ skills/            스킬 5개
 │      ├─ law-api-query              law.go.kr API 조회 (+ 조회 스크립트)
 │      ├─ realestate-law-analysis    법률 분석 절차·쟁점 체크리스트
 │      ├─ realestate-tax-analysis    세무 분석·세율표
+│      ├─ citation-verification      인용 사후검증 절차
 │      └─ realestate-law-orchestrator 팀 조율 (자동 실행됨)
 ├─ design/               보고서 웹앱 템플릿 + 디자인 시스템
 ├─ docs/                 워크로그 · 에러 재발방지 · 강의자료
+├─ wiki/                 미리 조사해둔 경매·세법 쟁점 40개 (재사용 지식 자산)
 └─ scripts/check_setup.py 설치 점검
 ```
 
-**동작 방식**: 질문 → `legal-analyst`가 도메인·쟁점 판별 → 조사관 2명이 **병렬로** 법령·판례 조회 → (세금이면 `tax-advisor` 합류) → 교차 검증 후 근거와 함께 종합.
+**동작 방식**: 질문 → `legal-analyst`가 도메인·쟁점 판별 → 조사관 2명이 **병렬로** 법령·판례 조회(위키에 이미 있으면 재활용) → (세금이면 `tax-advisor` 합류) → 교차 검증 종합 → `citation-verifier`가 **독립적으로** 인용을 재검증(2차 시야) → 통과한 근거로만 최종 답변.
 
 직접 조회해보고 싶다면:
 ```bash
