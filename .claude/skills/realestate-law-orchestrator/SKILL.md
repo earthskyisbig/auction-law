@@ -44,6 +44,7 @@ description: >
 ## Phase 2: 병렬 조사 (팬아웃)
 1. `TaskCreate`로 조사 작업 등록.
 2. `statute-researcher`·`precedent-researcher`(및 세무 시 `tax-advisor`) 스폰 시 **`isolation` 파라미터를 지정하지 않는다**(worktree 금지 — 위 경고 참조).
+2-1. 경매 쟁점이면 조사관에게 `wiki/INDEX.md`(경매 쟁점 위키, `_workspace/`와 달리 git 커밋되는 영구 자산)를 먼저 확인하도록 지시 — 이미 조사된 항목은 재조사 대신 재검증만 한다.
 3. `SendMessage`로 검색 지시 배분:
    - `statute-researcher` → 법령·조문(세무 시 세법 조문 포함) → `_workspace/01_statute_findings.md`
    - `precedent-researcher` → 판례·법령해석례·예규 → `_workspace/02_precedent_findings.md`

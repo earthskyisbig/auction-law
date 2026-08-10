@@ -34,6 +34,10 @@
   - `law_api.py`에 `target=ttSpecialDecc`(조세심판원 결정례)·`licbyl`(법령 별표·서식) 추가. **직접 실호출로 검증**(GitHub `ChangooLee/mcp-kr-legislation` 소스에서 target 코드명을 확인 후, 우리 OC로 재검증): `ttSpecialDecc`는 search·body 모두 정상(재결요지·이유 원문 확보 가능), `licbyl`은 **search만 정상**이고 **body는 JSON도 파일도 아닌 HTML 위젯만 반환**해 호출 금지 처리 — search 결과 필드(`별표서식파일링크`/`별표서식PDF파일링크`)를 그대로 쓰도록 문서화(`api-spec.md`, `statute-researcher.md`, `tax-advisor.md`, `realestate-tax-analysis/SKILL.md`).
   - `law_api.py`에 파일 기반 캐시 추가(검색 TTL 1h·본문 TTL 24h, `scripts/.cache/`, `.gitignore` 처리) + `--no-cache` 플래그(인용 사후검증처럼 최신성이 중요할 때 우회). 캐시 hit/miss/무시 3가지 경로를 실측 확인.
 
+- **경매 쟁점 위키 구축**: "부동산경매 자주 마주치는 사건·쟁점을 정리하고 LLM 위키로 저장·재활용하게 해달라"는 요청 → 우선 22개 쟁점 후보를 카테고리별로 목록화해 제시, 사용자가 핵심 10개(말소기준권리·유치권·법정지상권·대항력·최우선변제·배당순위·당해세·매각불허가·인도명령·체납관리비)를 선택. `wiki/INDEX.md` + `wiki/auction/TEMPLATE.md`(핵심판정/성립요건/관련법령표/관련판례표/실무체크포인트/흔한오해/리스크/근거출처/조사한계 8단 구조)를 먼저 만들고, general-purpose 에이전트 10개를 병렬(백그라운드)로 스폰해 각자 한 쟁점씩 law_api.py로 실조사 후 위키 파일 작성 + INDEX 행 갱신까지 맡김. 전부 완료(예: 체납관리비 항목은 대법원 2004다3598 판결이유 전문 확보, 2001다8677 전합은 API DB 미수록임을 실측해 "확인 안 됨"으로 정직하게 표시).
+- **위키를 실제로 "필요시 활용"되게 배선**: `law-api-query/SKILL.md`에 "위키 우선 확인" 절 추가(신규 조회 전 `wiki/INDEX.md` 먼저 확인 → 있으면 조문번호만 재검증 후 재활용, 6개월 지나면 재조사 권장), `statute-researcher.md`·`precedent-researcher.md`·`realestate-law-analysis/SKILL.md`·오케스트레이터 Phase 2에 동일 지침 연결. `_workspace/`(세션별 임시, gitignore)와 달리 `wiki/`는 **git 커밋되는 영구 자산**으로 설계.
+- **위키 2차 확장(11~20번)**: 사용자가 "나머지도 같은 방식으로"라고 요청 → 보류 목록 10개(선순위 가압류·가처분·가등기, 배당요구종기, 상가임차인 대항력·권리금, 재매각, 무잉여, 지분경매 공유물분할, 농지취득자격증명, 선순위 전세권, 조합원 지위 승계(경매 취득 시), 투기과열지구 조합원 지위 양도제한)를 동일 패턴(general-purpose 에이전트 10개 병렬 백그라운드, TEMPLATE.md 8단 구조, 각자 INDEX 행 갱신)으로 조사. 총 20개 항목 완료. 19·20번은 겹치는 주제(조합원 지위)를 "예외 인정 여부" vs "제한 원칙·위반 효과"로 초점을 나눠 중복을 피함.
+
 ## 부딪힌 문제와 해결 ★
 > 강의 하이라이트. 증상 → 원인 → 해결 → 교훈. (상세 로그는 docs/ERRORS.md)
 

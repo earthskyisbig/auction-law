@@ -14,6 +14,8 @@
 | 2026-07-14 | 초기 구성 (팀 3인 + 스킬 3종) | 전체 | - |
 | 2026-07-14 | 등록 OC=myung7788 반영 + IP 등록 요건 문서화 | law-api-query, CLAUDE.md | 실호출 시 IP 미등록 검증 실패 발견 |
 | 2026-07-14 | 세무 자문관(tax-advisor) + realestate-tax-analysis 스킬 추가, 오케스트레이터에 조건부 편성 | agents/tax-advisor.md, skills/realestate-tax-analysis, orchestrator | 세무 쟁점(취득세·양도세·종부세 등) 대응 확장 요청 |
+| 2026-07-27 | 경매 쟁점 위키(`wiki/`) 신설 — 핵심 10개 쟁점(말소기준권리·유치권·법정지상권·대항력·최우선변제·배당순위·당해세·매각불허가·인도명령·체납관리비)을 미리 조사해 영구 저장, 조사관이 신규 조회 전 우선 참조하도록 스킬에 연결 | wiki/INDEX.md, wiki/auction/*, law-api-query/SKILL.md, statute-researcher.md, precedent-researcher.md | 반복 질문마다 같은 쟁점을 매번 재조사하는 비용을 줄이고 재사용 가능한 지식 자산 구축 요청 |
+| 2026-07-27 | 경매 쟁점 위키 2차 확장(11~20번) — 선순위 가압류·가처분·가등기, 배당요구종기, 상가임차인 대항력·권리금, 재매각, 무잉여, 지분경매 공유물분할, 농지취득자격증명, 선순위 전세권, 조합원 지위 승계(경매), 투기과열지구 조합원 지위 양도제한 | wiki/INDEX.md, wiki/auction/11~20-*.md | 사용자가 보류 목록 전체를 같은 방식으로 추가 조사 요청 — 위키 총 20개 항목 |
 
 
 ## 워크스페이스 표준 (workspace-init)
