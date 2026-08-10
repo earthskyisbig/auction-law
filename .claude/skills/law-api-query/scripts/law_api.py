@@ -127,6 +127,17 @@ def _request(url, params, ttl=0, no_cache=False):
     return full, raw
 
 
+def _find_no_match_placeholder(obj):
+    """정상 JSON이지만 '일치하는 판례가 없습니다' 류의 안내문 하나만 담긴 응답을 감지한다.
+    (2026-08-10 실측: target=prec body 조회에서 국세법령정보시스템 출처 판례가 이 형태로 옴 —
+    totalCnt 필드 자체가 없어 _find_total_cnt로는 못 잡는다.)"""
+    if isinstance(obj, dict) and len(obj) == 1:
+        v = next(iter(obj.values()))
+        if isinstance(v, str) and ("없습니다" in v or "존재하지" in v):
+            return v
+    return None
+
+
 def _find_total_cnt(obj):
     """응답 JSON 어디에 있든 totalCnt(검색결과 건수)를 재귀적으로 찾는다.
     target마다 최상위 키(LawSearch/PrecSearch/...)가 달라 위치를 하드코딩하지 않는다."""
@@ -205,6 +216,12 @@ def _emit(full, raw, args):
     total = _find_total_cnt(data)
     if total is not None and str(total) == "0":
         print("[NOT_FOUND] 검색 결과 0건 — 키워드를 바꿔 재검색할 것 (search=2 본문검색은 사용 금지).")
+
+    placeholder = _find_no_match_placeholder(data)
+    if placeholder:
+        print(f'[NOT_FOUND] 본문 없음 — API가 "{placeholder}"라고 응답함(정상 JSON, 내용 없음). '
+              "목록(search)에는 있어도 본문(body) 출처가 다른 시스템(예: 국세법령정보시스템)이면 이렇게 나올 수 있다.")
+
     print(json.dumps(data, ensure_ascii=False, indent=2))
 
 
