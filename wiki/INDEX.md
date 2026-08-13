@@ -34,10 +34,16 @@ law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조
 | 18 | 선순위 전세권의 배당요구 여부에 따른 인수/소멸 | 특수물건 | [18-jeonsegwon-inswu-somyeol.md](auction/18-jeonsegwon-inswu-somyeol.md) | 완료 | 2026-07-27 |
 | 19 | 조합설립인가 후 경매 취득 시 조합원 지위 승계 여부 | 재개발·재건축 연계 | [19-johapwon-jiwi-seunggye.md](auction/19-johapwon-jiwi-seunggye.md) | 완료 | 2026-07-27 |
 | 20 | 투기과열지구 조합원 지위 양도 제한과 경매 예외 | 재개발·재건축 연계 | [20-tugigwayeoljigu-johapwon-yangdo.md](auction/20-tugigwayeoljigu-johapwon-yangdo.md) | 완료 | 2026-07-27 |
+| 21 | 명도소송(인도청구소송) 절차 | 명도절차 | [21-myeongdosongsong.md](auction/21-myeongdosongsong.md) | 완료 | 2026-08-10 |
+| 22 | 인도명령 6월 도과의 법적 성질과 효과 | 명도절차 | [22-indomyeongryeong-6wol-dogwa.md](auction/22-indomyeongryeong-6wol-dogwa.md) | 완료 | 2026-08-10 |
+| 23 | 점유이전금지가처분 | 명도절차 | [23-jeomyuijeon-geumjigacheobun.md](auction/23-jeomyuijeon-geumjigacheobun.md) | 완료 | 2026-08-10 |
+| 24 | 부동산 인도 강제집행 절차 | 명도절차 | [24-budongsan-indojipaeng.md](auction/24-budongsan-indojipaeng.md) | 완료 | 2026-08-10 |
+| 25 | 유체동산(이삿짐) 처리 절차 | 명도절차 | [25-yuchedongsan-cheori.md](auction/25-yuchedongsan-cheori.md) | 완료 | 2026-08-10 |
+| 26 | 상가건물 임대차보호법상 경매 시 임차권 소멸/인수 | 명도절차 | [26-sangga-imdaeeup-somyeol.md](auction/26-sangga-imdaeeup-somyeol.md) | 완료 | 2026-08-10 |
 
 ## 경매 3차 확장 후보 (아직 조사 안 함)
 대위변제로 인한 권리관계 변동, 예고등기(폐지 전 물건 잔존 이슈), 구분소유적 공유(집합건물 대지권 미등기),
-법정지상권 있는 건물의 지료 산정, 유치권과 점유이전금지가처분의 경합. — 필요 시 요청하면 같은 형식으로 추가 조사.
+법정지상권 있는 건물의 지료 산정. — 필요 시 요청하면 같은 형식으로 추가 조사.
 
 ## 세법 목록
 
@@ -53,7 +59,7 @@ law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조
 | 8 | 주택임대소득 과세(분리과세·등록임대 감면) | 임대소득세 | [08-jutaek-imdaesodeuk.md](tax/08-jutaek-imdaesodeuk.md) | 완료 | 2026-08-10 |
 | 9 | 1세대1주택 양도세 비과세 요건(보유·거주기간, 12억) | 양도소득세 | [09-1sedae1jutaek-biguase.md](tax/09-1sedae1jutaek-biguase.md) | 완료 | 2026-08-10 |
 | 10 | 일시적 2주택 비과세 특례 | 양도소득세 | [10-ilsijeok-2jutaek.md](tax/10-ilsijeok-2jutaek.md) | 완료 | 2026-08-10 |
-| 11 | 다주택자 양도세 중과(조정대상지역·한시배제) | 양도소득세 | [11-yangdose-jungwa.md](tax/11-yangdose-jungwa.md) | 완료 | 2026-08-10 |
+| 11 | 다주택자 양도세 중과(조정대상지역·한시배제) | 양도소득세 | [11-yangdose-jungwa.md](tax/11-yangdose-jungwa.md) | 완료·인용검증 PASS ([검증서](tax/11-yangdose-jungwa_verification.md)) | 2026-08-10 |
 | 12 | 장기보유특별공제(1세대1주택 vs 일반) | 양도소득세 | [12-janggiboyu-teukbyeolgongje.md](tax/12-janggiboyu-teukbyeolgongje.md) | 완료 | 2026-08-10 |
 | 13 | 조합원 입주권 양도세 비과세·주택수 산정 | 양도소득세 | [13-ipjugwon-yangdose.md](tax/13-ipjugwon-yangdose.md) | 완료 | 2026-08-10 |
 | 14 | 분양권 양도세(단기중과·주택수 산입) | 양도소득세 | [14-bunyanggwon-yangdose.md](tax/14-bunyanggwon-yangdose.md) | 완료 | 2026-08-10 |
