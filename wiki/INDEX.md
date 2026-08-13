@@ -1,13 +1,13 @@
 # 부동산 법률·세무 쟁점 위키 — 색인
 
-law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조사해둔 부동산 경매·세법 핵심 쟁점 모음. `statute-researcher`·
+law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조사해둔 부동산 경매·세법·재개발 핵심 쟁점 모음. `statute-researcher`·
 `precedent-researcher`·`tax-advisor`는 새로 조사하기 전에 **이 색인에서 관련 항목이 있는지 먼저 확인**하고, 있으면
 재활용하되 조문 번호·시행일·세율은 `law_api.py`로 짧게 재검증(24h 캐시라 비용이 크지 않음)한 뒤 인용한다. 개정·판례가
 자주 바뀌는 주제이므로 각 항목의 "갱신일"이 6개월(세법은 3개월) 이상 지났으면 재조사를 권장한다.
 
 ## 사용법
-- 조사관: 쟁점 키워드로 이 색인을 먼저 훑는다 → 해당 항목 파일(`wiki/auction/NN-*.md` 또는 `wiki/tax/NN-*.md`) 확인 → 근거 원문이 최신인지 조문/판례번호로 재검증 → 인용.
-- 위키에 없는 쟁점이면 평소대로 law.go.kr 실조회 후, 재사용 가치가 있다고 판단되면 이 색인에 새 항목으로 추가한다(경매는 `wiki/auction/TEMPLATE.md`, 세법은 `wiki/tax/TEMPLATE.md` 참조).
+- 조사관: 쟁점 키워드로 이 색인을 먼저 훑는다 → 해당 항목 파일(`wiki/auction/NN-*.md`, `wiki/tax/NN-*.md`, `wiki/redev/NN-*.md`) 확인 → 근거 원문이 최신인지 조문/판례번호로 재검증 → 인용.
+- 위키에 없는 쟁점이면 평소대로 law.go.kr 실조회 후, 재사용 가치가 있다고 판단되면 이 색인에 새 항목으로 추가한다(경매는 `wiki/auction/TEMPLATE.md`, 세법은 `wiki/tax/TEMPLATE.md`, 재개발·재건축은 `wiki/redev/TEMPLATE.md` 참조).
 - 위키는 `_workspace/`와 달리 **git에 커밋되는 영구 자산**이다(세션 간 재사용 목적). 개별 질문의 사실관계는 넣지 않는다 — 일반화된 쟁점·기준만 담는다.
 
 ## 경매 목록
@@ -61,7 +61,7 @@ law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조
 | 10 | 일시적 2주택 비과세 특례 | 양도소득세 | [10-ilsijeok-2jutaek.md](tax/10-ilsijeok-2jutaek.md) | 완료 | 2026-08-10 |
 | 11 | 다주택자 양도세 중과(조정대상지역·한시배제) | 양도소득세 | [11-yangdose-jungwa.md](tax/11-yangdose-jungwa.md) | 완료·인용검증 PASS ([검증서](tax/11-yangdose-jungwa_verification.md)) | 2026-08-10 |
 | 12 | 장기보유특별공제(1세대1주택 vs 일반) | 양도소득세 | [12-janggiboyu-teukbyeolgongje.md](tax/12-janggiboyu-teukbyeolgongje.md) | 완료 | 2026-08-10 |
-| 13 | 조합원 입주권 양도세 비과세·주택수 산정 | 양도소득세 | [13-ipjugwon-yangdose.md](tax/13-ipjugwon-yangdose.md) | 완료 | 2026-08-10 |
+| 13 | 조합원 입주권 양도세 비과세·주택수 산정 | 양도소득세 | [13-ipjugwon-yangdose.md](tax/13-ipjugwon-yangdose.md) | 완료 · **상가 전환 입주권 절 추가(2026-08-13)** | 2026-08-10 (F항 2026-08-13) |
 | 14 | 분양권 양도세(단기중과·주택수 산입) | 양도소득세 | [14-bunyanggwon-yangdose.md](tax/14-bunyanggwon-yangdose.md) | 완료 | 2026-08-10 |
 | 15 | 상생임대인 특례 | 양도소득세 | [15-sangsaeng-imdaein.md](tax/15-sangsaeng-imdaein.md) | 완료 | 2026-08-10 |
 | 16 | 부동산 상속세 평가(시가·기준시가)와 공제 | 상속증여세 | [16-sangsokse-pyeongga.md](tax/16-sangsokse-pyeongga.md) | 완료 | 2026-08-10 |
@@ -69,6 +69,28 @@ law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조
 | 18 | 대체주택 양도세 비과세 특례(재건축·재개발) | 재개발재건축 특유 | [18-daechejutaek-biguase.md](tax/18-daechejutaek-biguase.md) | 완료 | 2026-08-10 |
 | 19 | 청산금 과세(수령 시 양도세, 납부 시 취득가 가산) | 재개발재건축 특유 | [19-cheongsangeum-guase.md](tax/19-cheongsangeum-guase.md) | 완료 | 2026-08-10 |
 | 20 | 매매사업자·법인의 부동산 양도 과세구조(비교과세·부가세) | 사업자·법인 | [20-maemaesaeopja-beobin.md](tax/20-maemaesaeopja-beobin.md) | 완료 | 2026-08-10 |
+
+## 재개발·재건축 목록
+
+정비사업(도정법) 도메인. **이 도메인의 핵심 특성은 법률·시행령이 정하지 않고 시·도조례와 조합 정관·관리처분계획에
+위임한 사항이 많다는 것**이다 — 각 항목의 "⚠ 조례·정관 확인 필요" 절을 반드시 함께 읽을 것. 아래 5개 항목은
+2026-08-13 재개발 상가 투자 종합검토 보고서를 위키화한 것으로 **citation-verifier 독립 검증 PASS**를 통과한 인용이다.
+**조례 분석은 서울특별시 기준**이므로 다른 시·도 물건은 해당 조례를 개별 확인해야 한다.
+
+| # | 쟁점 | 카테고리 | 파일 | 상태 | 갱신일 |
+|---|------|---------|------|------|--------|
+| 1 | 재개발 상가 소유자의 조합원 자격(도정법 §2 9호 가목·§39①, 지위 승계 시점) | 조합원 자격 | [01-sangga-johapwon-jagyeok.md](redev/01-sangga-johapwon-jagyeok.md) | 완료 (citation-verifier PASS) | 2026-08-13 |
+| 2 | **상가→아파트 분양자격** — 법률 부존재 → 시행령 §63①3 위임 → 서울조례 §36①3 권리가액 기준 | 분양자격 | [02-sangga-apt-bunyang-jagyeok.md](redev/02-sangga-apt-bunyang-jagyeok.md) | 완료 (citation-verifier PASS) | 2026-08-13 |
+| 3 | 현금청산(§73) — 청산금 산정·지연이자·인도 동시이행 | 현금청산 | [03-hyeongeum-cheongsan-sangga.md](redev/03-hyeongeum-cheongsan-sangga.md) | 완료 (citation-verifier PASS) | 2026-08-13 |
+| 4 | 투기과열지구 양도제한의 상가 적용(§39②, 예외 규정 사각지대, 재개발/재건축 기산점 차이) | 양도제한 | [04-tugigwayeol-sangga-yangdo.md](redev/04-tugigwayeol-sangga-yangdo.md) | 완료 (citation-verifier PASS) | 2026-08-13 |
+| 5 | 임차인 리스크 — 보증금 구상·압류(§70②~④), 영업보상(공람공고일 기준), 권리금 배제 | 임차인·보상 | [05-sangga-imchain-bosang.md](redev/05-sangga-imchain-bosang.md) | 완료 (citation-verifier PASS) | 2026-08-13 |
+
+세무는 별도 항목을 만들지 않고 세법 위키에 연결했다 — 상가는 취득세 주택 수에 미산입이나 **관리처분계획인가로 입주권이
+되는 순간 소득세법상 주택 수에 산입**된다(조심 2020구1136). → [tax/13 "F. 상가에서 전환된 입주권"](tax/13-ipjugwon-yangdose.md)
+
+## 재개발·재건축 확장 후보 (아직 조사 안 함)
+서울 외 시·도조례(경기·인천)의 재개발 분양대상 기준, 재건축 상가→아파트 전환(시행령 §63②2호) 상세,
+1+1 분양(§76①7호라목) 요건, 재건축초과이익환수제, 조합 정관 표준안의 상가 관련 조항. — 필요 시 요청하면 같은 형식으로 추가 조사.
 
 ## 세법 2차 확장 후보 (아직 조사 안 함)
 농지·비사업용토지 양도세 중과, 상가·오피스텔 부가가치세(포괄양수도 면제), 재건축초과이익환수제(재건축부담금),

@@ -1,0 +1,381 @@
+<title>재개발 상가 투자 검토</title>
+<style>
+  :root{
+    --navy:#1c2b4a; --navy-2:#16223b; --navy-line:#2e3f60;
+    --cream:#f4f1ea; --paper:#f4f1ea; --card:#ffffff; --ink:#26262e; --muted:#6e6a75; --faint:#9a95a0;
+    --line:#e6e0d4; --line-soft:#efe9dd;
+    --accent:#e2611f; --accent-2:#c94f12; --accent-bg:#fde7d7; --accent-line:#f3c3a2;
+    --soft:#c9d6ee;
+    --green:#2c7a4b; --green-bg:#e4f1ea; --green-line:#bcdcc8;
+    --red:#c0392b; --red-bg:#f8e5e2; --red-line:#eec4bd;
+    --shadow:0 1px 2px rgba(28,43,74,.05),0 10px 26px rgba(28,43,74,.08);
+    --radius:12px; --maxw:940px;
+  }
+  /* 시스템 다크 — 단, 사용자가 라이트를 명시했으면 양보 */
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --paper:#141d30; --cream:#141d30; --card:#1d2942; --ink:#eef1f7; --muted:#a9b2c6; --faint:#7a85a0;
+    --line:#2a3a5a; --line-soft:#233250;
+    --navy:#101a2e; --navy-2:#0b1322; --navy-line:#26375a;
+    --accent-bg:#3a2113; --accent-line:#6e3a1c;
+    --green-bg:#153026; --green-line:#2c5a43; --red-bg:#341a16; --red-line:#63332b;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px rgba(0,0,0,.4);}}
+  :root[data-theme="light"]{
+    --paper:#f4f1ea;--cream:#f4f1ea;--card:#fff;--ink:#26262e;--muted:#6e6a75;--faint:#9a95a0;
+    --line:#e6e0d4;--line-soft:#efe9dd;--navy:#1c2b4a;--navy-2:#16223b;--navy-line:#2e3f60;
+    --accent-bg:#fde7d7;--accent-line:#f3c3a2;--green-bg:#e4f1ea;--green-line:#bcdcc8;--red-bg:#f8e5e2;--red-line:#eec4bd;
+    --shadow:0 1px 2px rgba(28,43,74,.05),0 10px 26px rgba(28,43,74,.08);}
+  :root[data-theme="dark"]{
+    --paper:#141d30;--cream:#141d30;--card:#1d2942;--ink:#eef1f7;--muted:#a9b2c6;--faint:#7a85a0;
+    --line:#2a3a5a;--line-soft:#233250;--navy:#101a2e;--navy-2:#0b1322;--navy-line:#26375a;
+    --accent-bg:#3a2113;--accent-line:#6e3a1c;--green-bg:#153026;--green-line:#2c5a43;--red-bg:#341a16;--red-line:#63332b;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px rgba(0,0,0,.4);}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;
+    font-family:"Apple SD Gothic Neo","AppleSDGothicNeo","Pretendard","Malgun Gothic","맑은 고딕",-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-feature-settings:"tnum";}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .tnum{font-variant-numeric:tabular-nums}
+  header.hero{background:var(--navy);color:#eef2f8;position:relative;overflow:hidden}
+  .hero-inner{max-width:var(--maxw);margin:0 auto;padding:44px 22px 40px;position:relative;z-index:2}
+  .hero-circle{position:absolute;right:-70px;top:50%;transform:translateY(-50%);width:280px;height:280px;border-radius:50%;
+    background:var(--accent);opacity:.16;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:800;margin:0 0 16px}
+  h1{font-size:clamp(26px,4.8vw,40px);line-height:1.2;margin:0;font-weight:800;letter-spacing:-.01em;color:#fff;text-wrap:balance}
+  h1 .hl{color:var(--accent)}
+  .sub{margin:16px 0 0;color:var(--soft);font-size:15.5px;max-width:58ch}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin:26px 0 0}
+  .chip{display:inline-flex;align-items:center;gap:6px;background:rgba(201,214,238,.10);border:1px solid rgba(201,214,238,.28);
+    color:#e7edf8;padding:7px 15px;border-radius:999px;font-size:13px;font-weight:600}
+  .chip b{color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin:22px 0 0;color:#8fa0c0;font-size:12.5px}
+  .toggle{position:sticky;top:0;z-index:20;background:var(--navy-2)}
+  .toggle-in{max-width:var(--maxw);margin:0 auto;padding:8px 22px;display:flex;justify-content:flex-end}
+  .tbtn{appearance:none;background:rgba(201,214,238,.10);border:1px solid rgba(201,214,238,.28);color:#dbe4f0;font:inherit;
+    font-size:12.5px;font-weight:700;padding:5px 13px;border-radius:8px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+  .tbtn:hover{background:rgba(201,214,238,.2)} .tbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  main{padding:36px 0 20px}
+  section{margin:0 0 34px}
+  .s-head{margin:0 0 16px}
+  .s-eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:800;margin:0 0 6px}
+  .s-title{font-size:22px;font-weight:800;letter-spacing:-.01em;margin:0;color:var(--ink)}
+  .s-desc{color:var(--muted);font-size:14px;margin:6px 0 0}
+  .verdict{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:var(--radius);
+    padding:22px 26px;box-shadow:var(--shadow)}
+  .verdict.green{border-left-color:var(--green)} .verdict.red{border-left-color:var(--red)} .verdict.navy{border-left-color:var(--navy)}
+  .v-tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:var(--accent);letter-spacing:.08em;text-transform:uppercase}
+  .verdict.green .v-tag{color:var(--green)} .verdict.red .v-tag{color:var(--red)}
+  .v-tag .dot{width:9px;height:9px;border-radius:50%;background:currentColor}
+  .v-main{font-size:clamp(20px,3.3vw,26px);font-weight:800;margin:10px 0 6px;letter-spacing:-.01em;text-wrap:balance;color:var(--ink)}
+  .v-body{color:var(--muted);font-size:14.5px;margin:0}
+  .grid{display:grid;gap:16px}
+  @media(min-width:720px){.grid.g2{grid-template-columns:1fr 1fr}}
+  .stepcard{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:var(--radius);
+    padding:20px 20px 18px;box-shadow:var(--shadow);position:relative}
+  .stepcard.navy{border-left-color:var(--navy)} .stepcard.green{border-left-color:var(--green)} .stepcard.red{border-left-color:var(--red)}
+  .ico{width:46px;height:46px;border-radius:12px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:22px;margin:0 0 14px}
+  .stepcard.navy .ico{background:var(--navy)} .stepcard.green .ico{background:var(--green)} .stepcard.red .ico{background:var(--red)}
+  .num{position:absolute;top:16px;right:16px;width:26px;height:26px;border-radius:50%;background:var(--accent-bg);color:var(--accent);
+    font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .stepcard h4{margin:0 0 8px;font-size:16px;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
+  .stepcard p{margin:0;font-size:13.5px;color:var(--muted)}
+  .stepcard p + p{margin-top:9px}
+  .stepcard .cite{margin-top:11px;font-size:12px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px;display:flex;flex-wrap:wrap;gap:5px 12px}
+  .idb{font-size:11px;font-weight:700;background:var(--line-soft);color:var(--muted);padding:1px 7px;border-radius:5px}
+  .flow{display:grid;gap:14px;align-items:stretch}
+  @media(min-width:860px){.flow{grid-template-columns:1fr auto 1fr auto 1fr}.flow .arw{display:flex}}
+  .flow .arw{display:none;align-items:center;justify-content:center;color:var(--accent);font-size:20px;font-weight:900}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);background:var(--card)}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+  thead th{background:var(--navy);color:#dfe7f4;font-weight:700;text-align:left;padding:12px 16px;font-size:12.5px}
+  tbody td{padding:13px 16px;border-top:1px solid var(--line-soft);vertical-align:top;color:var(--ink)}
+  tbody tr.on{background:var(--accent-bg)} tbody tr.on td{border-top-color:var(--accent-line)}
+  tbody td b{color:var(--ink)}
+  .check li{list-style:none;display:flex;gap:13px;padding:13px 6px;border-top:1px solid var(--line-soft)}
+  .check li:first-child{border-top:0}
+  .check .box{flex:0 0 auto;width:21px;height:21px;border:2px solid var(--accent);border-radius:6px;margin-top:1px;position:relative}
+  .check .box::after{content:"";position:absolute;left:5px;top:1px;width:6px;height:11px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(42deg)}
+  .check .txt{font-size:14px;color:var(--ink)} .check .why{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+  .disc{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;padding:15px 18px;
+    font-size:13px;color:var(--muted);display:flex;gap:12px;align-items:flex-start}
+  .disc .ic{color:var(--accent);font-weight:800;flex:0 0 auto}
+  .disc + .disc{margin-top:12px}
+  .footerbar{border-top:1px solid var(--line);margin-top:28px;padding:16px 0 40px;display:flex;justify-content:space-between;
+    color:var(--faint);font-size:12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .cite-inline{font-size:12px;color:var(--faint)}
+  @media (prefers-reduced-motion:no-preference){section{animation:rise .5s ease both}@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
+</style>
+
+<div class="toggle"><div class="toggle-in">
+  <button class="tbtn" id="themeBtn" type="button" aria-label="테마 전환"><span id="themeIcon">◐</span><span id="themeLabel">테마</span></button>
+</div></div>
+
+<header class="hero">
+  <div class="hero-circle"></div>
+  <div class="hero-inner">
+    <p class="eyebrow">법률·세무 검토 · auction-law</p>
+    <h1>재개발 상가 투자<br>— 아파트를 받는 기준은 <span class="hl">법률에 없다</span></h1>
+    <p class="sub">상가만 소유해도 조합원은 됩니다. 그러나 아파트 분양자격의 기준은 도정법에도 시행령에도 없고, 시·도조례와 개별 조합 정관이 결과를 정합니다.</p>
+    <div class="chips">
+      <span class="chip">🏢 <b>재개발 · 근린생활시설</b></span>
+      <span class="chip">⚖️ <b>도정법 · 서울시 정비조례</b></span>
+      <span class="chip">✅ <b>인용검증 PASS</b></span>
+    </div>
+    <div class="meta tnum">
+      <span>📅 2026-08-13</span>
+      <span>🔎 law.go.kr 조문·판례 원문</span>
+      <span>🔬 인용 71건 재조회 · 불일치 0</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section><div class="verdict">
+    <span class="v-tag"><span class="dot"></span>핵심 결론</span>
+    <p class="v-main">조합원 자격은 확정, 아파트 분양자격은 불확정.</p>
+    <p class="v-body">도정법 §2 9호 가목이 재개발 토지등소유자를 “토지 <b>또는</b> 건축물의 소유자”로 규정하므로 상가만 있어도 조합원이 된다. 그러나 상가 소유자가 아파트를 받는 기준은 법률·시행령에 존재하지 않는다 — 검증 과정에서 §76① 1~7호 전문을 재조회해 실제로 없음을 확인했다.</p>
+  </div></section>
+
+  <section>
+    <div class="s-head">
+      <p class="s-eyebrow">Structure</p>
+      <h2 class="s-title">분양자격 기준은 어디에 있나</h2>
+      <p class="s-desc">법률 → 시행령 → 조례로 내려가며 위임된다. 투자 판단에 필요한 숫자는 맨 끝, 개별 사업장 문서에 있다.</p>
+    </div>
+    <div class="flow">
+      <div class="stepcard navy">
+        <div class="ico">📕</div>
+        <h4>법률 — 없음</h4>
+        <p>도정법 §76①은 “주택 또는 토지를 소유한 경우”만 다룬다. 상가→아파트 기준이 <b>없다</b>.</p>
+        <div class="cite"><span>도정법 §76①</span><span class="idb">MST 284065</span></div>
+      </div>
+      <div class="arw">▶</div>
+      <div class="stepcard">
+        <div class="ico">📗</div>
+        <h4>시행령 — 위임</h4>
+        <p>§63①3호 단서가 “시·도조례로 정하는 금액·규모·취득 시기 또는 유형에 대한 기준”으로 넘긴다.</p>
+        <div class="cite"><span>시행령 §63①3호</span><span class="idb">MST 287285</span></div>
+      </div>
+      <div class="arw">▶</div>
+      <div class="stepcard green">
+        <div class="ico">📘</div>
+        <h4>조례 — 실질 기준</h4>
+        <p>서울시 정비조례 §36①3호: <b>권리가액 ≥ 분양용 최소규모 공동주택 1가구 추산액</b>. ‘권리가액’ 정의도 조례 §2 4호에 있다.</p>
+        <div class="cite"><span>서울시 정비조례</span><span class="idb">MST 2130189</span></div>
+      </div>
+    </div>
+    <div class="disc" style="margin-top:16px"><span class="ic">▲</span><span>
+      그런데 <b>“최소규모 공동주택 1가구 추산액”의 실제 금액은 법령 어디에도 없다.</b> 개별 사업장의 관리처분계획·조합 정관에서 정해진다.
+      즉 <b>매수 판단에 필요한 마지막 숫자는 법령이 아니라 그 조합의 문서에서 확인해야 한다.</b>
+      서울 외 지역은 조례 문언이 다르므로 반드시 개별 확인이 필요하다(이번 조사 범위 밖).
+    </span></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Key Findings</p><h2 class="s-title">승패를 가르는 4가지</h2></div>
+    <div class="grid g2">
+      <div class="stepcard">
+        <span class="num">1</span><div class="ico">📐</div>
+        <h4>권리가액이 전부다</h4>
+        <p>매수할 상가의 예상 권리가액(감정평가액)이 그 구역 최소규모 아파트 추산액을 넘느냐가 갈림길. 못 넘으면 현금청산이다.</p>
+        <p>재개발 종전자산 평가는 <b>시장·군수등이 선정한 2인 이상</b>의 산술평균이라 조합·투자자가 통제하기 어렵다.</p>
+        <div class="cite"><span>서울조례 §36①3</span><span>도정법 §74④1호 가목</span></div>
+      </div>
+      <div class="stepcard">
+        <span class="num">2</span><div class="ico">⚖️</div>
+        <h4>“받을 수 있다” ≠ “받을 권리가 있다”</h4>
+        <p>법제처는 상가 소유자에게 2주택 공급 관리처분계획을 “<b>수립할 수 있다</b>”고 회답했다 — 금지되지 않는다는 뜻이지 청구권이 아니다.</p>
+        <p>관리처분계획은 <b>계획재량</b>이라 조합 재량이 넓다. 결국 정관·총회 결의가 결과를 정한다.</p>
+        <div class="cite"><span>법제처 25-0035</span><span class="idb">341113</span><span>대법원 2022두56142</span></div>
+      </div>
+      <div class="stepcard red">
+        <span class="num">3</span><div class="ico">🧾</div>
+        <h4>상가는 주택수 밖, 입주권은 안</h4>
+        <p>상가는 취득세 다주택 중과·주택수 산입 대상이 아니다(지방세법 §13의2① — “주택”에 한정). 여기까진 장점.</p>
+        <p>그러나 <b>관리처분계획인가일에 아파트 입주권으로 전환</b>되면 소득세법상 주택 수에 산입되어 <b>기존 주택의 1세대1주택 비과세가 깨진다</b>.</p>
+        <div class="cite"><span>조심 2020구1136</span><span class="idb">899714</span><span>소득세법 §89②</span></div>
+      </div>
+      <div class="stepcard red">
+        <span class="num">4</span><div class="ico">🔑</div>
+        <h4>임차인 보증금은 매수인에게 돌아온다</h4>
+        <p>임차인이 조합에 보증금을 청구 → 조합이 지급 → <b>소유자에게 구상</b> → 미이행 시 <b>분양받을 대지·건축물을 압류</b>(저당권과 동일 효력).</p>
+        <p>임대차계약서 전부와 보증금 잔액 실사는 선택이 아니다.</p>
+        <div class="cite"><span>도정법 §70②~④</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head">
+      <p class="s-eyebrow">Transfer Restriction</p>
+      <h2 class="s-title">투기과열지구 양도제한 — 상가에도 적용된다</h2>
+    </div>
+    <div class="grid g2">
+      <div class="stepcard navy">
+        <div class="ico">📌</div>
+        <h4>조문에 “주택” 한정이 없다</h4>
+        <p>도정법 §39② 본문은 “<b>건축물 또는 토지</b>를 양수한 자”라고 규정한다. 법제처도 “상가를 제외한다는 규정을 두고 있지 아니하고… 주택과 상가를 달리 취급할 이유가 없다”고 회신했다.</p>
+        <div class="cite"><span>법제처 11-0293</span><span class="idb">324087</span><span>※ 재건축 사안</span></div>
+      </div>
+      <div class="stepcard red">
+        <div class="ico">🚪</div>
+        <h4>예외 규정의 사각지대</h4>
+        <p>§39② 단서 2·4호는 “<b>주택</b>”을 명시해 상가 양도인이 쓸 수 없다. 시행령 §37③도 1·2호는 재건축 전용, 3호는 “<b>토지</b>” 한정 — <b>상가 건축물 자체가 빠져 있다</b>.</p>
+        <p>사업이 장기 표류해도 팔고 나올 문이 좁다.</p>
+        <div class="cite"><span>도정법 §39②</span><span>시행령 §37③</span></div>
+      </div>
+    </div>
+    <div class="disc" style="margin-top:16px"><span class="ic">＋</span><span>
+      다만 <b>기산점은 유리하다</b> — 재개발은 <b>관리처분계획 인가 후</b>부터 제한된다(재건축은 조합설립인가 후). 매수 창구가 그만큼 길다.
+    </span></div>
+  </section>
+
+  <section>
+    <div class="s-head">
+      <p class="s-eyebrow">Compare</p>
+      <h2 class="s-title">재개발 vs 재건축 — 상가 소유자 기준</h2>
+      <p class="s-desc">투자자가 가장 자주 혼동하는 지점. 상가→주택 전환 기준의 법적 소재부터 다르다.</p>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr><th style="width:24%">쟁점</th><th style="width:38%">재개발</th><th style="width:38%">재건축</th></tr></thead>
+      <tbody>
+        <tr class="on">
+          <td><b>상가→아파트 기준의 소재</b></td>
+          <td><b>국가 법령에 없음</b> → 시행령 §63①3호 단서가 시·도조례로 위임 → <b>조례가 실질 기준</b></td>
+          <td><b>시행령 §63②2호 가~다목에 명문</b></td>
+        </tr>
+        <tr>
+          <td>기준의 내용</td>
+          <td>(서울) 권리가액 ≥ 분양용 최소규모 공동주택 1가구 추산액</td>
+          <td>원칙은 부대·복리시설 공급. 예외로 1주택 — 기존 가액 &gt; (최소분양단위 추산액 × 정관 비율). <b>정관 미정 시 비율 1.0</b></td>
+        </tr>
+        <tr>
+          <td>예측 가능성</td>
+          <td><b>낮음</b> — 조례 + 개별 관리처분계획</td>
+          <td><b>높음</b> — 국가 법령에 산식이 있음</td>
+        </tr>
+        <tr class="on">
+          <td><b>양도제한 기산점</b></td>
+          <td><b>관리처분계획 인가 후</b> (매수 창구 김)</td>
+          <td>조합설립인가 후 (훨씬 이름)</td>
+        </tr>
+        <tr>
+          <td>토지등소유자 정의</td>
+          <td>토지 <b>또는</b> 건축물 소유자 → 상가만 있어도 해당</td>
+          <td>건축물 <b>및</b> 부속토지 소유자 → 둘 다 필요</td>
+        </tr>
+        <tr>
+          <td>조합원 자격</td>
+          <td>토지등소유자</td>
+          <td>토지등소유자 중 <b>재건축에 동의한 자만</b></td>
+        </tr>
+        <tr>
+          <td>종전자산 감정평가</td>
+          <td>시장·군수등 선정 <b>2인 이상</b> 산술평균</td>
+          <td>시장·군수등 1인 이상 + <b>조합총회 의결 선정 1인 이상</b></td>
+        </tr>
+        <tr>
+          <td>수용권</td>
+          <td>있음(토지보상법 준용)</td>
+          <td>없음(매도청구)</td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <div class="s-head">
+      <p class="s-eyebrow">Timing</p>
+      <h2 class="s-title">매수 시점별 지위와 리스크</h2>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr><th style="width:30%">매수 시점</th><th style="width:22%">조합원 지위</th><th style="width:48%">주요 리스크</th></tr></thead>
+      <tbody>
+        <tr><td>정비구역 지정 전</td><td>취득 가능</td><td>사업 무산 리스크 최대, 권리산정기준일 미정</td></tr>
+        <tr><td>구역지정 ~ 조합설립인가</td><td>취득 가능</td><td>권리산정기준일 이후 <b>쪼개기 물건</b> 주의, §76①3호 현금청산 대상 여부</td></tr>
+        <tr><td>조합설립 ~ 사업시행계획인가</td><td>취득 가능</td><td>종전자산 평가 전이라 <b>권리가액 미확정</b> = 분양자격 불확실</td></tr>
+        <tr class="on"><td><b>사업시행계획인가 ~ 관리처분인가</b></td><td>취득 가능</td><td>평가액 윤곽은 나오나 프리미엄 반영. <b>투기과열지구면 관리처분인가가 데드라인</b></td></tr>
+        <tr><td><b>관리처분인가 후</b>(투기과열지구)</td><td><b>조합원 불가</b></td><td>§39②로 조합원이 못 되고 현금청산 대상. 사실상 매수 불가 구간</td></tr>
+        <tr><td>이전고시 후</td><td>자동승계 <b>부정</b></td><td>일반 부동산 매매로 접근해야 함 <span class="cite-inline">(대법원 2022두52874, 재건축 사안)</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <div class="s-head">
+      <p class="s-eyebrow">Risk</p>
+      <h2 class="s-title">돈을 잃는 경로</h2>
+      <p class="s-desc">보고서에 정리한 9개 시나리오 중 발생 빈도·손실 규모가 큰 것.</p>
+    </div>
+    <div class="grid g2">
+      <div class="stepcard red">
+        <div class="ico">📉</div>
+        <h4>A. 권리가액 미달 → 현금청산</h4>
+        <p>10억에 매수했는데 감정평가 5억, 구역 최소규모 아파트 추산액 6억이면 → 분양대상 제외 → 현금청산.</p>
+        <p><b>방어</b>: 유사물건 평가사례로 권리가액을 역산하고, 관리처분 전이면 최소규모 추산액 추정치를 조합에 확인.</p>
+      </div>
+      <div class="stepcard red">
+        <div class="ico">🚫</div>
+        <h4>B. 관리처분인가 후 매수</h4>
+        <p>투기과열지구에서 관리처분인가 후 양수 → 조합원 자체가 될 수 없고 예외 규정도 상가엔 거의 없다.</p>
+        <p><b>방어</b>: 계약 전 ①투기과열지구 지정 여부 ②관리처분인가 여부 확인. 지정 해제를 기대하는 건 무의미하다.</p>
+      </div>
+      <div class="stepcard red">
+        <div class="ico">✂️</div>
+        <h4>C. 쪼개기 상가</h4>
+        <p>권리산정기준일 이후 집합건물 전환·전유부분 분할 호실은 독립 분양권이 부정될 수 있다.</p>
+        <p><b>방어</b>: 등기부 <b>전유부분 분할 이력</b>과 구역의 <b>권리산정기준일 고시</b>를 대조.</p>
+      </div>
+      <div class="stepcard red">
+        <div class="ico">🍸</div>
+        <h4>F. 유흥주점 임차 → 취득세 12%</h4>
+        <p>고급오락장 중과. 탈출구는 취득일부터 <b>60일 이내 용도변경 착공</b>뿐인데 임차 잔여기간이 길면 불가능.</p>
+        <p>10억 기준 4,000만원 → 1억 2,000만원. 대도시 법인이면 16%.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head">
+      <p class="s-eyebrow">Checklist</p>
+      <h2 class="s-title">매수 전 반드시 확인할 것</h2>
+      <p class="s-desc">서류마다 “무엇을 보는지”까지.</p>
+    </div>
+    <div class="card"><ul class="check" style="margin:0;padding:6px 14px">
+      <li><span class="box"></span><span class="txt"><b>조합 정관</b><span class="why">상가 조합원 취급, 아파트·상가 분리정산 여부, 현금청산금 산정·사업비 공제 조항의 구체성, 지연이자율</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>관리처분계획서 또는 조합원 분양안내</b><span class="why">“분양용 최소규모 공동주택 1가구 추산액”의 실제 금액 — 이게 없으면 권리가액 대비 판단이 불가능하다</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>해당 시·도 정비조례</b><span class="why">분양대상·상가 공급순위·권리가액 정의. 서울 외 지역은 문언이 다르므로 개별 확인 필수</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>등기사항전부증명서</b><span class="why">소유권 취득일(조례상 등기 접수일 기준), <b>전유부분 분할 이력</b>, 지분 공유 여부(1인 조합원 처리 위험)</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>건축물대장</b><span class="why">종전 건축물 소유면적(위법 건축 부분 제외), 용도(상가 공급순위 판정), 무허가 여부</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>정비계획 수립 공람공고일</b><span class="why">영업보상 대상자 인정시점. 임차인 입점·사업자등록일이 이 날 이전인지 대조</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>권리산정기준일 고시</b><span class="why">상가 쪼개기 판정선. 전유부분 분할일이 이 날 이후면 독립 분양권 부정 위험</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>임대차계약서 전부 + 보증금 잔액</b><span class="why">조합이 대신 지급 후 소유자에게 구상·압류 — 매수인이 최종 부담자</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>임차인 업종 — 유흥주점 여부</b><span class="why">취득세 12% 중과. 임차 잔여기간과 60일 용도변경 가능성 대조</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>매수인의 기존 보유 주택 현황</b><span class="why">관리처분인가 시점에 입주권이 주택 수에 산입되어 기존 주택 비과세가 깨진다 — 인가 <b>전에</b> 설계</span></span></li>
+    </ul></div>
+  </section>
+
+  <div class="disc"><span class="ic">⚠</span><span>
+    <b>확인되지 않은 것</b> — “권리가액 ≥ 최소분양가”를 <b>정면으로 판시한 대법원 판례는 확인 안 됨</b>(조례·법제처 해석례까지만 확인). 법제처 11-0293은 <b>재건축 사안</b>이며 재개발(관리처분인가 후)을 정면으로 다룬 사례는 확인 안 됨. 정비사업 영업손실 보상 요건의 대법원 판시, 서울 외 시·도조례도 확인하지 않았다.
+  </span></div>
+
+  <div class="disc"><span class="ic">ℹ</span><span>
+    law.go.kr 공개 법령·판례·해석례 원문에 근거한 <b>일반적 법률·세무 정보</b>이며 특정 물건·거래에 대한 법률자문이 아니다. 인용 71건은 <code>citation-verifier</code>가 독립 재조회해 검증했다(불일치 0건). 개별 사건의 최종 판단은 <b>변호사·법무사·세무사</b> 상담이 필요하다. 법령·조례는 개정이 잦으므로 실행 시점의 시행일을 반드시 재확인할 것.
+  </span></div>
+
+  <div class="footerbar"><span>auction-law · 재개발 상가 투자 검토</span><span class="tnum">2026-08-13</span></div>
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement,btn=document.getElementById('themeBtn'),
+      icon=document.getElementById('themeIcon'),label=document.getElementById('themeLabel');
+  function cur(){var a=root.getAttribute('data-theme');return a?a:(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');}
+  function paint(t){icon.textContent=t==='dark'?'☾':'☀';label.textContent=t==='dark'?'다크':'라이트';}
+  paint(cur());
+  btn.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';root.setAttribute('data-theme',n);paint(n);});
+  window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(){if(!root.getAttribute('data-theme'))paint(cur());});
+})();
+</script>
