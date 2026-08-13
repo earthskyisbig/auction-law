@@ -70,8 +70,11 @@ def check_oc():
 
 
 def check_api(oc):
+    # display=10: law.go.kr 법령명 검색은 완전일치 우선이 아니라 부분일치도 섞어 반환한다.
+    # display=1로 받으면 "주택법"을 물어도 「민간임대주택에 관한 특별법」이 나와 점검 결과가
+    # 혼란스럽다(docs/ERRORS.md 2026-08-10 참조). 넉넉히 받아 정확히 일치하는 것을 고른다.
     url = ("https://www.law.go.kr/DRF/lawSearch.do?"
-           f"OC={oc}&target=law&type=JSON&display=1&query=%EC%A3%BC%ED%83%9D%EB%B2%95")
+           f"OC={oc}&target=law&type=JSON&display=10&query=%EC%A3%BC%ED%83%9D%EB%B2%95")
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=20) as r:
@@ -92,8 +95,11 @@ def check_api(oc):
         problems.append("OC의 호출 IP 미등록 (또는 LAW_OC 삭제 후 test 사용)")
     else:
         law = data.get("LawSearch", {}).get("law")
-        law = law[0] if isinstance(law, list) else law
-        name = law.get("법령명한글", "?") if isinstance(law, dict) else "?"
+        laws = law if isinstance(law, list) else [law] if isinstance(law, dict) else []
+        # 정확히 "주택법"인 항목을 우선 고르고, 없으면 첫 결과로 폴백
+        exact = next((x for x in laws if x.get("법령명한글") == "주택법"), None)
+        picked = exact or (laws[0] if laws else None)
+        name = picked.get("법령명한글", "?") if isinstance(picked, dict) else "?"
         print(f"{OK} law.go.kr 조회 성공 — 예: '{name}' 확인됨")
 
 
