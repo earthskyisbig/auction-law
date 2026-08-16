@@ -20,6 +20,8 @@
 | 2026-08-10 | 경매 위키 명도절차 확장(21~26번) — 명도소송 절차, 인도명령 6월 도과의 법적 성질, 점유이전금지가처분, 부동산 인도 강제집행, 유체동산 처리, 상가건물임대차법상 경매 시 소멸/인수 | wiki/INDEX.md, wiki/auction/21~26-*.md | 사용자가 "경매 시 명도절차 관련 위키 항목" 요청 → #9(인도명령) 문서의 명시된 조사 공백(명도소송 절차, 6월 도과 판례 미확인)을 메우는 후속 조사로 6개 선정 |
 | 2026-08-10 | `citation-verifier` 에이전트 + `citation-verification` 스킬 신설 — legal-analyst의 자기 검증에서 인용 사후검증을 분리해 독립 에이전트가 처음부터 다시 판정하도록 변경(2차 시야). 오케스트레이터에 Phase 4(독립 검증, 필수 게이트)로 편성 | agents/citation-verifier.md, skills/citation-verification, orchestrator Phase 4, legal-analyst.md, realestate-law-analysis/SKILL.md, README.md | 사용자가 "검증 에이전트 있나" 질문 → 자기 검증만 있고 독립 2차 시야가 없다는 공백 확인 → citation-verifier 신설 요청 |
 
+| 2026-08-16 | citation-verifier 세무 결과 검증 확장(조문 실존·tax-rate-loader 일치·한시규정 종료일·주택수 세목별 분리 — 4대 검증, 실패 시 확인필요 반려) + 세율·조문 확인 로그 위키 신설(조문 재질문 시 API 전 위키 우선) | agents/citation-verifier.md, wiki/tax/00-verification-log.md, wiki/INDEX.md | auction-tax2 세무 하네스 연계 — 세무 검증 역할 분리 요청 |
+
 
 ## 워크스페이스 표준 (workspace-init)
 
