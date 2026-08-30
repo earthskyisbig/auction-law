@@ -67,8 +67,25 @@ TARGETS = {
 }
 
 
+def _load_dotenv_law_oc():
+    # 프로젝트 루트 .env의 LAW_OC 폴백 — 서브에이전트 셸에는 환경변수가 전파되지 않아
+    # OC=test로 호출되는 사고가 실제 발생했다(2026-08-17). 우선순위: CLI > 환경변수 > .env.
+    root = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                        "..", "..", "..", ".."))
+    env_path = os.path.join(root, ".env")
+    try:
+        with open(env_path, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith("LAW_OC="):
+                    return line.split("=", 1)[1].strip().strip('"').strip("'") or None
+    except OSError:
+        pass
+    return None
+
+
 def get_oc(cli_oc=None):
-    return cli_oc or os.environ.get("LAW_OC") or "test"
+    return cli_oc or os.environ.get("LAW_OC") or _load_dotenv_law_oc() or "test"
 
 
 def _cache_path(full_url):
