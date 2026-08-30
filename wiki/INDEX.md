@@ -10,6 +10,14 @@ law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조
 - 위키에 없는 쟁점이면 평소대로 law.go.kr 실조회 후, 재사용 가치가 있다고 판단되면 이 색인에 새 항목으로 추가한다(경매는 `wiki/auction/TEMPLATE.md`, 세법은 `wiki/tax/TEMPLATE.md`, 재개발·재건축은 `wiki/redev/TEMPLATE.md` 참조).
 - 위키는 `_workspace/`와 달리 **git에 커밋되는 영구 자산**이다(세션 간 재사용 목적). 개별 질문의 사실관계는 넣지 않는다 — 일반화된 쟁점·기준만 담는다.
 
+## 정책 대책 노트 (법령 검증 항목과 구별 — 발표·보도 기준 동향 추적)
+
+| 발표일 | 대책 | 파일 | 상태 | 갱신일 |
+|---|------|------|------|--------|
+| 2026-08-13 | 8·13 대책 — 수도권 23만호+α 공급·금융 47.8조·이주비대출 개선·소형신축 주택수특례 연장·전세대출보증 제한 확대·토지보상법 개정 발의(조합원 지위양도 완화는 제외) | [policy/2026-0813-daechaek.md](policy/2026-0813-daechaek.md) | ⚠ 발표 기준(국토부·금융위 **안건 원문 PDF** 확인) — 입법·시행령 개정 추적 중 | 2026-08-30 |
+
+> 정책 노트 작성 원칙: 언론 요약이 아니라 **국토부(molit.go.kr)·금융위(fsc.go.kr) 보도자료·안건 원문을 직접 확보**해 정리한다. 과제별 조치사항(법 개정/시행령/행정지도)과 시행시기를 반드시 병기한다.
+
 ## 경매 목록
 
 | # | 쟁점 | 카테고리 | 파일 | 상태 | 갱신일 |
@@ -32,8 +40,8 @@ law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조
 | 16 | 지분경매(공유지분) 낙찰 후 공유물분할청구 | 특수물건 | [16-jibun-gyeongmae.md](auction/16-jibun-gyeongmae.md) | 완료 | 2026-07-27 |
 | 17 | 농지 낙찰과 농지취득자격증명 | 특수물건 | [17-nongji-chwideukjagyeok.md](auction/17-nongji-chwideukjagyeok.md) | 완료 | 2026-07-27 |
 | 18 | 선순위 전세권의 배당요구 여부에 따른 인수/소멸 | 특수물건 | [18-jeonsegwon-inswu-somyeol.md](auction/18-jeonsegwon-inswu-somyeol.md) | 완료 | 2026-07-27 |
-| 19 | 조합설립인가 후 경매 취득 시 조합원 지위 승계 여부 | 재개발·재건축 연계 | [19-johapwon-jiwi-seunggye.md](auction/19-johapwon-jiwi-seunggye.md) | 완료 | 2026-07-27 |
-| 20 | 투기과열지구 조합원 지위 양도 제한과 경매 예외 | 재개발·재건축 연계 | [20-tugigwayeoljigu-johapwon-yangdo.md](auction/20-tugigwayeoljigu-johapwon-yangdo.md) | 완료 | 2026-07-27 |
+| 19 | 조합설립인가 후 경매 취득 시 조합원 지위 승계 여부 (+**신탁방식 F절·소규모주택정비법 대비표 G절**) | 재개발·재건축 연계 | [19-johapwon-jiwi-seunggye.md](auction/19-johapwon-jiwi-seunggye.md) | 완료 (citation-verifier PASS) | 2026-08-30 |
+| 20 | 투기과열지구 조합원 지위 양도 제한과 경매 예외 (+**신탁방식 재건축의 기산점** 절) | 재개발·재건축 연계 | [20-tugigwayeoljigu-johapwon-yangdo.md](auction/20-tugigwayeoljigu-johapwon-yangdo.md) | 완료 (citation-verifier PASS, 시행령 §37③ 2026.2.3 개정 반영, 8·13 대책 미변경 확인) | 2026-08-30 |
 | 21 | 명도소송(인도청구소송) 절차 | 명도절차 | [21-myeongdosongsong.md](auction/21-myeongdosongsong.md) | 완료 | 2026-08-10 |
 | 22 | 인도명령 6월 도과의 법적 성질과 효과 | 명도절차 | [22-indomyeongryeong-6wol-dogwa.md](auction/22-indomyeongryeong-6wol-dogwa.md) | 완료 | 2026-08-10 |
 | 23 | 점유이전금지가처분 | 명도절차 | [23-jeomyuijeon-geumjigacheobun.md](auction/23-jeomyuijeon-geumjigacheobun.md) | 완료 | 2026-08-10 |
@@ -51,7 +59,7 @@ law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조
 |---|------|---------|------|------|--------|
 | 0 | 세율·조문 확인 로그(auction-tax2 엔진 연계 — 조문 재질문 시 API 전에 먼저 볼 것) | 공통 | [00-verification-log.md](tax/00-verification-log.md) | 운영 중 | 2026-08-16 |
 | 1 | 다주택자 취득세 중과(조정대상지역·법인) | 취득세 | [01-chwideukse-jungwa.md](tax/01-chwideukse-jungwa.md) | 완료 | 2026-08-10 |
-| 2 | 주택 수 산정 기준(분양권·입주권·오피스텔) | 취득세 | [02-jutaeksu-sanjeong.md](tax/02-jutaeksu-sanjeong.md) | 완료 | 2026-08-10 |
+| 2 | 주택 수 산정 기준(분양권·입주권·오피스텔) | 취득세 | [02-jutaeksu-sanjeong.md](tax/02-jutaeksu-sanjeong.md) | 완료 (8·13 소형신축 특례 연장 발표 노트 — 시행령 개정 추적 중) | 2026-08-30 |
 | 3 | 생애최초 취득세 감면 요건 | 취득세 | [03-saengaechoicho-gammyeon.md](tax/03-saengaechoicho-gammyeon.md) | 완료 | 2026-08-10 |
 | 4 | 경매·공매 낙찰의 취득세 과세표준·유상취득 판단 | 취득세 | [04-gyeongmae-chwideukse.md](tax/04-gyeongmae-chwideukse.md) | 완료 | 2026-08-10 |
 | 5 | 종부세 1세대1주택 특례(12억 공제·세액공제) | 재산세·종부세 | [05-jongbuse-1sedae1jutaek.md](tax/05-jongbuse-1sedae1jutaek.md) | 완료 | 2026-08-10 |
@@ -83,7 +91,7 @@ law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조
 | 1 | 재개발 상가 소유자의 조합원 자격(도정법 §2 9호 가목·§39①, 지위 승계 시점) | 조합원 자격 | [01-sangga-johapwon-jagyeok.md](redev/01-sangga-johapwon-jagyeok.md) | 완료 (citation-verifier PASS) | 2026-08-13 |
 | 2 | **상가→아파트 분양자격** — 법률 부존재 → 시행령 §63①3 위임 → 서울조례 §36①3 권리가액 기준 | 분양자격 | [02-sangga-apt-bunyang-jagyeok.md](redev/02-sangga-apt-bunyang-jagyeok.md) | 완료 (citation-verifier PASS) | 2026-08-13 |
 | 3 | 현금청산(§73) — 청산금 산정·지연이자·인도 동시이행 | 현금청산 | [03-hyeongeum-cheongsan-sangga.md](redev/03-hyeongeum-cheongsan-sangga.md) | 완료 (citation-verifier PASS) | 2026-08-13 |
-| 4 | 투기과열지구 양도제한의 상가 적용(§39②, 예외 규정 사각지대, 재개발/재건축 기산점 차이) | 양도제한 | [04-tugigwayeol-sangga-yangdo.md](redev/04-tugigwayeol-sangga-yangdo.md) | 완료 (citation-verifier PASS) | 2026-08-13 |
+| 4 | 투기과열지구 양도제한의 상가 적용(§39②, 예외 규정 사각지대, 재개발/재건축 기산점 차이) | 양도제한 | [04-tugigwayeol-sangga-yangdo.md](redev/04-tugigwayeol-sangga-yangdo.md) | 완료 (citation-verifier PASS, 시행령 §37③ 2026.2.3 개정 반영, 8·13 대책 미변경 확인) | 2026-08-30 |
 | 5 | 임차인 리스크 — 보증금 구상·압류(§70②~④), 영업보상(공람공고일 기준), 권리금 배제 | 임차인·보상 | [05-sangga-imchain-bosang.md](redev/05-sangga-imchain-bosang.md) | 완료 (citation-verifier PASS) | 2026-08-13 |
 
 세무는 별도 항목을 만들지 않고 세법 위키에 연결했다 — 상가는 취득세 주택 수에 미산입이나 **관리처분계획인가로 입주권이
