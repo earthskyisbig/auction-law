@@ -1,0 +1,313 @@
+<title>지분 합산 90㎡의 함정</title>
+<style>
+  :root{
+    --navy:#1c2b4a; --navy-2:#16223b; --navy-line:#2e3f60;
+    --cream:#f4f1ea; --paper:#f4f1ea; --card:#ffffff; --ink:#26262e; --muted:#6e6a75; --faint:#9a95a0;
+    --line:#e6e0d4; --line-soft:#efe9dd;
+    --accent:#e2611f; --accent-2:#c94f12; --accent-bg:#fde7d7; --accent-line:#f3c3a2;
+    --soft:#c9d6ee;
+    --green:#2c7a4b; --green-bg:#e4f1ea; --green-line:#bcdcc8;
+    --red:#c0392b; --red-bg:#f8e5e2; --red-line:#eec4bd;
+    --shadow:0 1px 2px rgba(28,43,74,.05),0 10px 26px rgba(28,43,74,.08);
+    --radius:12px; --maxw:960px;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --paper:#141d30; --cream:#141d30; --card:#1d2942; --ink:#eef1f7; --muted:#a9b2c6; --faint:#7a85a0;
+    --line:#2a3a5a; --line-soft:#233250;
+    --navy:#101a2e; --navy-2:#0b1322; --navy-line:#26375a;
+    --accent-bg:#3a2113; --accent-line:#6e3a1c;
+    --green-bg:#153026; --green-line:#2c5a43; --red-bg:#341a16; --red-line:#63332b;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px rgba(0,0,0,.4);}}
+  :root[data-theme="light"]{
+    --paper:#f4f1ea;--cream:#f4f1ea;--card:#fff;--ink:#26262e;--muted:#6e6a75;--faint:#9a95a0;
+    --line:#e6e0d4;--line-soft:#efe9dd;--navy:#1c2b4a;--navy-2:#16223b;--navy-line:#2e3f60;
+    --accent-bg:#fde7d7;--accent-line:#f3c3a2;--green-bg:#e4f1ea;--green-line:#bcdcc8;--red-bg:#f8e5e2;--red-line:#eec4bd;
+    --shadow:0 1px 2px rgba(28,43,74,.05),0 10px 26px rgba(28,43,74,.08);}
+  :root[data-theme="dark"]{
+    --paper:#141d30;--cream:#141d30;--card:#1d2942;--ink:#eef1f7;--muted:#a9b2c6;--faint:#7a85a0;
+    --line:#2a3a5a;--line-soft:#233250;--navy:#101a2e;--navy-2:#0b1322;--navy-line:#26375a;
+    --accent-bg:#3a2113;--accent-line:#6e3a1c;--green-bg:#153026;--green-line:#2c5a43;--red-bg:#341a16;--red-line:#63332b;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px rgba(0,0,0,.4);}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;
+    font-family:"Apple SD Gothic Neo","AppleSDGothicNeo","Pretendard","Malgun Gothic","맑은 고딕",-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-feature-settings:"tnum";}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .tnum{font-variant-numeric:tabular-nums}
+  header.hero{background:var(--navy);color:#eef2f8;position:relative;overflow:hidden}
+  .hero-inner{max-width:var(--maxw);margin:0 auto;padding:44px 22px 40px;position:relative;z-index:2}
+  .hero-circle{position:absolute;right:-70px;top:50%;transform:translateY(-50%);width:280px;height:280px;border-radius:50%;
+    background:var(--accent);opacity:.16;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:800;margin:0 0 16px}
+  h1{font-size:clamp(26px,4.8vw,40px);line-height:1.2;margin:0;font-weight:800;letter-spacing:-.01em;color:#fff;text-wrap:balance}
+  h1 .hl{color:var(--accent)}
+  .sub{margin:16px 0 0;color:var(--soft);font-size:15.5px;max-width:62ch}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin:26px 0 0}
+  .chip{display:inline-flex;align-items:center;gap:6px;background:rgba(201,214,238,.10);border:1px solid rgba(201,214,238,.28);
+    color:#e7edf8;padding:7px 15px;border-radius:999px;font-size:13px;font-weight:600}
+  .chip b{color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin:22px 0 0;color:#8fa0c0;font-size:12.5px}
+  .toggle{position:sticky;top:0;z-index:20;background:var(--navy-2)}
+  .toggle-in{max-width:var(--maxw);margin:0 auto;padding:8px 22px;display:flex;justify-content:flex-end}
+  .tbtn{appearance:none;background:rgba(201,214,238,.10);border:1px solid rgba(201,214,238,.28);color:#dbe4f0;font:inherit;
+    font-size:12.5px;font-weight:700;padding:5px 13px;border-radius:8px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+  .tbtn:hover{background:rgba(201,214,238,.2)} .tbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  main{padding:36px 0 20px}
+  section{margin:0 0 34px}
+  .s-head{margin:0 0 16px}
+  .s-eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:800;margin:0 0 6px}
+  .s-title{font-size:22px;font-weight:800;letter-spacing:-.01em;margin:0;color:var(--ink)}
+  .s-desc{color:var(--muted);font-size:14px;margin:6px 0 0}
+  .verdict{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:var(--radius);
+    padding:22px 26px;box-shadow:var(--shadow)}
+  .verdict.green{border-left-color:var(--green)} .verdict.red{border-left-color:var(--red)} .verdict.navy{border-left-color:var(--navy)}
+  .v-tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:var(--accent);letter-spacing:.08em;text-transform:uppercase}
+  .verdict.green .v-tag{color:var(--green)} .verdict.red .v-tag{color:var(--red)}
+  .v-tag .dot{width:9px;height:9px;border-radius:50%;background:currentColor}
+  .v-main{font-size:clamp(19px,3.1vw,24px);font-weight:800;margin:10px 0 6px;letter-spacing:-.01em;text-wrap:balance;color:var(--ink)}
+  .v-body{color:var(--muted);font-size:14.5px;margin:0}
+  .v-body + .v-body{margin-top:9px}
+  .grid{display:grid;gap:16px}
+  @media(min-width:720px){.grid.g2{grid-template-columns:1fr 1fr}.grid.g3{grid-template-columns:repeat(3,1fr)}}
+  .stepcard{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:var(--radius);
+    padding:20px 20px 18px;box-shadow:var(--shadow);position:relative}
+  .stepcard.navy{border-left-color:var(--navy)} .stepcard.green{border-left-color:var(--green)} .stepcard.red{border-left-color:var(--red)}
+  .ico{width:44px;height:44px;border-radius:12px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:21px;margin:0 0 13px}
+  .stepcard.navy .ico{background:var(--navy)} .stepcard.green .ico{background:var(--green)} .stepcard.red .ico{background:var(--red)}
+  .num{position:absolute;top:16px;right:16px;width:26px;height:26px;border-radius:50%;background:var(--accent-bg);color:var(--accent);
+    font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .stepcard h4{margin:0 0 8px;font-size:16px;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
+  .stepcard p{margin:0;font-size:13.5px;color:var(--muted)}
+  .stepcard p + p{margin-top:9px}
+  .stepcard .cite{margin-top:11px;font-size:12px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px;display:flex;flex-wrap:wrap;gap:5px 12px}
+  .idb{font-size:11px;font-weight:700;background:var(--line-soft);color:var(--muted);padding:1px 7px;border-radius:5px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);background:var(--card)}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+  thead th{background:var(--navy);color:#dfe7f4;font-weight:700;text-align:left;padding:12px 16px;font-size:12.5px}
+  tbody td{padding:13px 16px;border-top:1px solid var(--line-soft);vertical-align:top;color:var(--ink)}
+  tbody tr.on{background:var(--accent-bg)} tbody tr.on td{border-top-color:var(--accent-line)}
+  tbody tr.ok{background:var(--green-bg)} tbody tr.ok td{border-top-color:var(--green-line)}
+  tbody tr.no{background:var(--red-bg)} tbody tr.no td{border-top-color:var(--red-line)}
+  .disc{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;padding:15px 18px;
+    font-size:13px;color:var(--muted);display:flex;gap:12px;align-items:flex-start}
+  .disc.red{border-left-color:var(--red)} .disc.green{border-left-color:var(--green)}
+  .disc .ic{color:var(--accent);font-weight:800;flex:0 0 auto}
+  .disc.red .ic{color:var(--red)} .disc.green .ic{color:var(--green)}
+  .disc + .disc{margin-top:12px}
+  .quote{background:var(--cream);border-left:3px solid var(--accent);padding:12px 16px;margin:12px 0 0;border-radius:0 8px 8px 0;
+    font-size:13.5px;color:var(--ink)}
+  :root[data-theme="dark"] .quote,:root:not([data-theme="light"]) .quote{background:var(--line-soft)}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .quote{background:var(--cream)}}
+  .footerbar{border-top:1px solid var(--line);margin-top:28px;padding:16px 0 40px;display:flex;justify-content:space-between;
+    color:var(--faint);font-size:12px;flex-wrap:wrap;gap:8px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .pill{display:inline-block;font-size:11.5px;font-weight:800;padding:2px 9px;border-radius:999px;letter-spacing:.02em}
+  .pill.ok{background:var(--green-bg);color:var(--green);border:1px solid var(--green-line)}
+  .pill.no{background:var(--red-bg);color:var(--red);border:1px solid var(--red-line)}
+  .pill.mid{background:var(--accent-bg);color:var(--accent-2);border:1px solid var(--accent-line)}
+  /* 피자(필지) 시각화 */
+  .pizzas{display:grid;gap:16px;margin-top:16px}
+  @media(min-width:720px){.pizzas{grid-template-columns:repeat(3,1fr)}}
+  .pizza{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;text-align:center}
+  .pizza h5{margin:0 0 4px;font-size:14px;font-weight:800;color:var(--ink)}
+  .pizza .who{font-size:12px;color:var(--faint);margin:0 0 12px}
+  .bar{height:26px;border-radius:8px;background:var(--line-soft);overflow:hidden;position:relative;margin:0 0 8px}
+  .bar .fill{height:100%;background:var(--accent);border-radius:8px 0 0 8px}
+  .bar .goal{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--red)}
+  .pizza .lab{font-size:13px;color:var(--muted)} .pizza .lab b{color:var(--ink)}
+  .pizza .res{margin-top:10px}
+  .bigmath{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:20px 22px;text-align:center;font-size:clamp(16px,3vw,21px);font-weight:800;margin-top:16px;color:var(--ink)}
+  .bigmath .x{color:var(--red)} .bigmath .o{color:var(--green)}
+  .bigmath small{display:block;font-weight:600;font-size:13px;color:var(--muted);margin-top:8px}
+  @media (prefers-reduced-motion:no-preference){section{animation:rise .5s ease both}@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
+</style>
+
+<div class="toggle"><div class="toggle-in">
+  <button class="tbtn" id="themeBtn" type="button" aria-label="테마 전환"><span id="themeIcon">◐</span><span id="themeLabel">테마</span></button>
+</div></div>
+
+<header class="hero">
+  <div class="hero-circle"></div>
+  <div class="hero-inner">
+    <p class="eyebrow">쉽게 읽는 판결 이야기 · auction-law</p>
+    <h1>땅 조각을 모아서 90㎡?<br>법원은 <span class="hl">"안 됩니다"</span>라고 했다</h1>
+    <p class="sub">서울 한남3구역 재개발에서 나온 중요한 판결을 초등학생도 이해할 수 있게 풀었습니다. "여러 필지의 땅 지분을 합쳐서 90㎡만 넘기면 새 아파트를 받는다"는 말을 믿고 투자하면 위험한 이유입니다.</p>
+    <div class="chips">
+      <span class="chip">🏘️ <b>한남3구역 재개발</b></span>
+      <span class="chip">⚖️ <b>1심·2심 모두 투자자 패소</b></span>
+      <span class="chip">📐 <b>핵심: 필지별 90㎡</b></span>
+      <span class="chip">⏳ <b>대법원 계류 중</b></span>
+    </div>
+    <div class="meta tnum">
+      <span>📅 정리 2026-08-18</span>
+      <span>📜 서울조례 §36 원문은 law.go.kr 실조회로 확인</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section><div class="verdict red">
+    <span class="v-tag"><span class="dot"></span>한 줄 결론</span>
+    <p class="v-main">여러 필지의 땅 조각(지분)은 <b>합쳐서 세어주지 않는다.</b> 한 필지 안에서 내 몫이 90㎡를 넘어야 아파트를 받는다.</p>
+    <p class="v-body">투자자는 세 필지의 지분을 합치면 98.67㎡라서 90㎡가 넘는다고 주장했지만, 법원은 <b>"필지마다 따로 계산해야 한다"</b>고 했습니다. 세 필지 중 어느 하나도 혼자서는 90㎡를 못 넘었기 때문에(8.83 / 86 / 3.83㎡), 아파트 대신 <b>돈으로 정산(현금청산)</b>하라는 조합의 결정이 옳다고 판단했습니다. 1심에 이어 2심도 같은 결론입니다.</p>
+  </div></section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Step 1 · 기본 개념</p><h2 class="s-title">먼저, 낱말부터 쉽게</h2></div>
+    <div class="grid g3">
+      <div class="stepcard navy">
+        <div class="ico">🍕</div>
+        <h4>필지 = 피자 한 판</h4>
+        <p>땅은 나라가 <b>한 판, 두 판</b> 하고 세듯이 번호를 붙여 관리해요. 그 한 판 한 판을 <b>"필지"</b>라고 부릅니다. 옆에 있는 땅이라도 번호가 다르면 <b>다른 판</b>이에요.</p>
+      </div>
+      <div class="stepcard navy">
+        <div class="ico">🍕</div>
+        <h4>지분 = 내 피자 조각</h4>
+        <p>피자 한 판을 여러 명이 나눠 가질 수 있죠? 땅도 여러 명이 나눠 가질 수 있어요. 그때 <b>내 몫</b>을 <b>"지분"</b>이라고 합니다. "이 필지의 10분의 1은 내 것" 하는 식이에요.</p>
+      </div>
+      <div class="stepcard navy">
+        <div class="ico">🏠</div>
+        <h4>입주권 vs 현금청산</h4>
+        <p>재개발로 동네를 새로 지으면, 자격이 되는 땅 주인은 <b>새 아파트를 받을 권리(입주권)</b>를 얻어요. 자격이 안 되면 아파트 대신 <b>땅값을 돈으로 받고 끝</b>(현금청산)입니다.</p>
+      </div>
+    </div>
+    <div class="disc" style="margin-top:16px"><span class="ic">📏</span><span>
+      <b>왜 90㎡라는 기준이 있을까?</b> 아주 작은 땅 조각 주인에게까지 전부 새 아파트를 주면 아파트가 모자라겠죠. 그래서 서울시 조례(서울시가 만든 규칙)는 <b>"땅으로 아파트를 받으려면 90㎡(약 27평) 이상은 가지고 있어야 한다"</b>는 기준을 두었습니다.
+    </span></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Step 2 · 사건</p><h2 class="s-title">이번 사건에서 무슨 일이 있었나</h2>
+      <p class="s-desc">투자자(원고)는 2003년 12월 30일보다 전부터 한남3구역 안 도로 3개 필지의 지분을 가지고 있었습니다.</p></div>
+
+    <div class="pizzas">
+      <div class="pizza">
+        <h5>A 필지 (피자 1판)</h5>
+        <p class="who">내 조각</p>
+        <div class="bar"><div class="fill" style="width:8.8%"></div><div class="goal" style="left:90%"></div></div>
+        <p class="lab tnum"><b>8.83㎡</b> / 기준 90㎡</p>
+        <p class="res"><span class="pill no">90㎡ 안 됨</span></p>
+      </div>
+      <div class="pizza">
+        <h5>B 필지 (피자 2판)</h5>
+        <p class="who">내 조각</p>
+        <div class="bar"><div class="fill" style="width:86%"></div><div class="goal" style="left:90%"></div></div>
+        <p class="lab tnum"><b>86㎡</b> / 기준 90㎡</p>
+        <p class="res"><span class="pill no">아깝지만 안 됨</span></p>
+      </div>
+      <div class="pizza">
+        <h5>C 필지 (피자 3판)</h5>
+        <p class="who">내 조각</p>
+        <div class="bar"><div class="fill" style="width:3.8%"></div><div class="goal" style="left:90%"></div></div>
+        <p class="lab tnum"><b>3.83㎡</b> / 기준 90㎡</p>
+        <p class="res"><span class="pill no">90㎡ 안 됨</span></p>
+      </div>
+    </div>
+
+    <div class="bigmath tnum">
+      투자자의 주장: <span class="o">8.83 + 86 + 3.83 = 98.67㎡ ≥ 90㎡</span> → "아파트 주세요!"<br>
+      법원의 답: <span class="x">피자 세 판의 조각을 한 접시에 모아도, 한 판을 다 가진 게 아니다</span>
+      <small>90㎡는 <b>필지(피자 한 판)마다 따로</b> 세는 기준 — 세 판 어디에서도 90㎡를 못 넘었으므로 아파트 자격 없음 → 현금청산</small>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Step 3 · 재판 결과</p><h2 class="s-title">재판은 어떻게 진행됐나</h2></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th style="width:22%">단계</th><th style="width:30%">법원</th><th>결과</th></tr></thead>
+      <tbody>
+        <tr class="no"><td><b>1심</b></td><td>서울행정법원<br><span style="font-size:12px;color:var(--muted)">2023구합70749</span></td><td><b>투자자 패소</b> — "90㎡는 필지별로 따진다. 합산 불가. 현금청산이 맞다"</td></tr>
+        <tr class="no"><td><b>2심 (항소심)</b></td><td>서울고등법원<br><span style="font-size:12px;color:var(--muted)">2024누71710 · 2025.9.12. 선고</span></td><td><b>투자자 또 패소</b> — 1심과 같은 판단 유지</td></tr>
+        <tr class="on"><td><b>3심 (대법원)</b></td><td>대법원</td><td><b>계류 중</b> — 아직 최종 확정은 아니지만, 두 번 연속 같은 결론이 나온 상태</td></tr>
+      </tbody>
+    </table></div>
+    <div class="disc" style="margin-top:16px"><span class="ic">⏳</span><span>
+      <b>"계류 중"이란?</b> 대법원이 아직 최종 답을 내리지 않았다는 뜻이에요. 결론이 뒤집힐 가능성이 아예 없는 건 아니지만, 1심과 2심이 <b>똑같은 이유로 똑같은 결론</b>을 냈다는 점이 중요합니다.
+    </span></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Step 4 · 규칙의 근거</p><h2 class="s-title">규칙이 실제로 어떻게 쓰여 있길래?</h2>
+      <p class="s-desc">아래 조문은 이 정리를 만들며 law.go.kr(국가법령정보)에서 원문을 직접 조회해 확인한 것입니다(현행 서울조례, 2026.5.18. 시행).</p></div>
+    <div class="quote">
+      <b>서울특별시 도시 및 주거환경정비 조례 §36② 3호</b> — "1주택 또는 <b>1필지의 토지</b>를 여러 명이 소유하고 있는 경우" 여러 명의 분양신청자를 <b>1명의 분양대상자로 본다</b>. 다만, 권리산정기준일 이전부터 공유로 소유한 <b>토지의 지분이 제1항제2호(90㎡ 이상)</b> … 에 해당하는 경우는 예외로 한다.
+    </div>
+    <div class="quote">
+      <b>같은 조례 부칙 제29조③ (경과조치)</b> — "<b>2003년 12월 30일 전부터 공유지분으로 소유한 토지</b>의 권리가액이 분양용 최소규모 공동주택 1가구의 추산액 이상인 자는 종전 조례 제27조제2항제3호에 따른 분양대상자로 본다."
+    </div>
+    <div class="disc" style="margin-top:16px"><span class="ic">🔎</span><span>
+      <b>포인트</b>: 예외 조항이 <b>"1필지의 토지를 여러 명이 소유한 경우"</b>라는 틀 안에 붙어 있어요. 즉 규칙 자체가 "피자 한 판 안에서 내 조각이 얼마나 큰가"를 묻는 구조라서, 법원은 <b>여러 판을 합쳐서 세는 해석을 받아들이지 않았습니다.</b> "2003.12.30. 이전 소유"라는 옛날 예외 규정도 이 틀을 벗어나게 해주지는 못했습니다.
+    </span></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Step 5 · 정리표</p><h2 class="s-title">그래서 어떤 땅이 아파트를 받고, 어떤 땅이 못 받나</h2>
+      <p class="s-desc">함께 공유해주신 정리 슬라이드(잘사는흥부 자료)의 4가지 경우를 표로 옮겼습니다. "권리산정기준일"은 쪼개기 여부를 판정하는 기준 날짜입니다.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th style="width:6%">#</th><th>어떤 경우인가</th><th style="width:18%">결과</th></tr></thead>
+      <tbody>
+        <tr class="ok"><td>1</td><td>기준일 전에 나뉜 <b>온전한 한 필지</b>가 90㎡ 이상</td><td><span class="pill ok">입주권 가능</span></td></tr>
+        <tr class="ok"><td>2</td><td>기준일 전에 나뉜 90㎡ 미만의 <b>온전한 필지 여러 개</b>를 모아 90㎡ 이상 (필지를 통째로 여러 개 소유)</td><td><span class="pill ok">입주권 가능</span></td></tr>
+        <tr class="ok"><td>3</td><td>기준일 전에 나뉜 <b>하나의 지분</b>이 그 자체로 90㎡ 이상</td><td><span class="pill ok">입주권 가능</span></td></tr>
+        <tr class="no"><td>4</td><td>90㎡ 미만의 <b>지분 여러 개를 합쳐서</b> 90㎡ 이상을 만드는 경우 — <b>이번 판결이 바로 이 경우</b></td><td><span class="pill no">현금청산</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="disc red" style="margin-top:16px"><span class="ic">💡</span><span>
+      <b>2번과 4번의 차이가 헷갈리죠?</b> 2번은 <b>피자 한 판을 통째로</b> 여러 판 가진 사람이에요(작은 판이라도 온전한 내 판). 4번은 <b>여러 판에서 조각만</b> 가진 사람입니다. 판을 통째로 가졌으면 합쳐 세어주지만, <b>조각들은 합쳐 세어주지 않는다</b> — 이것이 이번 판결의 핵심입니다.
+    </span></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Warning</p><h2 class="s-title">투자할 때 꼭 기억할 것</h2></div>
+    <div class="grid g3">
+      <div class="stepcard red">
+        <div class="ico">🚫</div><span class="num">1</span>
+        <h4>"합산해서 90㎡" 물건 조심</h4>
+        <p>시장에는 "2003년 이전 지분이라 여러 필지를 합쳐 90㎡만 맞추면 무조건 입주권"이라고 소개되는 소액 지분 물건이 있어요. 이번 판결로 그 논리가 <b>1심·2심 연속으로 부정</b>됐습니다.</p>
+      </div>
+      <div class="stepcard red">
+        <div class="ico">📐</div><span class="num">2</span>
+        <h4>"단일 필지로 90㎡"인지 볼 것</h4>
+        <p>합계 면적만 보지 말고, <b>한 필지 안에서 내 지분이 90㎡ 이상인지</b>를 확인하세요. 86㎡처럼 아슬아슬하게 모자라도 결과는 똑같이 현금청산이었습니다.</p>
+      </div>
+      <div class="stepcard red">
+        <div class="ico">👨‍👩‍👧</div><span class="num">3</span>
+        <h4>가족이 나눠 사도 함정</h4>
+        <p>90㎡ 넘는 필지를 부부·가족이 지분으로 나눠 사면 <b>한 사람 몫이 90㎡ 아래로 떨어질 수 있어요.</b> 공유하신 슬라이드도 "배우자 한쪽 지분을 90㎡ 이상으로 만들 것"을 권합니다(같은 세대는 어차피 1명의 분양대상자로 묶이는 점도 함께 고려).</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Sources</p><h2 class="s-title">이 정리는 무엇을 근거로 했나</h2></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th style="width:34%">자료</th><th>확인 방법</th></tr></thead>
+      <tbody>
+        <tr class="ok"><td><b>서울조례 §36①·② + 부칙 §29③</b></td><td>law.go.kr Open API로 <b>원문 직접 조회·인용 확인</b> (현행 2026.5.18. 시행, MST 2130189)</td></tr>
+        <tr class="on"><td>1심 2023구합70749 · 2심 2024누71710 (2025.9.12.)</td><td>공유해주신 게시글(부동산 스터디, JunDaddy)·슬라이드(잘사는흥부) 기준 — <b>하급심 판결문 원문은 law.go.kr 미제공으로 직접 확인하지 못함</b></td></tr>
+        <tr class="on"><td>사건 세부 수치(8.83 / 86 / 3.83㎡ 등)</td><td>공유 자료 기준(원문 대조 안 됨)</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <div class="disc"><span class="ic">ℹ</span><span>
+    이 페이지는 공유된 게시글·슬라이드와 law.go.kr 조례 원문을 바탕으로 한 <b>일반 정보</b>이며 법률자문이 아닙니다. 사건은 <b>대법원 계류 중이라 아직 최종 확정이 아니고</b>, 하급심 판결문 원문은 확인하지 못했습니다. 분양자격은 구역·조례·기본계획 수립 시점에 따라 적용 규정이 달라지므로(경과조치 포함), 실제 매수 전에는 반드시 <b>정비사업 전문 변호사 상담</b>을 받으세요.
+  </span></div>
+
+  <div class="footerbar"><span>auction-law · 지분 합산 90㎡ 판결 쉬운 정리 (한남3구역)</span><span class="tnum">정리 2026-08-18 · 조례 원문 law.go.kr 확인</span></div>
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement,btn=document.getElementById('themeBtn'),
+      icon=document.getElementById('themeIcon'),label=document.getElementById('themeLabel');
+  function cur(){var a=root.getAttribute('data-theme');return a?a:(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');}
+  function paint(t){icon.textContent=t==='dark'?'☾':'☀';label.textContent=t==='dark'?'다크':'라이트';}
+  paint(cur());
+  btn.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';root.setAttribute('data-theme',n);paint(n);});
+  window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(){if(!root.getAttribute('data-theme'))paint(cur());});
+})();
+</script>
