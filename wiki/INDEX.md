@@ -68,7 +68,8 @@ law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조
 | 17 | 부담부증여 시 양도세·증여세 병행 과세 | 상속증여세 | [17-budambu-jeungyeo.md](tax/17-budambu-jeungyeo.md) | 완료 | 2026-08-10 |
 | 18 | 대체주택 양도세 비과세 특례(재건축·재개발) | 재개발재건축 특유 | [18-daechejutaek-biguase.md](tax/18-daechejutaek-biguase.md) | 완료 | 2026-08-10 |
 | 19 | 청산금 과세(수령 시 양도세, 납부 시 취득가 가산) | 재개발재건축 특유 | [19-cheongsangeum-guase.md](tax/19-cheongsangeum-guase.md) | 완료 | 2026-08-10 |
-| 20 | 매매사업자·법인의 부동산 양도 과세구조(비교과세·부가세) | 사업자·법인 | [20-maemaesaeopja-beobin.md](tax/20-maemaesaeopja-beobin.md) | 완료 | 2026-08-10 |
+| 20 | 매매사업자·법인의 부동산 양도 과세구조(비교과세·부가세) | 사업자·법인 | [20-maemaesaeopja-beobin.md](tax/20-maemaesaeopja-beobin.md) | 완료 | 2026-08-16 |
+| 21 | 매매사업자 재고주택의 주택수 산정(비과세 실질판정 vs 중과 명문포함) | 사업자·법인 | [21-maemae-jaego-jutaeksu.md](tax/21-maemae-jaego-jutaeksu.md) | 완료 | 2026-08-16 |
 
 ## 재개발·재건축 목록
 

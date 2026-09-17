@@ -92,10 +92,11 @@ auction-law/
 │  │   ├─ precedent-researcher   판례·유권해석 조사
 │  │   ├─ citation-verifier      독립 인용 검증 (2차 시야, 최종 출력 전 필수)
 │  │   └─ tax-advisor            세무 자문 (세금 질문 시 합류)
-│  └─ skills/            스킬 5개
+│  └─ skills/            스킬 6개
 │      ├─ law-api-query              law.go.kr API 조회 (+ 조회 스크립트)
 │      ├─ realestate-law-analysis    법률 분석 절차·쟁점 체크리스트
 │      ├─ realestate-tax-analysis    세무 분석·세율표
+│      ├─ tax-calc                   세액 확정 계산기 (판정 트리 + 세율표 JSON + 골든 테스트)
 │      ├─ citation-verification      인용 사후검증 절차
 │      └─ realestate-law-orchestrator 팀 조율 (자동 실행됨)
 ├─ wiki/                 미리 조사해둔 쟁점 46개 (재사용 지식 자산, git 커밋됨)

@@ -1,0 +1,366 @@
+<title>세무에이전트 만들기 — 세금은 변수 8개의 함수다</title>
+<style>
+:root{
+  --dark:#141413; --light:#faf9f5; --light-gray:#e8e6dc; --mid-gray:#b0aea5;
+  --orange:#d97757; --blue:#6a9bcc; --green:#788c5d;
+  --mute:rgba(20,20,19,0.62); --on-dark-mute:rgba(250,249,245,0.6); --line:rgba(20,20,19,0.1);
+  --heading:'Poppins','Apple SD Gothic Neo','Pretendard',Arial,sans-serif;
+  --body:'Lora',Georgia,'Apple SD Gothic Neo',serif;
+  --label:'Poppins','Apple SD Gothic Neo',Arial,sans-serif;
+  --maxw:1100px; --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--light);color:var(--dark);font-family:var(--body);-webkit-font-smoothing:antialiased;line-height:1.65}
+h1,h2,h3{margin:0;font-family:var(--heading);font-weight:600;letter-spacing:-0.01em}
+a{color:var(--orange)}
+::selection{background:var(--orange);color:var(--light)}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+section{padding:84px 0}
+section.on-dark{background:var(--dark);color:var(--light)}
+section.bg-soft{background:var(--light-gray)}
+.eyebrow{font-family:var(--label);font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:0.5em;background:var(--light-gray);padding:6px 14px;border-radius:999px}
+.eyebrow.on-dark{background:rgba(250,249,245,0.08);color:var(--on-dark-mute)}
+.eyebrow::before{content:'';width:6px;height:6px;background:var(--orange);border-radius:50%;display:inline-block}
+.chip-group{display:flex;gap:6px;background:rgba(250,249,245,0.08);padding:6px;border-radius:12px;width:fit-content;flex-wrap:wrap}
+.chip{font-family:var(--label);font-size:0.84rem;font-weight:500;background:transparent;color:var(--on-dark-mute);border:none;border-radius:8px;padding:8px 16px;cursor:pointer;transition:all 0.25s ease}
+.chip:hover{color:var(--light)}
+.chip.active{background:var(--light);color:var(--orange);box-shadow:0 1px 4px rgba(0,0,0,0.3)}
+.disclosure{background:var(--light);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:box-shadow 0.25s ease,border-color 0.25s ease}
+.disclosure:hover{box-shadow:0 12px 30px -14px rgba(20,20,19,0.15);border-color:rgba(217,119,87,0.35)}
+.disclosure summary{list-style:none;cursor:pointer;padding:22px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.disclosure summary::-webkit-details-marker{display:none}
+.disclosure .chev{width:20px;height:20px;color:var(--mid-gray);transition:transform 0.35s var(--ease);flex:none}
+.disclosure[open] .chev{transform:rotate(90deg);color:var(--orange)}
+.disclosure .body{padding:0 26px 22px;color:var(--mute);font-size:0.96rem;line-height:1.7;border-top:1px solid var(--line);padding-top:16px}
+.disclosure .body strong{color:var(--dark)}
+.card{background:var(--light);border:1px solid var(--line);border-radius:16px;padding:22px 20px;transition:transform 0.3s var(--ease),box-shadow 0.3s ease,border-color 0.3s ease}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 32px -16px rgba(20,20,19,0.18);border-color:rgba(217,119,87,0.35)}
+.card .name{font-family:var(--heading);font-weight:600;font-size:1.05rem;margin-bottom:4px}
+.card .tag{font-family:var(--label);font-size:0.7rem;color:var(--mute);text-transform:uppercase;letter-spacing:0.04em}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:700px){.compare{grid-template-columns:1fr}}
+.compare > div{border-radius:22px;padding:40px 34px;background:var(--light)}
+.compare .muted{border:1px solid var(--line)}
+.compare .emphasis{border:2px solid var(--orange)}
+.pill{font-family:var(--label);font-size:0.68rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:6px 12px;border-radius:999px;display:inline-block}
+.pill.neutral{background:var(--light-gray);color:var(--mute)}
+.pill.active{background:var(--orange);color:var(--light)}
+.progress{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--orange),var(--blue));z-index:100;transition:width 0.1s linear}
+nav.topnav{position:fixed;top:0;left:0;right:0;height:56px;z-index:90;display:flex;align-items:center;justify-content:center;background:rgba(250,249,245,0);border-bottom:1px solid transparent;transition:background 0.3s ease,border-color 0.3s ease,backdrop-filter 0.3s ease}
+nav.topnav.scrolled{background:rgba(250,249,245,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+nav.topnav .links{display:flex;gap:22px;font-family:var(--label);font-size:0.8rem;font-weight:500}
+nav.topnav a{color:var(--mute);text-decoration:none;transition:color 0.2s}
+nav.topnav a:hover{color:var(--orange)}
+.blob{position:absolute;border-radius:50%;filter:blur(50px);pointer-events:none}
+@keyframes driftA{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,30px) scale(1.12)}}
+@keyframes driftB{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-36px,24px) scale(1.08)}}
+@keyframes driftC{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-26px) scale(1.1)}}
+@keyframes hueShift{0%{filter:hue-rotate(0deg) saturate(1.05)}50%{filter:hue-rotate(22deg) saturate(1.2)}100%{filter:hue-rotate(0deg) saturate(1.05)}}
+@keyframes floatY{0%,100%{transform:translateY(0px) rotate(0deg)}50%{transform:translateY(-10px) rotate(0.4deg)}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s var(--ease),transform 0.6s var(--ease)}
+.reveal.in-view{opacity:1;transform:translateY(0)}
+
+/* ---- page-specific ---- */
+.hero{position:relative;overflow:hidden;padding:150px 0 100px;text-align:center}
+.hero h1{font-size:clamp(2rem,5.2vw,3.4rem);line-height:1.18;margin:22px auto 18px;max-width:800px;text-wrap:balance}
+.hero .lead{font-style:italic;color:var(--mute);font-size:1.12rem;max-width:620px;margin:0 auto 44px}
+.formula{position:relative;display:inline-block;background:var(--light);border:1px solid var(--line);border-radius:22px;padding:26px 34px;box-shadow:0 24px 60px -30px rgba(20,20,19,0.25);animation:floatY 7s ease-in-out infinite}
+.formula .fx{font-family:var(--heading);font-weight:600;font-size:clamp(0.95rem,2.4vw,1.25rem)}
+.formula .fx em{font-style:normal;color:var(--orange)}
+.formula .vars{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.formula .vars span{font-family:var(--label);font-size:0.72rem;font-weight:600;letter-spacing:0.05em;background:var(--light-gray);border-radius:999px;padding:5px 12px;color:var(--mute)}
+.formula::after{content:'';position:absolute;inset:-2px;border-radius:24px;padding:2px;background:linear-gradient(120deg,var(--orange),var(--green),var(--blue));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0.55;animation:hueShift 9s ease-in-out infinite;pointer-events:none}
+.sec-head{max-width:720px;margin-bottom:44px}
+.sec-head h2{font-size:clamp(1.5rem,3.4vw,2.1rem);margin:14px 0 12px;text-wrap:balance}
+.sec-head p{color:var(--mute);margin:0}
+.on-dark .sec-head p{color:var(--on-dark-mute)}
+.grid8{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media (max-width:960px){.grid8{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:540px){.grid8{grid-template-columns:1fr}}
+.card p{margin:8px 0 0;font-size:0.88rem;color:var(--mute);line-height:1.6}
+.matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+@media (max-width:820px){.matrix{grid-template-columns:1fr}}
+.mcell{background:rgba(250,249,245,0.05);border:1px solid rgba(250,249,245,0.12);border-radius:16px;padding:22px}
+.mcell .mt{font-family:var(--label);font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+.mcell .mv{font-size:0.95rem;line-height:1.65;color:rgba(250,249,245,0.88)}
+.case{margin-top:36px;border-left:3px solid var(--orange);padding:6px 0 6px 22px;font-style:italic;color:var(--on-dark-mute);max-width:760px}
+.case strong{color:var(--light);font-style:normal}
+.maprow{display:grid;grid-template-columns:1fr 34px 1.3fr;align-items:center;gap:14px;padding:16px 20px;background:var(--light);border:1px solid var(--line);border-radius:14px}
+.maprow + .maprow{margin-top:10px}
+.maprow .from{font-family:var(--heading);font-weight:600;font-size:0.95rem}
+.maprow .arrow{color:var(--orange);font-family:var(--heading);text-align:center}
+.maprow .to{color:var(--mute);font-size:0.92rem}
+.maprow .to strong{color:var(--dark)}
+@media (max-width:640px){.maprow{grid-template-columns:1fr;gap:4px}.maprow .arrow{display:none}}
+.prompt{background:var(--light-gray);border-radius:12px;padding:14px 18px;font-family:var(--heading);font-size:0.88rem;line-height:1.6;color:var(--dark);margin:12px 0}
+.prompt::before{content:'실제 프롬프트';display:block;font-family:var(--label);font-size:0.64rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:6px}
+.steps .disclosure + .disclosure{margin-top:12px}
+.dtitle{display:flex;align-items:center;gap:12px}
+.dtitle .name{font-family:var(--heading);font-weight:600;font-size:1rem}
+ul.tight{margin:10px 0 0;padding-left:20px}
+ul.tight li{margin:6px 0}
+.check{display:flex;align-items:flex-start;gap:12px;padding:13px 18px;background:var(--light);border:1px solid var(--line);border-radius:12px;cursor:pointer;transition:border-color 0.25s}
+.check:hover{border-color:rgba(217,119,87,0.4)}
+.check + .check{margin-top:8px}
+.check input{accent-color:var(--orange);width:17px;height:17px;margin-top:3px;flex:none;cursor:pointer}
+.check span{font-size:0.94rem;color:var(--dark)}
+.check input:checked ~ span{color:var(--mute);text-decoration:line-through;text-decoration-color:rgba(217,119,87,0.5)}
+footer{background:var(--dark);color:var(--on-dark-mute);padding:52px 0;font-size:0.86rem}
+footer .wrap{display:flex;flex-direction:column;gap:8px}
+table.err{width:100%;border-collapse:collapse;font-size:0.92rem}
+table.err th{font-family:var(--label);font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--mute);text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)}
+table.err td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--mute)}
+table.err td:first-child{color:var(--dark);font-family:var(--heading);font-weight:500;font-size:0.88rem}
+.tablewrap{overflow-x:auto}
+</style>
+
+<div class="progress" id="progress"></div>
+<nav class="topnav" id="topnav"><div class="links">
+  <a href="#vars">변수 8개</a><a href="#matrix">기준점</a><a href="#design">설계</a><a href="#steps">스텝</a><a href="#rules">수칙</a><a href="#check">체크리스트</a>
+</div></nav>
+
+<!-- ───────────────── HERO ───────────────── -->
+<header class="hero">
+  <div class="blob" style="width:420px;height:420px;background:rgba(217,119,87,0.16);top:-80px;left:6%;animation:driftA 17s ease-in-out infinite"></div>
+  <div class="blob" style="width:360px;height:360px;background:rgba(106,155,204,0.14);bottom:-60px;right:8%;animation:driftB 20s ease-in-out infinite"></div>
+  <div class="blob" style="width:280px;height:280px;background:rgba(120,140,93,0.13);top:30%;right:26%;animation:driftC 15s ease-in-out infinite"></div>
+  <div class="wrap" style="position:relative">
+    <span class="eyebrow">auction-law 강의 · 세무에이전트 만들기</span>
+    <h1>세금은 변수 8개의 함수다</h1>
+    <p class="lead">세무에이전트 만들기 = 변수 파악을 시스템으로 옮기는 것.<br>조문 읽기가 아니라 변수 목록 만들기에서 시작한다.</p>
+    <div class="formula">
+      <div class="fx">세액 = <em>f</em> ( 변수₁ … 변수₈ )</div>
+      <div class="vars">
+        <span>시점</span><span>보유기간</span><span>주택수</span><span>금액대</span><span>규제지역</span><span>구간</span><span>누진</span><span>혜택</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ───────────────── 변수 8개 ───────────────── -->
+<section id="vars">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">1부</span>
+      <h2>세금을 결정하는 변수 8개</h2>
+      <p>세법 조문이 아무리 복잡해도, 실제 세금을 가르는 건 이 변수들이다. 설계의 첫 산출물은 코드가 아니라 이 목록이다.</p>
+    </div>
+    <div class="grid8">
+      <div class="card reveal"><div class="tag">Timing</div><div class="name">시점</div><p>취득일 · 양도일 · 과세기준일(6월 1일) · 법 개정 시행일</p></div>
+      <div class="card reveal"><div class="tag">Holding</div><div class="name">보유기간</div><p>2년(비과세) · 3년(장특공 시작) · 1~2년(단기 중과) + 거주기간</p></div>
+      <div class="card reveal"><div class="tag">Count</div><div class="name">주택수</div><p>세대 합산 — 입주권·분양권·오피스텔·상속·재고주택 포함 여부가 관건</p></div>
+      <div class="card reveal"><div class="tag">Price</div><div class="name">금액대</div><p>6억/9억(취득세 구간) · 12억(비과세 한도) · 9억/12억(종부세 공제)</p></div>
+      <div class="card reveal"><div class="tag">Zone</div><div class="name">규제지역</div><p>조정대상지역 여부 — 중과·거주요건·감면의 스위치</p></div>
+      <div class="card reveal"><div class="tag">Bracket</div><div class="name">구간</div><p>과세표준이 어느 세율 구간에 걸리나</p></div>
+      <div class="card reveal"><div class="tag">Progressive</div><div class="name">누진</div><p>구간을 넘으면 어떻게 붙나 — 누진공제, 초과분 안분</p></div>
+      <div class="card reveal"><div class="tag">Relief</div><div class="name">혜택</div><p>비과세 특례(일시적2주택·상속·혼인) · 감면(생애최초) · 공제(장특공)</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────── 다크 강조: 기준점 매트릭스 ───────────────── -->
+<section class="on-dark" id="matrix">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow on-dark">함정 — 여기서 사고의 90%가 난다</span>
+      <h2>같은 변수인데, 세목마다 기준점이 다르다</h2>
+      <p>변수를 골라 보라. 취득세·보유세·양도세가 같은 변수를 어떻게 다르게 재는지 드러난다.</p>
+    </div>
+    <div class="chip-group reveal" id="varChips">
+      <button class="chip active" data-v="t">시점</button>
+      <button class="chip" data-v="z">규제지역</button>
+      <button class="chip" data-v="c">주택수</button>
+      <button class="chip" data-v="r">혜택 (일시적 2주택)</button>
+    </div>
+    <div class="matrix reveal">
+      <div class="mcell"><div class="mt">취득세</div><div class="mv" id="m1"></div></div>
+      <div class="mcell"><div class="mt">보유세</div><div class="mv" id="m2"></div></div>
+      <div class="mcell"><div class="mt">양도세</div><div class="mv" id="m3"></div></div>
+    </div>
+    <div class="case reveal">
+      <strong>실전 사례(익명화)</strong> — 상속주택 1채를 가진 세대가 매매사업용 아파트를 추가 매입했다.
+      취득세 주택수를 셀 땐 상속주택이 <strong>빠졌고</strong>(상속 5년 내 → 표준세율),
+      양도세 중과 주택수엔 상속주택도 재고주택도 <strong>들어가고</strong>,
+      비과세 판정에선 재고주택이 <strong>실질에 따라 갈렸다</strong>.
+      같은 세 채인데 판정마다 세는 법이 달랐다 — 변수의 기준점을 세목별로 잡는 게 왜 핵심인지 보여준다.
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────── 변수 → 시스템 매핑 ───────────────── -->
+<section class="bg-soft" id="design">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">2부</span>
+      <h2>변수가 곧 설계다</h2>
+      <p>변수 목록이 잡히면 시스템 구조는 자동으로 따라온다. 어려운 아키텍처가 아니라 이 여섯 줄이 전부다.</p>
+    </div>
+    <div class="reveal">
+      <div class="maprow"><div class="from">변수를 채운다</div><div class="arrow">→</div><div class="to"><strong>LLM이 사용자에게 질문</strong> — 사실관계 추출. 변수를 다 채우기 전에 계산하지 않는다</div></div>
+      <div class="maprow"><div class="from">변수의 '기준'을 확인</div><div class="arrow">→</div><div class="to"><strong>조사관이 법령 API 원문 조회</strong> — 이미 조사한 쟁점은 위키 재사용</div></div>
+      <div class="maprow"><div class="from">변수 → 세율 매핑</div><div class="arrow">→</div><div class="to"><strong>세율표 JSON</strong> — 수치마다 근거 조문 + 검증상태 딱지. 법이 바뀌면 코드가 아니라 표를 고친다</div></div>
+      <div class="maprow"><div class="from">변수 조합 → 판정</div><div class="arrow">→</div><div class="to"><strong>파이썬 결정 트리</strong> — 특례 해당 여부는 if-else로 못 박는다</div></div>
+      <div class="maprow"><div class="from">구간·누진 → 세액</div><div class="arrow">→</div><div class="to"><strong>파이썬 계산 함수</strong> — LLM 암산 금지</div></div>
+      <div class="maprow"><div class="from">기준이 아직 맞는지</div><div class="arrow">→</div><div class="to"><strong>독립 검증관</strong>이 인용 재확인 + 개정은 값 교체가 아니라 <strong>날짜 분기</strong>로</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────── 구축 스텝 ───────────────── -->
+<section id="steps">
+  <div class="wrap steps">
+    <div class="sec-head reveal">
+      <span class="eyebrow">3부</span>
+      <h2>구축 스텝 — 실제 프롬프트</h2>
+      <p>프롬프트는 짧다. 순서와 검증 질문이 핵심이다. 각 스텝을 펼쳐 실제로 입력한 문장을 확인하라.</p>
+    </div>
+    <details class="disclosure reveal"><summary><div class="dtitle"><span class="pill neutral">Step 0</span><span class="name">조회 인프라 — 법령 원문을 가져올 수단부터</span></div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></summary>
+      <div class="body">law.go.kr Open API 조회 스킬을 먼저 만들고, 데이터 소스의 함정(본문검색 오작동 · 국세청 출처 판례 본문 조회 불가 · OC와 호출 IP 동시 검증)을 <strong>실측해서 기록</strong>한다. 이 함정 목록이 조사관의 품질을 결정한다. 구축 프롬프트 72개는 대부분 "만들어줘" 수준의 짧은 자연어였다 (docs/PROMPTS.md 전량 수록).</div>
+    </details>
+    <details class="disclosure reveal"><summary><div class="dtitle"><span class="pill neutral">Step 1</span><span class="name">에이전트 추가 + 즉시 실전 검증</span></div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></summary>
+      <div class="body"><div class="prompt">세무관련한 에이전트를 추가하고 싶어</div>
+      한 줄이면 된다. 중요한 건 직후에 변수가 잔뜩 얽힌 실전 질문을 던진 것:
+      <div class="prompt">조정대상지역 재개발빌라 조합설립후 경매로 매수함. 6개월내에 매매사업자로 매도시 취득세, 양도세는 어떻게 되나</div>
+      <strong>만들고 → 바로 써보고 → 막히면 고친다.</strong></div>
+    </details>
+    <details class="disclosure reveal"><summary><div class="dtitle"><span class="pill neutral">Step 2</span><span class="name">반복 쟁점을 위키로 — 변수의 기준점 사전 조사</span></div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></summary>
+      <div class="body"><div class="prompt">경매 위키와 같은 방식으로 세법 쟁점도 위키화해줘 <span style="color:var(--mute)">(요지)</span></div>
+      취득세 중과 · 주택수 산정 · 1세대1주택 비과세 · 일시적 2주택 · 장특공 등 20개 항목. 전부 <strong>변수의 기준점을 미리 조사해 두는 작업</strong>이다. 항목마다 갱신일·재검증 주기·검증상태·조사 한계를 기록한다 — 못 찾은 것의 기록이 다음 조사의 출발점이 된다.</div>
+    </details>
+    <details class="disclosure reveal"><summary><div class="dtitle"><span class="pill neutral">Step 3</span><span class="name">확정 계산기 — 외부 설계안은 검토·재구성</span></div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></summary>
+      <div class="body"><div class="prompt">제미나이와 설계를 논의한 내용이야. 네가 다시 적정한지 검토하고, 필요시 재구성해서 만들어보자</div>
+      "구현해줘"가 아니라 <strong>"검토하고 재구성해라"</strong>. 결과: 아키텍처 원칙(변수→트리→계산)은 채택, 낡은 수치는 기존 검증 자산으로 교정, 맞지 않는 프레임(독립 FastAPI)은 기각. 산출물 = 세율표 JSON + 판정 엔진 + 골든 테스트.</div>
+    </details>
+    <details class="disclosure reveal"><summary><div class="dtitle"><span class="pill neutral">Step 4</span><span class="name">변수값 전수 검증</span></div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></summary>
+      <div class="body"><div class="prompt">미검증 세율들 law-api로 검증해서 갱신해줘</div>
+      참고값 12건을 원문 조회 — 2건(생애최초 감면 구조 · 혼인 특례 기간)이 실제 법과 달라 수정했다. <strong>'검증됨/참고값' 딱지를 붙여둔 덕에 뭘 검증할지가 자동으로 목록이 됐다.</strong></div>
+    </details>
+    <details class="disclosure reveal"><summary><div class="dtitle"><span class="pill neutral">Step 5</span><span class="name">실전 운용 — 변수 질문 → 판정 → 검증</span></div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></summary>
+      <div class="body"><div class="prompt">○○구 1주택, △△구에 상속주택 1채. ○○주택을 언제까지 매도하면 양도세중과가 안되나 <span style="color:var(--mute)">(익명화)</span></div>
+      흐름: 변수 질문 4개(취득 시점·세대 관계·보유거주·금액대) → 조사관 병렬 조회 → 결정 트리 판정 → <strong>독립 검증관 게이트</strong>(실제로 인용 오류를 잡아 정정) → 답변. 후속 정보가 나올 때마다 해당 변수만 다시 채워 부분 재실행.</div>
+    </details>
+    <details class="disclosure reveal"><summary><div class="dtitle"><span class="pill neutral">Step 6</span><span class="name">자산화 — 조사 결과를 위키로 환류</span></div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></summary>
+      <div class="body"><div class="prompt">위키등재는 세부내용은 개인정보니 등록하지 말고, 개념을 등재해줘</div>
+      실전에서 조사한 쟁점을 <strong>개인 사안 정보 없이 일반화</strong>해 위키로. 다음 질문 땐 재조사 없이 재검증만 하면 된다 — 지식이 자산으로 쌓이는 루프.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ───────────────── Do / Don't ───────────────── -->
+<section class="bg-soft" id="rules">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">수칙</span>
+      <h2>Do &amp; Don't</h2>
+    </div>
+    <div class="compare reveal">
+      <div class="emphasis">
+        <span class="pill active">Do</span>
+        <ul class="tight">
+          <li>계산 전에 <strong>변수부터 다 채운다</strong> — 모르면 묻는다, 지어내지 않는다</li>
+          <li>세율은 <strong>데이터로 분리</strong> + 근거 조문 + 검증 딱지</li>
+          <li>법 개정은 <strong>날짜 분기 추가</strong> — 과거 사안엔 과거 법</li>
+          <li>만들고 → 실전 질문 → 고치기 루프</li>
+          <li>골든 테스트 기대값은 단계별 수기 검산</li>
+        </ul>
+      </div>
+      <div class="muted">
+        <span class="pill neutral">Don't</span>
+        <ul class="tight">
+          <li>LLM에게 세액 <strong>암산·특례 판정</strong>을 시키지 않는다 — 테스트 기대값을 사람이 암산해 틀리고 엔진이 맞았던 기록이 남아 있다</li>
+          <li>변수의 기준점을 <strong>세목 간 복사</strong>하지 않는다 (취득세의 주택수 ≠ 양도세의 주택수)</li>
+          <li>외부 설계안을 무검토 구현하지 않는다</li>
+          <li>작성자에게 자기 검증을 맡기지 않는다</li>
+          <li>옛 판례를 연혁 확인 없이 현행에 원용하지 않는다</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────── 에러 + 체크리스트 ───────────────── -->
+<section id="check">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">현장</span>
+      <h2>자주 겪는 에러 &amp; 재현 체크리스트</h2>
+    </div>
+    <div class="tablewrap reveal" style="margin-bottom:44px">
+      <table class="err">
+        <tr><th>증상</th><th>원인 → 해결</th></tr>
+        <tr><td>API "사용자 정보 검증 실패"</td><td>호출 IP 미등록 → IP 등록 또는 test 계정 폴백</td></tr>
+        <tr><td>판례 본문 "일치하는 판례가 없습니다"</td><td>국세법령정보시스템 출처는 본문 미제공 → 사건명만 인용, 조세심판원 결정례로 대체</td></tr>
+        <tr><td>세율표가 이미지로 와서 안 읽힘</td><td>&lt;img&gt; 태그 안에 텍스트 표가 들어 있다 → 조문 응답의 내용 키를 재귀 추출</td></tr>
+        <tr><td>계산 결과가 기대값과 다름</td><td>십중팔구 수기 검산 오류 → 단계별 재검산 후 판단</td></tr>
+      </table>
+    </div>
+    <div class="reveal">
+      <p style="font-family:var(--label);font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--mute)">수강생 체크리스트 · <span id="ckCount" style="color:var(--orange)">0/8</span></p>
+      <label class="check"><input type="checkbox"><span>내 도메인의 세금 결정 <strong>변수 목록</strong>을 먼저 쓴다 (시점·보유기간·주택수·금액대·규제지역·구간·누진·혜택)</span></label>
+      <label class="check"><input type="checkbox"><span>변수별로 <strong>세목마다 기준점이 어떻게 다른지</strong> 표로 정리한다</span></label>
+      <label class="check"><input type="checkbox"><span>조회 인프라 확보 — API 검색 1건 성공</span></label>
+      <label class="check"><input type="checkbox"><span>에이전트 1개 + 실전 질문 1개로 검증</span></label>
+      <label class="check"><input type="checkbox"><span>세율표 JSON 1개 세목 (수치마다 근거+검증상태) + 골든 테스트 5개</span></label>
+      <label class="check"><input type="checkbox"><span>참고값 1개를 원문 검증해 딱지 갱신</span></label>
+      <label class="check"><input type="checkbox"><span>실전 질문 1건을 "변수 질문 → 판정 → 검증" 흐름으로 완주</span></label>
+      <label class="check"><input type="checkbox"><span>조사 결과 1건을 개인정보 빼고 위키로 등재</span></label>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><strong style="color:var(--light);font-family:var(--heading)">auction-law</strong> — 부동산 법률·세무 에이전트 하네스</div>
+    <div>산출물은 일반 세무정보이며, 개별 사건의 최종 판단·신고는 세무사 확인이 필요합니다. 이 고지를 시스템의 모든 최종 출력에 포함시킬 것.</div>
+    <div style="opacity:0.55">강의 원문: docs/LECTURE-tax-agent.md · 프롬프트 전량: docs/PROMPTS.md · 2026-08-16</div>
+  </div>
+</footer>
+
+<script>
+// scroll progress + nav
+var nav=document.getElementById('topnav'),bar=document.getElementById('progress');
+addEventListener('scroll',function(){
+  var h=document.documentElement, p=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+  bar.style.width=p+'%';
+  nav.classList.toggle('scrolled',h.scrollTop>30);
+},{passive:true});
+// reveal (+ 안전장치: IO가 못 잡은 뷰포트 내 요소를 스크롤/가시성 변화 때 직접 확인)
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in-view');});},{threshold:0.12,rootMargin:'0px 0px -5% 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+function sweepReveal(){document.querySelectorAll('.reveal:not(.in-view)').forEach(function(el){
+  var r=el.getBoundingClientRect(); if(r.top<innerHeight&&r.bottom>0) el.classList.add('in-view');
+});}
+addEventListener('scroll',sweepReveal,{passive:true});
+document.addEventListener('visibilitychange',sweepReveal);
+setTimeout(sweepReveal,600);
+// matrix data — 세션에서 원문 검증된 내용 기반
+var M={
+  t:["취득일 기준. 신고는 유상 60일 · 증여는 말일부터 3개월 · 상속 6개월 — 원인마다 다르다.",
+     "매년 6월 1일 스냅샷. 잔금일 vs 등기접수일 중 빠른 날의 소유자가 1년치를 낸다.",
+     "양도일 기준 (잔금 vs 등기 중 빠른 날). 개정 세법도 양도일 시점 법령이 적용된다."],
+  z:["'취득 당시' 조정대상지역 여부가 중과 스위치. 지정 전 계약+계약금 증빙이면 구제.",
+     "지역 무관 — 주택수와 공시가격으로만 판정한다.",
+     "거주요건은 '취득 당시' 조정지역, 다주택 중과는 '양도 당시' 조정지역 — 한 세목 안에서도 시점이 갈린다."],
+  c:["상속주택은 5년간 제외 · 매입 재고주택은 포함 · 분양권 취득 주택은 '분양계약일' 시점으로 판정.",
+     "인별 전국 합산. 3주택부터 중과 세율표로 갈아탄다 (조정지역 무관).",
+     "중과 판정엔 매매사업 재고주택이 명문으로 포함, 비과세 판정엔 실질 판정 — 같은 집이 판정마다 다르게 세어진다."],
+  r:["일시적 2주택: 3년 내 종전주택 처분 + 이사·취업 등 사유 필요. 미이행 시 차액+가산세 추징.",
+     "1세대1주택 특례·부부공동명의 특례는 9.16~9.30 '신청'해야 적용 — 놓치면 그 해는 없다.",
+     "일시적 2주택: 종전주택 취득 1년 경과 + 신규 취득 후 3년 내 처분. 경매·공매 등 법정 사유면 기한 도과 용서 — 취득세와 요건이 다르다!"]
+};
+function setM(v){document.getElementById('m1').textContent=M[v][0];document.getElementById('m2').textContent=M[v][1];document.getElementById('m3').textContent=M[v][2];}
+setM('t');
+document.querySelectorAll('#varChips .chip').forEach(function(c){
+  c.addEventListener('click',function(){
+    document.querySelectorAll('#varChips .chip').forEach(function(x){x.classList.remove('active');});
+    c.classList.add('active'); setM(c.dataset.v);
+  });
+});
+// checklist counter
+var boxes=document.querySelectorAll('.check input');
+boxes.forEach(function(b){b.addEventListener('change',function(){
+  var n=document.querySelectorAll('.check input:checked').length;
+  document.getElementById('ckCount').textContent=n+'/8';
+});});
+</script>
