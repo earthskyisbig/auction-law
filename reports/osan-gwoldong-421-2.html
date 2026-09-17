@@ -1,0 +1,418 @@
+<title>오산 궐동 421-2 입찰 검토</title>
+<style>
+  :root{
+    --navy:#1c2b4a; --navy-2:#16223b; --navy-line:#2e3f60;
+    --cream:#f4f1ea; --paper:#f4f1ea; --card:#ffffff; --ink:#26262e; --muted:#6e6a75; --faint:#9a95a0;
+    --line:#e6e0d4; --line-soft:#efe9dd;
+    --accent:#e2611f; --accent-2:#c94f12; --accent-bg:#fde7d7; --accent-line:#f3c3a2;
+    --soft:#c9d6ee;
+    --green:#2c7a4b; --green-bg:#e4f1ea; --green-line:#bcdcc8;
+    --red:#c0392b; --red-bg:#f8e5e2; --red-line:#eec4bd;
+    --shadow:0 1px 2px rgba(28,43,74,.05),0 10px 26px rgba(28,43,74,.08);
+    --radius:12px; --maxw:960px;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --paper:#141d30; --cream:#141d30; --card:#1d2942; --ink:#eef1f7; --muted:#a9b2c6; --faint:#7a85a0;
+    --line:#2a3a5a; --line-soft:#233250;
+    --navy:#101a2e; --navy-2:#0b1322; --navy-line:#26375a;
+    --accent-bg:#3a2113; --accent-line:#6e3a1c;
+    --green-bg:#153026; --green-line:#2c5a43; --red-bg:#341a16; --red-line:#63332b;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px rgba(0,0,0,.4);}}
+  :root[data-theme="light"]{
+    --paper:#f4f1ea;--cream:#f4f1ea;--card:#fff;--ink:#26262e;--muted:#6e6a75;--faint:#9a95a0;
+    --line:#e6e0d4;--line-soft:#efe9dd;--navy:#1c2b4a;--navy-2:#16223b;--navy-line:#2e3f60;
+    --accent-bg:#fde7d7;--accent-line:#f3c3a2;--green-bg:#e4f1ea;--green-line:#bcdcc8;--red-bg:#f8e5e2;--red-line:#eec4bd;
+    --shadow:0 1px 2px rgba(28,43,74,.05),0 10px 26px rgba(28,43,74,.08);}
+  :root[data-theme="dark"]{
+    --paper:#141d30;--cream:#141d30;--card:#1d2942;--ink:#eef1f7;--muted:#a9b2c6;--faint:#7a85a0;
+    --line:#2a3a5a;--line-soft:#233250;--navy:#101a2e;--navy-2:#0b1322;--navy-line:#26375a;
+    --accent-bg:#3a2113;--accent-line:#6e3a1c;--green-bg:#153026;--green-line:#2c5a43;--red-bg:#341a16;--red-line:#63332b;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px rgba(0,0,0,.4);}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;
+    font-family:"Apple SD Gothic Neo","AppleSDGothicNeo","Pretendard","Malgun Gothic","맑은 고딕",-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-feature-settings:"tnum";}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .tnum{font-variant-numeric:tabular-nums}
+  header.hero{background:var(--navy);color:#eef2f8;position:relative;overflow:hidden}
+  .hero-inner{max-width:var(--maxw);margin:0 auto;padding:44px 22px 40px;position:relative;z-index:2}
+  .hero-circle{position:absolute;right:-70px;top:50%;transform:translateY(-50%);width:280px;height:280px;border-radius:50%;
+    background:var(--accent);opacity:.16;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:800;margin:0 0 16px}
+  h1{font-size:clamp(26px,4.8vw,40px);line-height:1.2;margin:0;font-weight:800;letter-spacing:-.01em;color:#fff;text-wrap:balance}
+  h1 .hl{color:var(--accent)}
+  .sub{margin:16px 0 0;color:var(--soft);font-size:15.5px;max-width:62ch}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin:26px 0 0}
+  .chip{display:inline-flex;align-items:center;gap:6px;background:rgba(201,214,238,.10);border:1px solid rgba(201,214,238,.28);
+    color:#e7edf8;padding:7px 15px;border-radius:999px;font-size:13px;font-weight:600}
+  .chip b{color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin:22px 0 0;color:#8fa0c0;font-size:12.5px}
+  .toggle{position:sticky;top:0;z-index:20;background:var(--navy-2)}
+  .toggle-in{max-width:var(--maxw);margin:0 auto;padding:8px 22px;display:flex;justify-content:flex-end}
+  .tbtn{appearance:none;background:rgba(201,214,238,.10);border:1px solid rgba(201,214,238,.28);color:#dbe4f0;font:inherit;
+    font-size:12.5px;font-weight:700;padding:5px 13px;border-radius:8px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+  .tbtn:hover{background:rgba(201,214,238,.2)} .tbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  main{padding:36px 0 20px}
+  section{margin:0 0 34px}
+  .s-head{margin:0 0 16px}
+  .s-eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:800;margin:0 0 6px}
+  .s-title{font-size:22px;font-weight:800;letter-spacing:-.01em;margin:0;color:var(--ink)}
+  .s-desc{color:var(--muted);font-size:14px;margin:6px 0 0}
+  .verdict{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:var(--radius);
+    padding:22px 26px;box-shadow:var(--shadow)}
+  .verdict.green{border-left-color:var(--green)} .verdict.red{border-left-color:var(--red)} .verdict.navy{border-left-color:var(--navy)}
+  .v-tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:var(--accent);letter-spacing:.08em;text-transform:uppercase}
+  .verdict.green .v-tag{color:var(--green)} .verdict.red .v-tag{color:var(--red)}
+  .v-tag .dot{width:9px;height:9px;border-radius:50%;background:currentColor}
+  .v-main{font-size:clamp(19px,3.1vw,24px);font-weight:800;margin:10px 0 6px;letter-spacing:-.01em;text-wrap:balance;color:var(--ink)}
+  .v-body{color:var(--muted);font-size:14.5px;margin:0}
+  .v-body + .v-body{margin-top:9px}
+  .grid{display:grid;gap:16px}
+  @media(min-width:720px){.grid.g2{grid-template-columns:1fr 1fr}.grid.g3{grid-template-columns:repeat(3,1fr)}}
+  .stepcard{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:var(--radius);
+    padding:20px 20px 18px;box-shadow:var(--shadow);position:relative}
+  .stepcard.navy{border-left-color:var(--navy)} .stepcard.green{border-left-color:var(--green)} .stepcard.red{border-left-color:var(--red)}
+  .ico{width:44px;height:44px;border-radius:12px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:21px;margin:0 0 13px}
+  .stepcard.navy .ico{background:var(--navy)} .stepcard.green .ico{background:var(--green)} .stepcard.red .ico{background:var(--red)}
+  .num{position:absolute;top:16px;right:16px;width:26px;height:26px;border-radius:50%;background:var(--accent-bg);color:var(--accent);
+    font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .stepcard h4{margin:0 0 8px;font-size:16px;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
+  .stepcard p{margin:0;font-size:13.5px;color:var(--muted)}
+  .stepcard p + p{margin-top:9px}
+  .stepcard .cite{margin-top:11px;font-size:12px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px;display:flex;flex-wrap:wrap;gap:5px 12px}
+  .idb{font-size:11px;font-weight:700;background:var(--line-soft);color:var(--muted);padding:1px 7px;border-radius:5px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);background:var(--card)}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+  thead th{background:var(--navy);color:#dfe7f4;font-weight:700;text-align:left;padding:12px 16px;font-size:12.5px}
+  tbody td{padding:13px 16px;border-top:1px solid var(--line-soft);vertical-align:top;color:var(--ink)}
+  tbody tr.on{background:var(--accent-bg)} tbody tr.on td{border-top-color:var(--accent-line)}
+  tbody tr.ok{background:var(--green-bg)} tbody tr.ok td{border-top-color:var(--green-line)}
+  tbody tr.no{background:var(--red-bg)} tbody tr.no td{border-top-color:var(--red-line)}
+  .check li{list-style:none;display:flex;gap:13px;padding:14px 6px;border-top:1px solid var(--line-soft)}
+  .check li:first-child{border-top:0}
+  .check .box{flex:0 0 auto;width:21px;height:21px;border:2px solid var(--accent);border-radius:6px;margin-top:1px;position:relative}
+  .check .box::after{content:"";position:absolute;left:5px;top:1px;width:6px;height:11px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(42deg)}
+  .check .txt{font-size:14px;color:var(--ink)} .check .why{display:block;color:var(--muted);font-size:12.5px;margin-top:3px}
+  .disc{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;padding:15px 18px;
+    font-size:13px;color:var(--muted);display:flex;gap:12px;align-items:flex-start}
+  .disc.red{border-left-color:var(--red)} .disc.green{border-left-color:var(--green)}
+  .disc .ic{color:var(--accent);font-weight:800;flex:0 0 auto}
+  .disc.red .ic{color:var(--red)} .disc.green .ic{color:var(--green)}
+  .disc + .disc{margin-top:12px}
+  .quote{background:var(--cream);border-left:3px solid var(--accent);padding:12px 16px;margin:12px 0 0;border-radius:0 8px 8px 0;
+    font-size:13.5px;color:var(--ink)}
+  :root[data-theme="dark"] .quote,:root:not([data-theme="light"]) .quote{background:var(--line-soft)}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .quote{background:var(--cream)}}
+  .footerbar{border-top:1px solid var(--line);margin-top:28px;padding:16px 0 40px;display:flex;justify-content:space-between;
+    color:var(--faint);font-size:12px;flex-wrap:wrap;gap:8px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .pill{display:inline-block;font-size:11.5px;font-weight:800;padding:2px 9px;border-radius:999px;letter-spacing:.02em}
+  .pill.ok{background:var(--green-bg);color:var(--green);border:1px solid var(--green-line)}
+  .pill.no{background:var(--red-bg);color:var(--red);border:1px solid var(--red-line)}
+  .pill.mid{background:var(--accent-bg);color:var(--accent-2);border:1px solid var(--accent-line)}
+  @media (prefers-reduced-motion:no-preference){section{animation:rise .5s ease both}@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
+</style>
+
+<div class="toggle"><div class="toggle-in">
+  <button class="tbtn" id="themeBtn" type="button" aria-label="테마 전환"><span id="themeIcon">◐</span><span id="themeLabel">테마</span></button>
+</div></div>
+
+<header class="hero">
+  <div class="hero-circle"></div>
+  <div class="hero-inner">
+    <p class="eyebrow">경매 입찰 법률·세무 검토 · auction-law</p>
+    <h1>오산 궐동 421-2<br>— 토지 낙찰 후 <span class="hl">수용보상</span> 전략 검토</h1>
+    <p class="sub">2025타경58798. 토지만 매각되고 지상 건물은 타인 소유로 남는 구조에서, 유치권·법정지상권·지료·보상평가·세무·경쟁구도를 조문과 판례 원문으로 검토했다.</p>
+    <div class="chips">
+      <span class="chip">📍 <b>답 1,516㎡ · 자연녹지</b></span>
+      <span class="chip">🏗️ <b>오산세교3 공공주택지구</b></span>
+      <span class="chip">⚖️ <b>유치권 4.5억 신고</b></span>
+      <span class="chip">✅ <b>인용검증 ✗0건</b></span>
+    </div>
+    <div class="meta tnum">
+      <span>📅 검토 2026-08-14</span>
+      <span>🔨 매각기일 2026-08-21 (3차)</span>
+      <span>🔎 law.go.kr 조문·판례 원문</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="disc red"><span class="ic">🚨</span><span>
+      <b>법원 기록이 현황을 반영하지 못하고 있다.</b> 매각물건명세서(2026.8.5 작성)는 감정평가서(2025.4.23)를 원용해 지상을 여전히
+      <b>“콘크리트 기초공사”</b>로 기재한다. 그러나 현재 건물은 <b>전기배선을 제외하고 완공</b>되었고 준공감리까지 마쳤다.
+      이 차이가 유치권·법정지상권·보상평가의 결론을 모두 바꾸며, 동시에 <b>매각불허가 리스크(민사집행법 §121 5호)</b>를 양방향으로 만든다.
+    </span></div>
+  </section>
+
+  <section><div class="verdict">
+    <span class="v-tag"><span class="dot"></span>핵심 결론</span>
+    <p class="v-main">법적 방어는 탄탄하다. 남은 위험은 법리가 아니라 <b>사실확인 2건</b>과 <b>경쟁자의 자금 우위</b>다.</p>
+    <p class="v-body"><b>유치권은 건물에만 미치고 토지에는 미치지 않는다</b>(대법원 2007마98의 두 번째 논거 — 공사금 채권은 토지에 관하여 생긴 것이 아니다). 법정지상권도 불성립이 유력하고, <b>유치권자가 점유해도 건물 소유자에게 지료를 청구할 수 있다</b>(2021다249810).</p>
+    <p class="v-body">보상 전망도 개선됐다. 사용승인·지목변경이 되면 불리 조항(실무기준 1.7.14 “조성 <b>중</b>에 있는 토지”)이 문언상 배제되고, 기준 공시지가는 <b>2025년치(657,300원/㎡)</b>가 원칙이다. 다만 <b>양도세 감면(조특법 §77)은 확정적으로 불가</b>하고, 경매신청채권자인 한보종합건설은 <b>상계로 사실상 무자본 입찰</b>이 가능하다.</p>
+  </div></section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Property</p><h2 class="s-title">물건 개요</h2></div>
+    <div class="tablewrap"><table class="tnum">
+      <thead><tr><th style="width:26%">항목</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td>소재지 · 지목</td><td>경기도 오산시 궐동 421-2 · <b>답 1,516㎡</b>(458.59평), 자연녹지지역</td></tr>
+        <tr><td>사건</td><td>2025타경58798 (2025타경55480 중복·취하) · 수원지방법원 본원 12계</td></tr>
+        <tr class="on"><td><b>매각 범위</b></td><td><b>토지만 매각.</b> 지상 건물은 매각 대상 아님(미등기 추정). 컨테이너 2동 제외, 제시외 관정 포함</td></tr>
+        <tr><td>감정가</td><td>1,251,152,000원 (822,000원/㎡) — <b>2025.4.23 기준, 건물 없는 상태로 평가</b></td></tr>
+        <tr class="on"><td><b>매각가 진행</b></td><td>1차 12.51억 유찰 → 2차 8.76억 유찰 → <b>3차 6.13억(49%) 2026.08.21</b> → 4차 4.29억(34%) 2026.09.28</td></tr>
+        <tr><td>소유자 · 채무자</td><td>송한결(공매로 이창배 지분 취득, 현재 단독) · 이창배</td></tr>
+        <tr class="no"><td><b>채권자</b></td><td><b>한보종합건설(주)</b> — 시공사 + 근저당권자(9.6억, 2025.9.17 대위변제 취득) + 경매신청인(청구액 8억) + 유치권 신고자(4.5억)</td></tr>
+        <tr><td>말소기준권리</td><td>2023.11.30 근저당권 (원 안성제일신협)</td></tr>
+        <tr><td>건물 현황</td><td>2023.11.27 건축허가(제2종근생·제조업소, 연면적 288.75㎡) → <b>전기배선 제외 완공</b>, 2026.4 준공감리, 사용승인 임박</td></tr>
+        <tr class="on"><td><b>개별공시지가</b></td><td>2025년 <b>657,300원/㎡</b> / 2024년 286,400원/㎡ / 주변 답 356,000원/㎡ — 감정평가는 <b>2024년치 사용</b></td></tr>
+        <tr><td>공법상 제한</td><td>공공주택지구(오산세교3, <b>2025.12.31 지구지정</b>), 토지거래허가구역, 성장관리권역, 가축사육제한구역</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <div class="s-head">
+      <p class="s-eyebrow">Verdict by issue</p>
+      <h2 class="s-title">쟁점별 판정</h2>
+      <p class="s-desc">모든 인용은 citation-verifier가 <code>--no-cache</code>로 재조회해 검증했다(✗ 0건).</p>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr><th style="width:24%">쟁점</th><th style="width:14%">판정</th><th>근거</th></tr></thead>
+      <tbody>
+        <tr class="ok"><td><b>토지 유치권</b></td><td><span class="pill ok">불성립 유력</span></td><td>공사금 채권은 <b>건물</b>에 관하여 생긴 것 — 대법원 2007마98(65091). 상사유치권도 같은 결정에서 배척</td></tr>
+        <tr class="ok"><td>법정지상권</td><td><span class="pill ok">불성립 유력</span></td><td>나대지 저당(2023.11.30) 후 신축 — 2003다26051. <b>단 착공 시점 확인 조건부</b></td></tr>
+        <tr class="ok"><td>지료(부당이득)</td><td><span class="pill ok">청구 가능</span></td><td>건물 소유자는 현실 점거 없어도 부지 점유 — 2021다249810(236795)</td></tr>
+        <tr class="ok"><td>농취증</td><td><span class="pill ok">불요 확정</span></td><td>농지법 §34②2호(협의) → §6②<b>8호</b> → §8① 단서 1호가 8호 인용</td></tr>
+        <tr class="ok"><td>토지거래허가</td><td><span class="pill ok">불요 확정</span></td><td>부동산거래신고법 §14②2호 “「민사집행법」에 따른 경매” 명문 배제</td></tr>
+        <tr class="on"><td><b>보상 “대지” 평가</b></td><td><span class="pill mid">사용승인 조건부</span></td><td>실무기준 1.7.14는 “조성 <b>중</b>” 한정 → 완료 시 배제. 810-4②3호로 공장용지 주장 가능</td></tr>
+        <tr class="on"><td>보상 기준 공시지가</td><td><span class="pill mid">2025년 원칙</span></td><td>토지보상법 §70④ “사업인정고시일과 가장 가까운 것”. <b>단 §27⑤ 소급·개발이익 배제 위험</b></td></tr>
+        <tr class="no"><td><b>양도세 감면(§77)</b></td><td><span class="pill no">불가 확정</span></td><td>“사업인정고시일부터 소급 <b>2년 이전</b> 취득” + “2026.12.31 이전 양도” 둘 다 미충족</td></tr>
+        <tr class="no"><td>영업보상</td><td><span class="pill no">어려움</span></td><td>기준일 우려는 근거 없으나(§44③), §45 1호 “<b>전부터 계속 행하고 있는 영업</b>” 미충족</td></tr>
+        <tr class="no"><td><b>경쟁 — 상계</b></td><td><span class="pill no">한보 우위</span></td><td>민사집행법 §143② — 채권자는 배당액만큼 현금 없이 낙찰 가능. <b>제3자는 불가</b></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Lien</p><h2 class="s-title">유치권 — 건물엔 성립, 토지엔 불성립</h2></div>
+    <div class="grid g2">
+      <div class="stepcard green">
+        <div class="ico">⚖️</div>
+        <h4>2007마98의 논거는 둘이다</h4>
+        <p><b>①</b> “미완성 정착물 = 토지 부합물” → 건물이 완공되면 <b>적용되지 않는다</b>.</p>
+        <p><b>②</b> “공사금 채권은 <b>토지에 관하여 생긴 것이 아니므로</b> 토지에 유치권을 행사할 수 없다” → <b>완성 여부를 요건으로 걸지 않아 그대로 살아있다.</b></p>
+        <p>이 건은 <b>토지만 매각</b>되므로 ②가 결정적이다. 사건명도 「경락부동산인도명령」으로 상황이 같다.</p>
+        <div class="cite"><span>대법원 2008.5.30.자 2007마98</span><span class="idb">65091</span></div>
+      </div>
+      <div class="stepcard green">
+        <div class="ico">🏢</div>
+        <h4>완공은 오히려 유리하게 작용</h4>
+        <p>2007마98이 인용한 <b>95다16202</b>는 완성 건물이면 수급인이 <b>“건물을 유치할 권리”</b>를 가진다고 한다.</p>
+        <p>즉 건물 완공은 유치권을 <b>건물 쪽으로 확정</b>시키고 <b>토지 쪽으로는 더 확실히 부정</b>한다.</p>
+        <div class="cite"><span>대법원 95다16202</span><span class="idb">199003</span></div>
+      </div>
+    </div>
+    <div class="disc" style="margin-top:16px"><span class="ic">⚠</span><span>
+      <b>반대 방향도 알아둘 것.</b> 2008다70763·2019다271685에 따르면 <b>근저당 설정 후·압류 전</b> 취득한 유치권은 매각으로 소멸하지 않고 매수인에게 대항할 수 있다.
+      따라서 <b>“근저당보다 늦어서 소멸한다”는 논거는 쓸 수 없다.</b> 주논거는 반드시 <b>견련관계 부정</b>(2007마98 논거②)으로 세워야 한다.
+      또한 유치권 신고일(2025.11.27)이 경매개시(2025.11.12)보다 뒤라는 점도 결정적 논거가 아니다 — 기준은 신고일이 아니라 <b>점유 개시 시점</b>이다.
+    </span></div>
+    <div class="disc red"><span class="ic">✗</span><span>
+      <b>미검증 항목.</b> 민사집행법 §91⑤ “변제할 책임”이 <b>물적 부담에 그치는지(=목적물 포기로 면책되는지)</b>를 판시한 판례를
+      law.go.kr에서 <b>찾지 못했다</b>(키워드 3종·60건 목록 전수 확인). 대법원 종합법률정보에서 별도 확인이 필요하다.
+      다만 위 결론대로 <b>토지에 유치권이 미치지 않으면 이 쟁점은 발생하지 않는다.</b>
+    </span></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Ground rent</p><h2 class="s-title">지료 — 유치권자가 점유해도 받을 수 있다</h2></div>
+    <div class="card" style="padding:20px 22px">
+      <p style="margin:0 0 4px;font-size:14px;color:var(--muted)">대법원 2021다249810 판결요지 [1] — 원문</p>
+      <div class="quote">
+        “건물의 소유자가 <b>현실적으로 건물이나 그 부지를 점거하고 있지 아니하고 있더라도</b> 건물의 소유를 위하여 그 부지를 점유한다고 볼 수 있다.
+        따라서 타인 소유의 토지 위에 권원 없이 건물을 소유하는 자는 <b>그 자체로써</b> 건물 부지가 된 토지를 점유하고 있는 것이므로 …
+        토지의 <b>차임에 상당하는 이익</b>을 얻고 이로 인하여 타인에게 동액 상당의 손해를 주고 있다”
+      </div>
+      <div style="margin-top:14px;font-size:13.5px;color:var(--muted)">
+        → <b>청구 상대방은 건물 소유자</b>(유치권자가 아니다). 유치권자가 점유 중이어도 <b>무관하게 청구 가능</b>하다. 2022년 판례(2018다243133)를 인용한 최신 확립 법리다.
+      </div>
+    </div>
+    <div class="disc" style="margin-top:14px"><span class="ic">⚠</span><span>
+      <b>요율을 판시한 판례는 없다.</b> 조문·판례는 “차임 상당액”이라고만 하고 실제 금액은 <b>임료 감정</b> 사항이다.
+      실무에서 회자되는 “공시지가 × 2~3%”는 <b>관행이지 법정 요율이 아니다.</b>
+      또한 <b>미등기 건물의 원시취득자</b>가 건축주인지 시공사인지에 따라 <b>청구 상대방이 달라지므로</b> 도급계약서 확인이 필요하다.
+    </span></div>
+  </section>
+
+  <section>
+    <div class="s-head">
+      <p class="s-eyebrow">Compensation</p>
+      <h2 class="s-title">보상평가 — 사용승인이 승부처</h2>
+      <p class="s-desc">재결 단계와 소송 단계의 전망이 갈린다.</p>
+    </div>
+    <div class="grid g2">
+      <div class="stepcard red">
+        <span class="num">1</span><div class="ico">📉</div>
+        <h4>재결 단계 — 불리하게 작동할 수 있다</h4>
+        <p>「감정평가 실무기준」 <b>1.7.14(택지 등 조성공사 중에 있는 토지)</b>는 “조성 전 토지의 <b>소지가액</b> + 기준시점까지 조성공사에 <b>실제 든 비용</b> + <b>공사진행정도</b>”로 평가하도록 한다.</p>
+        <p>게다가 <b>810-2</b>가 “이 절에서 정하지 않은 사항은 100~600까지의 규정을 <b>적용한다</b>”고 하여, 800장에 없다는 사실이 오히려 이 조항을 불러들인다.</p>
+        <div class="cite"><span>국토부 고시 제2023-522호</span><span class="idb">2100000229230</span></div>
+      </div>
+      <div class="stepcard green">
+        <span class="num">2</span><div class="ico">📈</div>
+        <h4>사용승인이 나면 이 조항이 빠진다</h4>
+        <p>1.7.14는 문언상 <b>“조성공사 <u>중</u>에 있는 토지”</b>에만 적용된다. <b>사용승인 → 지목변경(공장용지)</b>이 되면 조성이 완료되어 <b>적용 대상에서 벗어난다.</b></p>
+        <p>조성 완료 토지 전용 규정은 실무기준에 <b>없고</b>, 원칙인 810-5.2(기준시점의 현실적 이용상황)와 <b>토지보상법 §70②</b>로 회귀한다.</p>
+        <p><b>810-4②3호</b> 괄호는 “형질변경허가 관계 서류 등 신빙성 있는 자료”가 있으면 지목 무관 <b>“대(공장용지 포함)”</b>로 인정 가능하다고 명시한다.</p>
+      </div>
+      <div class="stepcard green">
+        <div class="ico">🏛️</div>
+        <h4>실무기준은 법원을 기속하지 않는다</h4>
+        <p>대법원 2013두4620 — <b>피고가 한국토지주택공사(LH)인 사건</b>. 판시[2]가 “‘감정평가 실무기준’이나 ‘토지보상평가지침’이 일반 국민이나 법원을 <b>기속하는지 여부(소극)</b>”라고 명시한다.</p>
+        <p>즉 1.7.14는 <b>LH가 재결에서 꺼낼 수 있는 카드</b>일 뿐이고, 법원은 <b>토지보상법 §70②</b>라는 법률 기준으로 직접 판단한다.</p>
+        <p style="color:var(--red)"><b>단 이 방어는 보상금증감소송까지 갈 각오·시간·비용을 전제로 한다.</b></p>
+        <div class="cite"><span>대법원 2014.6.12. 2013두4620</span><span class="idb">187391</span></div>
+      </div>
+      <div class="stepcard navy">
+        <div class="ico">📅</div>
+        <h4>기준 공시지가는 2025년치가 원칙</h4>
+        <p>토지보상법 <b>§70④</b>: “사업인정고시일 <b>전</b>의 시점을 공시기준일로 하는 공시지가 중 사업인정고시일과 <b>가장 가까운 것</b>”</p>
+        <p>사업인정고시 = 지구지정일 <b>2025.12.31</b>(공공주택특별법 §27② 의제) → 공시기준일 <b>2025.1.1</b> = <b>657,300원/㎡</b>. 2024년치(286,400원)가 아니다.</p>
+        <p style="color:var(--red)"><b>예외 2개가 살아있다</b> — ①§27⑤+시행령 §20(지구 표준지 <b>평균</b>변동률이 시 전체보다 30%↑면 주민공람일 이전으로 소급) ②개발이익 배제(§70①⑤).</p>
+      </div>
+    </div>
+    <div class="disc" style="margin-top:16px"><span class="ic">📌</span><span>
+      <b>나지상정 — 반드시 알아둘 것.</b> 시행규칙 §22②은 토지 평가 시 <b>“건축물등이 없는 상태를 상정”</b>한다.
+      즉 <b>토지 보상금에 건물 가치는 들어가지 않고</b>, 건물은 §33 지장물로 <b>별도</b> 보상된다.
+      그런데 <b>그 건물은 낙찰자 소유가 아니므로 건물 보상금은 낙찰자에게 오지 않는다.</b>
+      대신 <b>철거 부담도 지지 않는다</b> — 사업시행자가 자기 비용으로 제거할 수 있고 소유자는 수인·인도 의무만 진다(2021다249810 요지[3][5]).
+    </span></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Tax</p><h2 class="s-title">세무 — 감면은 막히고, 중과는 빠질 수 있다</h2></div>
+    <div class="grid g2">
+      <div class="stepcard red">
+        <div class="ico">🚫</div>
+        <h4>조특법 §77 수용 감면 — 불가 확정</h4>
+        <p>조문 원문: “…사업인정고시일…부터 <b>소급하여 2년 이전에 취득</b>한 토지등을 <b>2026년 12월 31일 이전에 양도</b>함으로써…”</p>
+        <p><b>두 겹으로 막힌다.</b> ①지구지정 2025.12.31이 사업인정고시 의제 → <b>2023.12.31 이전</b> 취득이어야 하는데 2026년 취득 ②예상 수용은 2029~2030년이라 일몰 밖(연장돼도 ①이 남는다).</p>
+        <p>법제처 12-0368도 §77의 취지를 <b>“사업이 예정되기 전부터 갖고 있다가 뜻하지 않게 수용당한 자”</b>로 본다.</p>
+        <div class="cite"><span>조특법 §77①</span><span class="idb">MST 280409 / JO 007700</span></div>
+      </div>
+      <div class="stepcard green">
+        <div class="ico">💡</div>
+        <h4>비사업용 토지에서 빠질 여지가 있다</h4>
+        <p>소득세법 시행령 <b>§168의8③4호</b>: “농지법 §6②<b>8호</b>에 따른 <b>농지전용협의를 완료한 농지</b>로서 <b>당해 전용목적으로 사용되는 토지</b>”는 비사업용에서 <b>제외</b>된다.</p>
+        <p>이 토지는 이미 §6②8호로 확정됐으므로 앞 요건 충족. 남은 건 <b>“전용목적 사용” 인정 여부</b>인데, 건물 완공·공장용지 지목변경 시 <b>충족 가능성이 크다.</b></p>
+        <p><b>절세 효과: 시나리오 A +1,615만 / B +8,853만</b> — 세무사에게 명시 질의를 권한다.</p>
+      </div>
+    </div>
+    <div class="disc" style="margin-top:16px"><span class="ic">🧾</span><span>
+      <b>유치권 합의금의 세무 처리.</b> 「유치권자에게 지급한 명도관련 합의금의 양도소득세 <b>필요경비</b> 인정 여부」를 다룬 사례가 <b>3건</b>(2020.07.08 / 2021.09.17 / 2022.01.27) 존재한다.
+      본문은 국세법령정보시스템 출처라 law.go.kr에서 조회되지 않으나, <b>실제로 다투어지는 쟁점</b>이라는 뜻이다.
+      4.5억 협상을 하실 경우 <b>합의서 문구 설계 단계에서 세무사와 상의</b>할 가치가 있다.
+    </span></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Competition</p><h2 class="s-title">경쟁 구도 — 상계로 인한 구조적 열위</h2></div>
+    <div class="card" style="padding:20px 22px">
+      <p style="margin:0 0 4px;font-size:14px;color:var(--muted)">민사집행법 §143② — 원문</p>
+      <div class="quote">
+        “<b>채권자가 매수인인 경우</b>에는 매각결정기일이 끝날 때까지 법원에 신고하고 <b>배당받아야 할 금액을 제외한 대금</b>을 배당기일에 낼 수 있다.”
+      </div>
+      <div style="margin-top:14px;font-size:13.5px;color:var(--muted)">
+        한보종합건설은 근저당 9.6억·청구액 8억을 쥔 신청채권자다. → <b>배당예상액만큼 현금 없이 낙찰 가능</b>, 사실상 무자본에 가까운 입찰이 된다.<br>
+        반면 <b>제3자에게는 §143②이 적용되지 않는다.</b> §143①(채무인수)은 관계채권자 승낙이 요건이라 실무상 <b>전액 현금 납부 전제</b>다.
+      </div>
+      <div style="margin-top:12px;font-size:13.5px;color:var(--ink)">
+        ↳ <b>다만 완전한 우위는 아니다.</b> §143③에 따라 배당액에 이의가 제기되면(유치권 4.5억 다툼이 바로 그것) 그 부분은 배당기일까지 <b>현실 납부</b>해야 한다.
+      </div>
+    </div>
+    <div class="disc" style="margin-top:14px"><span class="ic">🤔</span><span>
+      <b>구조상의 모순 하나.</b> 유치권이 인정되면 매각가가 떨어져 <b>자기 근저당 배당이 줄어든다.</b> 그럼에도 유치권을 신고한 것은
+      통상 <b>본인이 저가로 낙찰받으려는 의도</b>이거나 <b>다른 입찰자를 배제하려는 목적</b>으로 읽힌다. 3차·4차 유찰을 그들도 기다리고 있을 수 있다.
+    </span></div>
+  </section>
+
+  <section>
+    <div class="s-head">
+      <p class="s-eyebrow">Before bidding</p>
+      <h2 class="s-title">입찰 전 반드시 확인할 것</h2>
+      <p class="s-desc">법령 조회로는 좁힐 수 없는 개별 사실관계다. 1·2번은 결론을 뒤집을 수 있다.</p>
+    </div>
+    <div class="card"><ul class="check" style="margin:0;padding:6px 14px">
+      <li><span class="box"></span><span class="txt"><b>① 오산시청 — 농지전용이 §34② “협의”인지 §34① “허가”인지</b>
+        <span class="why">🔴 <b>허가</b>였다면 농지법 §6②<b>7호</b>가 되어 <b>농취증이 필요</b>해지고, 미제출 시 <b>매각불허가</b>다. 낙찰받고도 날아간다. 용도지역(도시지역 자연녹지)상 협의일 가능성이 높으나 확인 필수. <b>검증관이 “이것 확인 전에는 입찰하지 말 것”을 조건으로 달았다.</b></span></span></li>
+      <li><span class="box"></span><span class="txt"><b>② 착공신고서·현장 기록 — 2023.11.30 당시 물리적 착공 여부</b>
+        <span class="why">🔴 법정지상권을 가르는 <b>유일한 관문</b>. 92다7221은 “저당권 설정 당시 건물이 <b>건축중</b>이었고 규모·종류가 외형상 예상할 수 있는 정도까지 <b>건축이 진전</b>”되어 있으면 성립한다고 한다. <b>건축허가만으로는 안 된다.</b> 착공예정이 2025.3.20이므로 미착공이 유력하나 확인 필요.</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>③ 도급계약서·건축주 명의 — 미등기 건물의 원시취득자</b>
+        <span class="why">🟡 건축주(이창배)인지 시공사(한보종합건설)인지에 따라 <b>지료 청구 상대방</b>이 달라진다. 도급계약 내용에 따라 시공사 귀속 가능성도 있다.</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>④ 사용승인 접수·완료 예상 시점</b>
+        <span class="why">보상평가의 승부처. 사용승인 → 지목변경(공장용지)이 되면 실무기준 1.7.14(소지가액+공사비)가 배제된다. 입찰일과의 선후도 함께 확인.</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>⑤ 오산세교3 §10 주민 의견청취 공고일 + 지구 표준지 평균변동률</b>
+        <span class="why">공공주택특별법 §27⑤·시행령 §20의 <b>소급 발동</b> 판정용. 판단 단위는 개별공시지가가 아니라 <b>지구 전체 표준지 평균변동률</b>이다.</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>⑥ 전 소유자의 공공주택특별법 §11③ 30일 기득권 신고 이행 여부</b>
+        <span class="why">시행령 §14④상 지구 지정·고시일부터 30일 → <b>2026.1.30경 기한이 이미 지났다.</b> 미이행 시 공사 계속 근거를 잃을 수 있다.</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>⑦ 전문가 확인 — 변호사 / 보상전문 감정평가사 / 세무사</b>
+        <span class="why">변호사: §91⑤ 성질(미검증 항목) + 유치권 대응 전략 · 감정평가사: 사용승인 후 “공장용지” 평가 가능성 · 세무사: 비사업용 제외(시행령 §168의8③4호) 적용 + 합의금 필요경비 처리</span></span></li>
+    </ul></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Risk</p><h2 class="s-title">남은 위험</h2></div>
+    <div class="grid g3">
+      <div class="stepcard red">
+        <div class="ico">💰</div>
+        <h4>자금 구조</h4>
+        <p>유치권 신고가 있으면 <b>금융권이 기피</b>한다. 자기자금 비중이 커지고, 3~4년간 자금이 묶인다. 상계 가능한 경쟁자와 자금력에서 구조적으로 불리하다.</p>
+      </div>
+      <div class="stepcard red">
+        <div class="ico">📋</div>
+        <h4>매각불허가 (양방향)</h4>
+        <p>§127 취소(낙찰자 탈출)는 §121 <b>6호</b>에 한정돼 “완공으로 가치 상승”은 해당 없음 → <b>탈출 카드로는 약하다.</b> 반대로 §121 <b>5호</b>(명세서 중대한 흠)는 <b>누구에게나 열려 있다.</b></p>
+      </div>
+      <div class="stepcard red">
+        <div class="ico">⏳</div>
+        <h4>시간과 소송</h4>
+        <p>보상까지 3~4년, 27년초 지장물조사 예상. 재결에서 불리하게 나오면 <b>보상금증감소송</b>까지 가야 상방이 실현된다. 그 비용·기간을 감당해야 한다.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="disc red"><span class="ic">⚠</span><span>
+    <b>조사 한계 — 확인되지 않은 것.</b>
+    ① 민사집행법 §91⑤ “변제할 책임”의 성질(물적 부담 여부) 판례를 law.go.kr에서 <b>찾지 못함</b> — 종합법률정보 별도 확인 필요.
+    ② 유치권의 <b>물상대위</b> 인정 여부 판례 <b>확인 안 됨</b>(확보된 물상대위 판례 7건은 전부 저당권 사안).
+    ③ 지료 <b>요율</b>을 판시한 판례 <b>없음</b> — 임료 감정 사항.
+    ④ 미등기 건물 <b>원시취득자 확정 법리</b> 원문 확보 실패.
+    ⑤ 실무기준 1.7.14를 적용·배척한 판례 <b>0건</b>(268건 본문 전수 스캔) — 공백 상태.
+    ⑥ 오산세교3 주민공람 실제 일자, 지구 표준지 평균변동률 <b>미확인</b>.
+  </span></div>
+
+  <div class="disc"><span class="ic">ℹ</span><span>
+    law.go.kr 공개 법령·판례·행정규칙 원문에 근거한 <b>일반적 법률·세무 정보</b>이며 특정 물건에 대한 법률자문이나 투자 권유가 아니다.
+    인용은 <code>citation-verifier</code>가 독립 재조회로 검증했다(<b>✗ 0건</b>, ⚠ 5건). <b>입찰가 결정은 본인 판단</b>이며,
+    유치권 대응·보상평가 전망은 <b>변호사·보상전문 감정평가사</b> 확인을 강권한다. 법령은 개정이 잦으므로 실행 시점의 시행일을 재확인할 것.
+  </span></div>
+
+  <div class="footerbar"><span>auction-law · 오산 궐동 421-2 (2025타경58798)</span><span class="tnum">검토 2026-08-14 · 매각기일 2026-08-21</span></div>
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement,btn=document.getElementById('themeBtn'),
+      icon=document.getElementById('themeIcon'),label=document.getElementById('themeLabel');
+  function cur(){var a=root.getAttribute('data-theme');return a?a:(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');}
+  function paint(t){icon.textContent=t==='dark'?'☾':'☀';label.textContent=t==='dark'?'다크':'라이트';}
+  paint(cur());
+  btn.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';root.setAttribute('data-theme',n);paint(n);});
+  window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(){if(!root.getAttribute('data-theme'))paint(cur());});
+})();
+</script>

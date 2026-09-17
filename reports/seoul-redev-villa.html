@@ -1,0 +1,250 @@
+<!--
+  auction-law — 서울 재개발 빌라 투자 법률 리스크 보고서
+  근거: _workspace/03_analyst_report.md (citation-verifier 3차 독립검증 PASS, 2026-08-17)
+  디자인: design/report-template.html (웜 크림 + 딥 네이비 + 오렌지)
+-->
+<title>서울 재개발 빌라 법률 리스크</title>
+<style>
+  :root{
+    --navy:#1c2b4a; --navy-2:#16223b; --navy-line:#2e3f60;
+    --cream:#f4f1ea; --paper:#f4f1ea; --card:#ffffff; --ink:#26262e; --muted:#6e6a75; --faint:#9a95a0;
+    --line:#e6e0d4; --line-soft:#efe9dd;
+    --accent:#e2611f; --accent-2:#c94f12; --accent-bg:#fde7d7; --accent-line:#f3c3a2;
+    --soft:#c9d6ee;
+    --green:#2c7a4b; --green-bg:#e4f1ea; --green-line:#bcdcc8;
+    --red:#c0392b; --red-bg:#f8e5e2; --red-line:#eec4bd;
+    --shadow:0 1px 2px rgba(28,43,74,.05),0 10px 26px rgba(28,43,74,.08);
+    --radius:12px; --maxw:940px;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --paper:#141d30; --cream:#141d30; --card:#1d2942; --ink:#eef1f7; --muted:#a9b2c6; --faint:#7a85a0;
+    --line:#2a3a5a; --line-soft:#233250;
+    --navy:#101a2e; --navy-2:#0b1322; --navy-line:#26375a;
+    --accent-bg:#3a2113; --accent-line:#6e3a1c;
+    --green-bg:#153026; --green-line:#2c5a43; --red-bg:#341a16; --red-line:#63332b;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px rgba(0,0,0,.4);}}
+  :root[data-theme="light"]{
+    --paper:#f4f1ea;--cream:#f4f1ea;--card:#fff;--ink:#26262e;--muted:#6e6a75;--faint:#9a95a0;
+    --line:#e6e0d4;--line-soft:#efe9dd;--navy:#1c2b4a;--navy-2:#16223b;--navy-line:#2e3f60;
+    --accent-bg:#fde7d7;--accent-line:#f3c3a2;--green-bg:#e4f1ea;--green-line:#bcdcc8;--red-bg:#f8e5e2;--red-line:#eec4bd;
+    --shadow:0 1px 2px rgba(28,43,74,.05),0 10px 26px rgba(28,43,74,.08);}
+  :root[data-theme="dark"]{
+    --paper:#141d30;--cream:#141d30;--card:#1d2942;--ink:#eef1f7;--muted:#a9b2c6;--faint:#7a85a0;
+    --line:#2a3a5a;--line-soft:#233250;--navy:#101a2e;--navy-2:#0b1322;--navy-line:#26375a;
+    --accent-bg:#3a2113;--accent-line:#6e3a1c;--green-bg:#153026;--green-line:#2c5a43;--red-bg:#341a16;--red-line:#63332b;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px rgba(0,0,0,.4);}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;
+    font-family:"Apple SD Gothic Neo","AppleSDGothicNeo","Pretendard","Malgun Gothic","맑은 고딕",-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-feature-settings:"tnum";}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .tnum{font-variant-numeric:tabular-nums}
+  header.hero{background:var(--navy);color:#eef2f8;position:relative;overflow:hidden}
+  .hero-inner{max-width:var(--maxw);margin:0 auto;padding:44px 22px 40px;position:relative;z-index:2}
+  .hero-circle{position:absolute;right:-70px;top:50%;transform:translateY(-50%);width:280px;height:280px;border-radius:50%;
+    background:var(--accent);opacity:.16;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:800;margin:0 0 16px}
+  h1{font-size:clamp(26px,4.8vw,40px);line-height:1.2;margin:0;font-weight:800;letter-spacing:-.01em;color:#fff;text-wrap:balance}
+  h1 .hl{color:var(--accent)}
+  .sub{margin:16px 0 0;color:var(--soft);font-size:15.5px;max-width:58ch}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin:26px 0 0}
+  .chip{display:inline-flex;align-items:center;gap:6px;background:rgba(201,214,238,.10);border:1px solid rgba(201,214,238,.28);
+    color:#e7edf8;padding:7px 15px;border-radius:999px;font-size:13px;font-weight:600}
+  .chip b{color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin:22px 0 0;color:#8fa0c0;font-size:12.5px}
+  .toggle{position:sticky;top:0;z-index:20;background:var(--navy-2)}
+  .toggle-in{max-width:var(--maxw);margin:0 auto;padding:8px 22px;display:flex;justify-content:flex-end}
+  .tbtn{appearance:none;background:rgba(201,214,238,.10);border:1px solid rgba(201,214,238,.28);color:#dbe4f0;font:inherit;
+    font-size:12.5px;font-weight:700;padding:5px 13px;border-radius:8px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+  .tbtn:hover{background:rgba(201,214,238,.2)} .tbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  main{padding:36px 0 20px}
+  section{margin:0 0 34px}
+  .s-head{margin:0 0 16px}
+  .s-eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:800;margin:0 0 6px}
+  .s-title{font-size:22px;font-weight:800;letter-spacing:-.01em;margin:0;color:var(--ink)}
+  .s-desc{color:var(--muted);font-size:14px;margin:6px 0 0;max-width:70ch}
+  .verdict{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:var(--radius);
+    padding:22px 26px;box-shadow:var(--shadow)}
+  .verdict.green{border-left-color:var(--green)} .verdict.red{border-left-color:var(--red)} .verdict.navy{border-left-color:var(--navy)}
+  .v-tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:var(--accent);letter-spacing:.08em;text-transform:uppercase}
+  .verdict.green .v-tag{color:var(--green)} .verdict.red .v-tag{color:var(--red)}
+  .v-tag .dot{width:9px;height:9px;border-radius:50%;background:currentColor}
+  .v-main{font-size:clamp(20px,3.3vw,26px);font-weight:800;margin:10px 0 6px;letter-spacing:-.01em;text-wrap:balance;color:var(--ink)}
+  .v-body{color:var(--muted);font-size:14.5px;margin:0}
+  .grid{display:grid;gap:16px}
+  @media(min-width:720px){.grid.g2{grid-template-columns:1fr 1fr}.grid.g3{grid-template-columns:repeat(3,1fr)}}
+  .stepcard{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:var(--radius);
+    padding:20px 20px 18px;box-shadow:var(--shadow);position:relative}
+  .stepcard.navy{border-left-color:var(--navy)} .stepcard.green{border-left-color:var(--green)} .stepcard.red{border-left-color:var(--red)}
+  .ico{width:46px;height:46px;border-radius:12px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:22px;margin:0 0 14px}
+  .stepcard.navy .ico{background:var(--navy)} .stepcard.green .ico{background:var(--green)} .stepcard.red .ico{background:var(--red)}
+  .num{position:absolute;top:16px;right:16px;width:26px;height:26px;border-radius:50%;background:var(--accent-bg);color:var(--accent);
+    font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .stepcard h4{margin:0 0 8px;font-size:16px;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
+  .stepcard p{margin:0;font-size:13.5px;color:var(--muted)}
+  .stepcard .cite{margin-top:11px;font-size:12px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px;display:flex;flex-wrap:wrap;gap:5px 12px}
+  .idb{font-size:11px;font-weight:700;background:var(--line-soft);color:var(--muted);padding:1px 7px;border-radius:5px}
+  .flow{display:grid;gap:16px;align-items:stretch}
+  @media(min-width:820px){.flow{grid-template-columns:1fr auto 1fr auto 1fr auto 1fr}.flow .arw{display:flex}}
+  .flow .arw{display:none;align-items:center;justify-content:center;color:var(--accent);font-size:20px;font-weight:900}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);background:var(--card)}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  thead th{background:var(--navy);color:#dfe7f4;font-weight:700;text-align:left;padding:12px 16px;font-size:12.5px}
+  tbody td{padding:13px 16px;border-top:1px solid var(--line-soft);vertical-align:top;color:var(--ink)}
+  tbody tr.on{background:var(--accent-bg)} tbody tr.on td{border-top-color:var(--accent-line)}
+  .check li{list-style:none;display:flex;gap:13px;padding:13px 6px;border-top:1px solid var(--line-soft)}
+  .check li:first-child{border-top:0}
+  .check .box{flex:0 0 auto;width:21px;height:21px;border:2px solid var(--accent);border-radius:6px;margin-top:1px;position:relative}
+  .check .box::after{content:"";position:absolute;left:5px;top:1px;width:6px;height:11px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(42deg)}
+  .check .txt{font-size:14px;color:var(--ink)} .check .why{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+  .disc{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;padding:15px 18px;
+    font-size:13px;color:var(--muted);display:flex;gap:12px;align-items:flex-start}
+  .disc .ic{color:var(--accent);font-weight:800;flex:0 0 auto}
+  .footerbar{border-top:1px solid var(--line);margin-top:28px;padding:16px 0 40px;display:flex;justify-content:space-between;
+    color:var(--faint);font-size:12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  @media (prefers-reduced-motion:no-preference){section{animation:rise .5s ease both}@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
+</style>
+
+<div class="toggle"><div class="toggle-in">
+  <button class="tbtn" id="themeBtn" type="button" aria-label="테마 전환"><span id="themeIcon">◐</span><span id="themeLabel">테마</span></button>
+</div></div>
+
+<header class="hero">
+  <div class="hero-circle"></div>
+  <div class="hero-inner">
+    <p class="eyebrow">법률 검토 보고서 · auction-law</p>
+    <h1>서울 재개발 빌라 투자,<br><span class="hl">입주권은 자동으로 따라오지 않는다</span></h1>
+    <p class="sub">서울시 재개발 구역(예정지 포함) 빌라·다세대주택 매수 시 주의할 법률 쟁점 9가지 — law.go.kr 조문·판례 원문 근거, 독립 인용검증 통과.</p>
+    <div class="chips">
+      <span class="chip">📜 <b>조문 17건</b> 실조회</span>
+      <span class="chip">⚖️ <b>판례 12건</b> · 해석례 13건</span>
+      <span class="chip">✅ citation-verifier <b>3차 검증 PASS</b></span>
+      <span class="chip">🗺️ 조례 분석은 <b>서울시 기준</b></span>
+    </div>
+    <div class="meta tnum"><span>📅 작성 2026-08-17</span><span>🔎 국가법령정보센터 Open API (law.go.kr)</span><span>📁 근거 원문: _workspace/03_analyst_report.md</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section><div class="verdict red">
+    <span class="v-tag"><span class="dot"></span>핵심 결론</span>
+    <p class="v-main">세 관문을 모두 통과해야 아파트를 받는다 — 하나라도 막히면 현금청산.</p>
+    <p class="v-body">① 조합원이 되는가(도정법 §39) → ② 분양대상자가 되는가(서울조례 §36 · 도정법 §76·§77) → ③ 분양신청을 제대로 했는가(§72). 실패의 종착지는 현금청산(§73) — 시세가 아니라 감정가로 정산받고, 협의 단계 감정평가인은 조합이 선정한다.</p>
+  </div></section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Structure</p><h2 class="s-title">입주권까지의 3관문</h2>
+      <p class="s-desc">빌라 소유자는 서울조례 §36①1호(주택 소유자)로 원칙적 분양대상이지만, 아래 관문 어디서든 탈락할 수 있다.</p></div>
+    <div class="flow">
+      <div class="stepcard"><span class="num">1</span><div class="ico">🪪</div><h4>조합원 자격</h4><p>공유·1세대·다물권자 양수는 "여러 명 → 1명"으로 통합. 투기과열지구는 양수 시점 제한까지.</p>
+        <div class="cite"><span><b>도정법 §39</b></span></div></div>
+      <div class="arw">▶</div>
+      <div class="stepcard"><span class="num">2</span><div class="ico">🏠</div><h4>분양대상자</h4><p>권리산정기준일 후 세대수가 늘어난 물건(전환·신축·분할)은 여러 명이 1명으로 묶인다.</p>
+        <div class="cite"><span><b>서울조례 §36 · 도정법 §76·§77</b></span></div></div>
+      <div class="arw">▶</div>
+      <div class="stepcard"><span class="num">3</span><div class="ico">📮</div><h4>분양신청</h4><p>기간 내 적법한 신청 필수. 공유물건은 대표조합원 명의로 — 각자 신청하면 무효.</p>
+        <div class="cite"><span><b>도정법 §72</b></span></div></div>
+      <div class="arw">▶</div>
+      <div class="stepcard red"><span class="num">4</span><div class="ico">💸</div><h4>실패 시 현금청산</h4><p>감정가 정산으로 종결. 청산금 수령 전 인도 요구에는 응할 의무 없음(동시이행).</p>
+        <div class="cite"><span><b>도정법 §73</b></span><span class="idb">대법 2019두46411</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Risk Top 5</p><h2 class="s-title">돈을 잃는 5대 함정</h2></div>
+    <div class="grid g2">
+      <div class="stepcard red"><span class="num">1</span><div class="ico">🏢</div><h4>다물권자 매물 — 여러 명이 사도 분양권 1개</h4>
+        <p>한 사람이 빌라 여러 호실을 갖고 있다가 <b>조합설립인가 후</b> 호실별로 파는 매물은 양도인+매수인 <b>전원이 조합원 1명·분양권 1개</b>. 판례 사안 자체가 "13세대 중 12세대를 12명에게 판" 빌라 사례이며, 매수인의 선의를 이유로 별도 분양권을 기대해서는 안 된다. 대표조합원 없이 각자 분양신청하면 <b>전원 현금청산</b>.</p>
+        <div class="cite"><span><b>도정법 §39①3호 · §76①6호</b></span><span class="idb">대법 2020두36724</span></div></div>
+      <div class="stepcard red"><span class="num">2</span><div class="ico">✂️</div><h4>권리산정기준일 후 신축·쪼개기 빌라</h4>
+        <p>기준일 다음 날 이후 다가구→다세대 전환, 신축, 전유부분 분할로 세대수가 늘어난 물건은 <b>여러 명이 1명의 분양대상자</b>. 기준일은 정비구역 지정보다 훨씬 앞선 날짜로 고시될 수 있어 "구역 지정 전이니 안전"은 오판이고, 구역이 변경지정돼도 기준일은 <b>최초 고시일</b> 그대로다.</p>
+        <div class="cite"><span><b>도정법 §77 · 서울조례 §36②③</b></span><span class="idb">법제처 19-0458</span></div></div>
+      <div class="stepcard red"><span class="num">3</span><div class="ico">🚧</div><h4>투기과열지구 — 관리처분인가 후 매수 금지</h4>
+        <p>재개발은 <b>관리처분계획 인가 후</b> 양수하면 조합원 불가 → 곧바로 현금청산(재건축은 조합설립인가 후로 더 빠름). 예외(1세대 1주택 10년 소유·5년 거주 양도인 등)는 <b>파는 사람</b>이 요건을 갖춰야 한다. 단, 2018.1.25 전에 사업시행계획인가를 신청한 구역은 제한 자체가 없다.</p>
+        <div class="cite"><span><b>도정법 §39②③ · 시행령 §37</b></span><span class="idb">법제처 19-0079</span></div></div>
+      <div class="stepcard red"><span class="num">4</span><div class="ico">🔁</div><h4>재당첨 제한 5년 — 세대원까지 묶인다</h4>
+        <p>본인 또는 <b>세대원</b>이 최근 5년 내 투기과열지구 정비사업 분양대상자였다면 분양신청 자체가 불가 → 현금청산. 공동명의는 <b>한 명만 걸려도 전원 신청 불가</b>. 기산점은 조합원 분양분의 경우 최초 관리처분계획 인가일.</p>
+        <div class="cite"><span><b>도정법 §72⑥ · §73①3호</b></span><span class="idb">법제처 22-0524</span></div></div>
+      <div class="stepcard red"><span class="num">5</span><div class="ico">🗝️</div><h4>토지거래허가구역 — 갭투자 불가, 꼼수는 무효</h4>
+        <p>빌라도 대지지분이 넘어가므로 허가 대상. 허가는 <b>실거주 목적</b>이어야 해 전세 낀 매수와 충돌하고, 명의를 빌리거나 이용계획서를 꾸미면 계약이 <b>처음부터 확정적 무효</b> — 이전등기청구권도 협력청구권도 잃고 물건 자체를 잃는다.</p>
+        <div class="cite"><span><b>거래신고법 §11·§12·§17</b></span><span class="idb">대법 2009다96328 · 2024다212178</span></div></div>
+      <div class="stepcard navy"><span class="num">＋</span><div class="ico">🧾</div><h4>위장 세대분리·지분 나누기도 통하지 않는다</h4>
+        <p>"1세대"는 주민등록 형식이 아니라 <b>실질적으로 주거·생계를 같이하는 가구</b>. 전입신고만 분리하는 설계는 무효이고, 부부·미혼 19세 미만 자녀 공동명의도, 지인과의 지분 매수도 어차피 조합원 1명이다.</p>
+        <div class="cite"><span><b>도정법 §39①1·2호</b></span><span class="idb">대법 2022두50410</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Compare</p><h2 class="s-title">"재개발 예정지"의 법이 다르면 데드라인이 다르다</h2>
+      <p class="s-desc">모아타운·가로주택은 도정법이 아니라 빈집법(소규모주택정비 특례법) 사업이다. 같은 빌라라도 어느 법이냐에 따라 매수 가능 시한과 기준일 근거가 완전히 달라진다.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>사업 유형</th><th>투기과열지구 양도제한 기산점</th><th>권리산정기준일 근거</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr class="on"><td><b>도정법 재개발</b></td><td><b>관리처분계획 인가 후</b></td><td>도정법 §77 (서울시장이 공람공고일 후 앞당겨 고시 가능)</td><td>2018.1.25 전 사업시행계획인가 신청 구역은 제한 배제(19-0079)</td></tr>
+        <tr><td>도정법 재건축</td><td>조합설립인가 후</td><td>도정법 §77</td><td>매수 데드라인이 재개발보다 훨씬 빠름</td></tr>
+        <tr><td>빈집법 가로주택·소규모재개발</td><td><b>조합설립인가 후</b></td><td>빈집법 §28의2 (도정법 §77 준용 안 됨)</td><td>"재개발이니 관리처분 전까지 OK" 오판 주의</td></tr>
+        <tr><td>모아타운(관리지역)</td><td>조합설립인가 후</td><td>빈집법 §43의4④ → <b>관리계획 고시일</b> 또는 시·도지사 지정일</td><td>서울시가 공모 발표 시점으로 기준일을 앞당겨 고시하는 근거</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Special Cases</p><h2 class="s-title">특수 물건 · 매수 후 조치</h2></div>
+    <div class="grid g3">
+      <div class="stepcard"><div class="ico">🛖</div><h4>무허가건축물</h4><p>"무허가도 입주권 나온다"의 실제 요건은 <b>1989.1.24 이전 존재</b>(특정무허가건축물) + <b>조합 정관이 분양대상으로 규정</b>, 두 단계 전부다. 뒷받침 판례가 확인되지 않아 분쟁 시 예측가능성이 낮다.</p>
+        <div class="cite"><span><b>서울조례 §36①1호 · §2 1·2호</b></span><span class="idb">판례 확인 안 됨</span></div></div>
+      <div class="stepcard"><div class="ico">🌍</div><h4>토지만 소유한 물건</h4><p>종전토지 총면적 <b>90㎡ 이상</b> 또는 권리가액이 최소규모 추산액 이상이어야 분양대상. 권리산정기준일 후 취득·분할·공유 취득분은 면적·가액 산정에서 제외 — 토지를 덧붙여 90㎡를 맞추는 방식은 통하지 않는다.</p>
+        <div class="cite"><span><b>서울조례 §36①2·3호 · §36③</b></span></div></div>
+      <div class="stepcard green"><div class="ico">📌</div><h4>매수 직후 해야 할 일</h4><p>① 조합에 <b>소유자 변경·송달주소 등록</b>(분양신청 통지를 놓치는 게 가장 흔하고 회복이 어려운 사고). ② 공유·다물권 물건이면 <b>분양신청기간 만료 전 대표조합원 선임</b> 완료. ③ 조합 정관을 직접 받아 확인.</p>
+        <div class="cite"><span><b>도정법 §72 · §73</b></span><span class="idb">법제처 20-0221</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Checklist</p><h2 class="s-title">계약 전 확인할 12가지 사실</h2>
+      <p class="s-desc">전부 고시·행정 사실이라 법령 조회로는 알 수 없다 — 조문 해석이 정확해도 이 사실관계가 틀리면 결론이 뒤집힌다.</p></div>
+    <div class="card"><ul class="check" style="margin:0;padding:6px 14px">
+      <li><span class="box"></span><span class="txt"><b>사업 근거 법률</b><span class="why">도정법 재개발 vs 빈집법 모아타운·가로주택 — 양도제한 기산점이 갈린다.</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>권리산정기준일(고시일)</b><span class="why">서울시 공보 고시. 이 날짜 다음 날 이후 세대수 증가 물건이면 여러 명이 1명.</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>정비구역 최초 지정·고시일</b><span class="why">변경지정돼도 기준일은 최초 고시일(법제처 19-0458).</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>투기과열지구 지정 여부·지정일</b><span class="why">매수 당시 기준. 이후 해제돼도 소급 구제 없음(법제처 22-0628).</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>사업시행계획인가 최초 신청일 (2018.1.25 전/후)</b><span class="why">전이면 §39② 양도제한 자체가 적용되지 않는다(법제처 19-0079).</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>관리처분계획 인가 여부·인가일</b><span class="why">재개발 양도제한 기산점이자 재당첨 제한 5년의 기산점.</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>토지거래허가구역 지정 여부 + 공고된 허가대상 범위</b><span class="why">허가 요부와 실거주 제약을 결정. 지정 공고 내용까지 확인.</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>매도인이 구역 내 보유한 물건 수와 취득·양도 이력</b><span class="why">등기부를 구역 전체 기준으로 교차 조회. 다물권자 물건이면 전원 1명.</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>집합건물 전환등기일 · 신축 준공일 · 전유부분 분할등기일</b><span class="why">셋 중 하나라도 기준일 다음 날 이후면 쪼개기 규제 사정권.</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>본인·세대원 전원의 최근 5년 정비사업 분양대상자 이력</b><span class="why">재당첨 제한 5년(§72⑥). 공유자는 전원 점검.</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>조합 정관</b><span class="why">대표조합원 선임 절차, 무허가건축물 분양대상 조항, 사업비 공제·지연이자 조항.</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>무허가건축물이면 1989.1.24 이전 존재 증빙</b><span class="why">무허가건물확인원·항공사진·재산세 과세대장 등.</span></span></li>
+    </ul></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Verification</p><h2 class="s-title">인용 검증 기록</h2></div>
+    <div class="grid g2">
+      <div class="stepcard green"><div class="ico">🔍</div><h4>독립 재검증 3라운드 → PASS</h4>
+        <p>작성에 관여하지 않은 검증 에이전트가 조문 17건·판례 12건·해석례 13건을 law.go.kr 원문과 전건 대조. 과정에서 오류 5건을 잡아 수정했다 — 그중 2건은 기존 위키 재활용분에서 유입된 낡은 서술이었고, 위키 원본까지 정정 완료.</p></div>
+      <div class="stepcard navy"><div class="ico">⚠️</div><h4>확인하지 못한 것 (추정하지 않음)</h4>
+        <p>법제처 16-0431을 무력화한 대법원 2022두59028 판결 본문(판례 DB 미등재), 무허가건축물 분양자격 판례(검색 0건), 토지거래허가 면제 면적·실거주 의무기간(시행령 미조회), 개별 구역의 고시·행정 사실 전부. 실사안에서는 별도 확인 필요.</p></div>
+    </div>
+  </section>
+
+  <div class="disc"><span class="ic">ℹ️</span><span>본 보고서는 law.go.kr Open API로 조회한 조문·판례 원문에 근거한 <b>일반 법률정보</b>이며, 특정 물건·거래에 대한 법률자문이 아닙니다. 조례 분석은 서울특별시 기준이고, 사실관계가 조금만 달라도 결론이 바뀝니다. 실제 매수 결정 전 반드시 변호사·법무사(세무 쟁점은 세무사) 상담을 받으시기 바랍니다.</span></div>
+
+  <div class="footerbar"><span>auction-law · 부동산법률팀 (legal-analyst + 조사관 2 + citation-verifier)</span><span class="tnum">2026-08-17</span></div>
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement,btn=document.getElementById('themeBtn'),
+      icon=document.getElementById('themeIcon'),label=document.getElementById('themeLabel');
+  function cur(){var a=root.getAttribute('data-theme');return a?a:(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');}
+  function paint(t){icon.textContent=t==='dark'?'☾':'☀';label.textContent=t==='dark'?'다크':'라이트';}
+  paint(cur());
+  btn.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';root.setAttribute('data-theme',n);paint(n);});
+  window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(){if(!root.getAttribute('data-theme'))paint(cur());});
+})();
+</script>
