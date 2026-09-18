@@ -28,7 +28,14 @@ description: >
 - 금액 기준(취득가·양도가·기준시가·시가)이 불확실하면 시세·실거래 리소스(realprice-flow, apt-value)로 확인하거나 "가정값"으로 명시.
 
 ## 계산 표준 (투명성)
-각 세목을 다음 단계로 분리해 보인다:
+**구체적 세액 산출·특례 판정은 `tax-calc` 스킬의 확정 계산기로 실행한다**(LLM 암산 금지):
+```bash
+python .claude/skills/tax-calc/scripts/tax_calc.py --input _workspace/tax_facts.json
+```
+사실관계를 JSON으로 추출하는 방법과 스키마는 `tax-calc/SKILL.md` 참조. 스크립트가 출력하는
+`미검증 수치` 경고는 law-api-query로 조문을 확인해 해소하고, 출력 숫자는 변경 없이 인용한다.
+
+각 세목을 다음 단계로 분리해 보인다(tax-calc 출력 형식과 동일):
 ```
 ① 과세표준     (취득가액 / 양도차익 / 공시가격 등)
 ② 세율 적용     (기본세율 · 중과 여부 · 누진공제)
