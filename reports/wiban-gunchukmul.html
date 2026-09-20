@@ -1,0 +1,405 @@
+<title>위반건축물 경매 전략 가이드</title>
+<style>
+  :root{
+    --navy:#1c2b4a; --navy-2:#16223b; --navy-line:#2e3f60;
+    --cream:#f4f1ea; --paper:#f4f1ea; --card:#ffffff; --ink:#26262e; --muted:#6e6a75; --faint:#9a95a0;
+    --line:#e6e0d4; --line-soft:#efe9dd;
+    --accent:#e2611f; --accent-2:#c94f12; --accent-bg:#fde7d7; --accent-line:#f3c3a2;
+    --soft:#c9d6ee;
+    --green:#2c7a4b; --green-bg:#e4f1ea; --green-line:#bcdcc8;
+    --red:#c0392b; --red-bg:#f8e5e2; --red-line:#eec4bd;
+    --shadow:0 1px 2px rgba(28,43,74,.05),0 10px 26px rgba(28,43,74,.08);
+    --radius:12px; --maxw:960px;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --paper:#141d30; --cream:#141d30; --card:#1d2942; --ink:#eef1f7; --muted:#a9b2c6; --faint:#7a85a0;
+    --line:#2a3a5a; --line-soft:#233250;
+    --navy:#101a2e; --navy-2:#0b1322; --navy-line:#26375a;
+    --accent-bg:#3a2113; --accent-line:#6e3a1c;
+    --green-bg:#153026; --green-line:#2c5a43; --red-bg:#341a16; --red-line:#63332b;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px rgba(0,0,0,.4);}}
+  :root[data-theme="light"]{
+    --paper:#f4f1ea;--cream:#f4f1ea;--card:#fff;--ink:#26262e;--muted:#6e6a75;--faint:#9a95a0;
+    --line:#e6e0d4;--line-soft:#efe9dd;--navy:#1c2b4a;--navy-2:#16223b;--navy-line:#2e3f60;
+    --accent-bg:#fde7d7;--accent-line:#f3c3a2;--green-bg:#e4f1ea;--green-line:#bcdcc8;--red-bg:#f8e5e2;--red-line:#eec4bd;
+    --shadow:0 1px 2px rgba(28,43,74,.05),0 10px 26px rgba(28,43,74,.08);}
+  :root[data-theme="dark"]{
+    --paper:#141d30;--cream:#141d30;--card:#1d2942;--ink:#eef1f7;--muted:#a9b2c6;--faint:#7a85a0;
+    --line:#2a3a5a;--line-soft:#233250;--navy:#101a2e;--navy-2:#0b1322;--navy-line:#26375a;
+    --accent-bg:#3a2113;--accent-line:#6e3a1c;--green-bg:#153026;--green-line:#2c5a43;--red-bg:#341a16;--red-line:#63332b;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px rgba(0,0,0,.4);}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased;
+    font-family:"Apple SD Gothic Neo","AppleSDGothicNeo","Pretendard","Malgun Gothic","맑은 고딕",-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-feature-settings:"tnum";}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .tnum{font-variant-numeric:tabular-nums}
+  header.hero{background:var(--navy);color:#eef2f8;position:relative;overflow:hidden}
+  .hero-inner{max-width:var(--maxw);margin:0 auto;padding:44px 22px 40px;position:relative;z-index:2}
+  .hero-circle{position:absolute;right:-70px;top:50%;transform:translateY(-50%);width:280px;height:280px;border-radius:50%;
+    background:var(--accent);opacity:.16;z-index:1}
+  .eyebrow{font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:800;margin:0 0 16px}
+  h1{font-size:clamp(26px,4.8vw,40px);line-height:1.2;margin:0;font-weight:800;letter-spacing:-.01em;color:#fff;text-wrap:balance}
+  h1 .hl{color:var(--accent)}
+  .sub{margin:16px 0 0;color:var(--soft);font-size:15.5px;max-width:62ch}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin:26px 0 0}
+  .chip{display:inline-flex;align-items:center;gap:6px;background:rgba(201,214,238,.10);border:1px solid rgba(201,214,238,.28);
+    color:#e7edf8;padding:7px 15px;border-radius:999px;font-size:13px;font-weight:600}
+  .chip b{color:#fff}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin:22px 0 0;color:#8fa0c0;font-size:12.5px}
+  .toggle{position:sticky;top:0;z-index:20;background:var(--navy-2)}
+  .toggle-in{max-width:var(--maxw);margin:0 auto;padding:8px 22px;display:flex;justify-content:flex-end}
+  .tbtn{appearance:none;background:rgba(201,214,238,.10);border:1px solid rgba(201,214,238,.28);color:#dbe4f0;font:inherit;
+    font-size:12.5px;font-weight:700;padding:5px 13px;border-radius:8px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+  .tbtn:hover{background:rgba(201,214,238,.2)} .tbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  main{padding:36px 0 20px}
+  section{margin:0 0 34px}
+  .s-head{margin:0 0 16px}
+  .s-eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:800;margin:0 0 6px}
+  .s-title{font-size:22px;font-weight:800;letter-spacing:-.01em;margin:0;color:var(--ink)}
+  .s-desc{color:var(--muted);font-size:14px;margin:6px 0 0}
+  .verdict{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:var(--radius);
+    padding:22px 26px;box-shadow:var(--shadow)}
+  .verdict.green{border-left-color:var(--green)} .verdict.red{border-left-color:var(--red)} .verdict.navy{border-left-color:var(--navy)}
+  .v-tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:var(--accent);letter-spacing:.08em;text-transform:uppercase}
+  .verdict.green .v-tag{color:var(--green)} .verdict.red .v-tag{color:var(--red)}
+  .v-tag .dot{width:9px;height:9px;border-radius:50%;background:currentColor}
+  .v-main{font-size:clamp(19px,3.1vw,24px);font-weight:800;margin:10px 0 6px;letter-spacing:-.01em;text-wrap:balance;color:var(--ink)}
+  .v-body{color:var(--muted);font-size:14.5px;margin:0}
+  .v-body + .v-body{margin-top:9px}
+  .grid{display:grid;gap:16px}
+  @media(min-width:720px){.grid.g2{grid-template-columns:1fr 1fr}.grid.g3{grid-template-columns:repeat(3,1fr)}}
+  .stepcard{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:var(--radius);
+    padding:20px 20px 18px;box-shadow:var(--shadow);position:relative}
+  .stepcard.navy{border-left-color:var(--navy)} .stepcard.green{border-left-color:var(--green)} .stepcard.red{border-left-color:var(--red)}
+  .ico{width:44px;height:44px;border-radius:12px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:21px;margin:0 0 13px}
+  .stepcard.navy .ico{background:var(--navy)} .stepcard.green .ico{background:var(--green)} .stepcard.red .ico{background:var(--red)}
+  .num{position:absolute;top:16px;right:16px;width:26px;height:26px;border-radius:50%;background:var(--accent-bg);color:var(--accent);
+    font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .stepcard h4{margin:0 0 8px;font-size:16px;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
+  .stepcard p{margin:0;font-size:13.5px;color:var(--muted)}
+  .stepcard p + p{margin-top:9px}
+  .stepcard .cite{margin-top:11px;font-size:12px;color:var(--faint);border-top:1px dashed var(--line);padding-top:10px;display:flex;flex-wrap:wrap;gap:5px 12px}
+  .idb{font-size:11px;font-weight:700;background:var(--line-soft);color:var(--muted);padding:1px 7px;border-radius:5px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);background:var(--card)}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+  thead th{background:var(--navy);color:#dfe7f4;font-weight:700;text-align:left;padding:12px 16px;font-size:12.5px}
+  tbody td{padding:13px 16px;border-top:1px solid var(--line-soft);vertical-align:top;color:var(--ink)}
+  tbody tr.on{background:var(--accent-bg)} tbody tr.on td{border-top-color:var(--accent-line)}
+  tbody tr.ok{background:var(--green-bg)} tbody tr.ok td{border-top-color:var(--green-line)}
+  tbody tr.no{background:var(--red-bg)} tbody tr.no td{border-top-color:var(--red-line)}
+  .check li{list-style:none;display:flex;gap:13px;padding:14px 6px;border-top:1px solid var(--line-soft)}
+  .check li:first-child{border-top:0}
+  .check .box{flex:0 0 auto;width:21px;height:21px;border:2px solid var(--accent);border-radius:6px;margin-top:1px;position:relative}
+  .check .box::after{content:"";position:absolute;left:5px;top:1px;width:6px;height:11px;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(42deg)}
+  .check .txt{font-size:14px;color:var(--ink)} .check .why{display:block;color:var(--muted);font-size:12.5px;margin-top:3px}
+  .disc{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;padding:15px 18px;
+    font-size:13px;color:var(--muted);display:flex;gap:12px;align-items:flex-start}
+  .disc.red{border-left-color:var(--red)} .disc.green{border-left-color:var(--green)}
+  .disc .ic{color:var(--accent);font-weight:800;flex:0 0 auto}
+  .disc.red .ic{color:var(--red)} .disc.green .ic{color:var(--green)}
+  .disc + .disc{margin-top:12px}
+  .quote{background:var(--cream);border-left:3px solid var(--accent);padding:12px 16px;margin:12px 0 0;border-radius:0 8px 8px 0;
+    font-size:13.5px;color:var(--ink)}
+  :root[data-theme="dark"] .quote,:root:not([data-theme="light"]) .quote{background:var(--line-soft)}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .quote{background:var(--cream)}}
+  .footerbar{border-top:1px solid var(--line);margin-top:28px;padding:16px 0 40px;display:flex;justify-content:space-between;
+    color:var(--faint);font-size:12px;flex-wrap:wrap;gap:8px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .pill{display:inline-block;font-size:11.5px;font-weight:800;padding:2px 9px;border-radius:999px;letter-spacing:.02em}
+  .pill.ok{background:var(--green-bg);color:var(--green);border:1px solid var(--green-line)}
+  .pill.no{background:var(--red-bg);color:var(--red);border:1px solid var(--red-line)}
+  .pill.mid{background:var(--accent-bg);color:var(--accent-2);border:1px solid var(--accent-line)}
+  .flow{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 22px;
+    font-size:13.5px;color:var(--ink)}
+  .flow .q{font-weight:800;margin:14px 0 4px} .flow .q:first-child{margin-top:0}
+  .flow .a{padding-left:18px;color:var(--muted)}
+  .flow .a b{color:var(--ink)}
+  .myth{display:grid;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:var(--card)}
+  .myth-row{display:grid;grid-template-columns:1fr;border-top:1px solid var(--line-soft)}
+  .myth-row:first-child{border-top:0}
+  @media(min-width:720px){.myth-row{grid-template-columns:1fr 1.4fr}}
+  .myth .m{padding:14px 18px;background:var(--red-bg);color:var(--red);font-weight:700;font-size:13.5px}
+  .myth .f{padding:14px 18px;font-size:13.5px;color:var(--ink)}
+  .myth .f small{display:block;color:var(--faint);font-size:12px;margin-top:4px}
+  @media (prefers-reduced-motion:no-preference){section{animation:rise .5s ease both}@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
+</style>
+
+<div class="toggle"><div class="toggle-in">
+  <button class="tbtn" id="themeBtn" type="button" aria-label="테마 전환"><span id="themeIcon">◐</span><span id="themeLabel">테마</span></button>
+</div></div>
+
+<header class="hero">
+  <div class="hero-circle"></div>
+  <div class="hero-inner">
+    <p class="eyebrow">경매 투자자 가이드 · auction-law</p>
+    <h1>위반건축물 경매,<br>진짜 리스크는 <span class="hl">철거가 아니다</span></h1>
+    <p class="sub">건축물대장에 "위반건축물"이 찍힌 경매 물건 — 시장의 통념 상당수가 폐지된 옛 법에 근거해 있습니다. 이행강제금의 승계 구조, 2026년 12월 열리는 양성화 한시 창구, 유형별 리스크와 가격 반영법까지 조문·판례 원문으로 검증해 정리했습니다.</p>
+    <div class="chips">
+      <span class="chip">⚖️ <b>조문·판례 원문 검증</b></span>
+      <span class="chip">🗓️ <b>특조법 2026.12.17 시행</b></span>
+      <span class="chip">💸 <b>이행강제금 완전 해부</b></span>
+      <span class="chip">✅ <b>독립 인용검증 PASS</b></span>
+    </div>
+    <div class="meta tnum">
+      <span>📅 작성 2026-09-18</span>
+      <span>🔎 law.go.kr 원문 실조회 · 2차 독립검증 통과</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section><div class="verdict">
+    <span class="v-tag"><span class="dot"></span>핵심 결론</span>
+    <p class="v-main">리스크의 실체는 <b>무기한 반복되는 이행강제금</b>이고, 기회의 실체는 <b>2026.12.17 열리는 18개월짜리 양성화 창구</b>다.</p>
+    <p class="v-body">통상의 불법증축은 강제철거(대집행) 요건을 채우기 어렵다(대법원 96누8086 — 입증책임은 행정청). 대신 이행강제금은 <b>횟수 상한도, 소멸시효 조항도 없이</b> 위반 상태가 계속되는 한 반복된다(헌재 2009헌바140·2020헌바501 합헌). 이 "무기한 비용"을 <b>유한한 금액(이행강제금 5회분 상당 과태료)으로 바꿔주는 것</b>이 2026.12.17 시행되는 특정건축물 정리에 관한 특별조치법이다 — 유효기간 18개월의 한시법이며, 경매 시장에서 가장 크게 할인되는 <b>근생빌라가 명시 대상</b>이다.</p>
+    <p class="v-body">낙찰자는 종전 소유자보다 유리한 위치에서 시작하도록 조문이 설계되어 있다(가중 제외·75% 감경). <b>다만 이 두 조항은 해석례·판례가 아직 하나도 없다</b> — 확정 이익으로 계산하면 안 되는 이유를 본문에서 설명한다.</p>
+  </div></section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Myth vs Fact</p><h2 class="s-title">시장의 통념 5개 — 전부 틀렸다</h2>
+      <p class="s-desc">각 사실(Fact)은 law.go.kr 원문 조회와 독립 검증을 거친 것입니다.</p></div>
+    <div class="myth">
+      <div class="myth-row">
+        <div class="m">"85㎡ 이하 주거용은 이행강제금 5회면 끝난다"</div>
+        <div class="f">그 5회 상한은 <b>2019.4.23. 법률 제16380호로 폐지된 옛 조항</b>이다. 현행 건축법 §80⑤에는 총 부과횟수 상한이 없다 — 위반 상태가 계속되는 한 <b>조례가 정한 횟수(연 2회 이내)만큼 무기한 반복</b>된다.<small>헌재 2020헌바558 결정문이 폐지 사실을 직접 확인 · 2009~2017년 연 1회 계속 부과된 실례 포함</small></div>
+      </div>
+      <div class="myth-row">
+        <div class="m">"오래 방치된 위반은 시간이 지나 소멸했다"</div>
+        <div class="f">건축법에는 이행강제금의 제척기간·소멸시효 조항이 없고, 그 부작위는 <b>합헌</b>이다. 위법 상태가 계속되는 한 새 시정명령·새 부과가 언제든 시작될 수 있다.<small>헌재 2020헌바501 · 단, 이미 발생한 개별 부과권의 소멸시효는 일반 법리에 따라 진행(법제처 06-0152)</small></div>
+      </div>
+      <div class="myth-row">
+        <div class="m">"주택은 영업허가 제한과 무관하다"</div>
+        <div class="f">건축법 §79②의 허가·면허 제한에서 주택은 자동 예외가 아니다 — <b>"허가권자가 기간을 정해 사용을 허용한 주택"만</b> 예외다. 게다가 이 제한은 <b>위반과 무관한 제3자(임차인)에게도, 위반이 없는 층에까지</b> 미친다. 옥탑 증축 하나로 건물 전체 상가 임대가 막힐 수 있다.<small>법제처 16-0663 · 08-0209 · 시행령 §114의 예외는 400㎡ 미만 축사·농수산업용 창고뿐</small></div>
+      </div>
+      <div class="myth-row">
+        <div class="m">"위반건축물엔 임차인 보호가 없으니 명도가 쉽다"</div>
+        <div class="f">미등기·무허가 건물에도 <b>주택임대차보호법이 적용</b>되고, 미등기 주택 임차인은 <b>대지 환가대금에서도 우선변제</b>받는다. 쪼개기 물건은 세대 수만큼 임차인이 있어 보증금 인수가 낙찰가를 초과할 수 있다 — 권리분석 생략 금지.<small>대법원 2004다26133 전원합의체 판시사항 [2]·[3] · 변경 판례 없음</small></div>
+      </div>
+      <div class="myth-row">
+        <div class="m">"대장에 위반 표기가 없으면 안전한 물건이다"</div>
+        <div class="f">대장 기재는 적법성을 만들지 않는다 — 허위 준공검사필증으로 대장에 적법하게 등재됐어도 <b>준공처분은 부존재</b>다(89누7955). 확인해야 할 것은 표기가 아니라 <b>건축물현황도 원도면과 실제 현황의 대조</b>다. 반대로 낙찰 후 대장이 불리하게 정정되면 다툴 길은 있다 — 대장 작성거부·직권말소는 항고소송 대상인 처분이다.<small>대법원 89누7955 · 2007두17359 · 2008두22655 · 낙찰자는 잔금 납부 전에도 평면도 발급 가능(법제처 12-0577)</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Enforcement fine</p><h2 class="s-title">이행강제금 — 낙찰자에게 무엇이 넘어오는가</h2></div>
+    <div class="grid g2">
+      <div class="stepcard green">
+        <div class="ico">🧾</div>
+        <h4>종전 소유자의 체납분: 승계 안 됨 (반대해석 🟡)</h4>
+        <p>이행강제금 징수 상대방은 <b>"부과처분을 받은 자"</b>(법제처 07-0280)이고, 경매 낙찰자가 공법상 체납액을 승계하려면 지하수법처럼 <b>명문 승계 규정이 필요</b>한데(법제처 14-0478) 건축법에는 없다.</p>
+        <p>⚠ 다만 이 결론을 정면으로 판시한 <b>판례는 확인되지 않았다</b> — 조문 구조에서 나온 반대해석이다. 입찰 전 부과처분 명의인을 반드시 확인할 것.</p>
+        <div class="cite"><span>건축법 §80⑥</span><span>법제처 07-0280 · 14-0478</span><span class="pill mid">판례 없음 — 반대해석</span></div>
+      </div>
+      <div class="stepcard red">
+        <div class="ico">🔁</div>
+        <h4>낙찰 후: 새로운 부과의 상대방이 된다 (판례 확정)</h4>
+        <p>소유자는 위법 상태를 시정할 지위에 있으므로, 위반행위를 누가 했든 <b>새 소유자(낙찰자)가 시정명령·이행강제금의 적법한 상대방</b>이 된다. 대법원 2012두20137 → 2021두45008 → <b>2022두48653(2026.1.8)</b> 3단 계보로 재확인됐다.</p>
+        <p>시정명령은 1회면 족하고, 이후에는 시정명령 없이 <b>조례가 정한 횟수(연 2회 이내)만큼 반복 부과</b>된다(법제처 21-0027 — 단 매 부과마다 계고·이행기간 부여는 필요). "체납액"을 물을 때는 <b>납부고지서 송달 여부</b>도 확인하라 — 송달 안 된 처분은 효력 자체가 없다(06-0151).</p>
+        <div class="cite"><span>건축법 §79①·§80⑤</span><span>대법원 2022두48653</span><span>법제처 21-0027 · 06-0151</span></div>
+      </div>
+    </div>
+    <div class="disc green" style="margin-top:16px"><span class="ic">▼</span><span>
+      <b>낙찰자에게 유리하게 설계된 두 조항 — 단, 아직 아무도 검증하지 않았다.</b> 시행령 §115조의3② 단서는 영리목적 가중(최대 100%)에서 <b>"위반행위 후 소유권이 변경된 경우"를 제외</b>하고, §115조의4①1호는 같은 사유를 <b>75% 감경</b> 대상으로 정한다. 즉 종전 소유자의 부과액이 가중 반영분이면 그 금액을 낙찰 후 예상액으로 쓰는 것은 과대추정이다. <b>그러나 두 조항 모두 해석례·판례가 전무하고, 감경은 재량 + 조례 기간 조건이 붙는다</b>(감경 주장이 기각된 행정심판 실례 있음). 감경 없는 값과 있는 값을 <b>범위로</b> 계산하라.
+    </span></div>
+    <div class="disc red"><span class="ic">✗</span><span>
+      <b>"구청과 협상해서 깎는다"는 전략은 법적으로 성립하지 않는다.</b> 허가권자에게는 부과금액·감경비율을 달리 정할 재량이 없다 — 법정 금액 이하로 부과할 수 없고, 법정 비율을 넘겨 감경할 수도 없다(법제처 25-0146). 감경 사유가 여러 개여도 <b>중첩 적용되지 않는다</b>(18-0466). 뒤집어 말하면, 조례와 시가표준액만 확보하면 <b>금액은 예측 가능하다.</b>
+    </span></div>
+    <div class="disc"><span class="ic">⚠</span><span>
+      <b>현상 유지 전략의 숨은 함정</b> — 무단 용도변경 건물은 그대로 <b>사용하는 행위 자체가 위반의 계속</b>이다(대법원 2017두30764). 근생빌라를 주거로 쓰는 한 "가만히 있으면 동결"이 아니라 <b>매일 위반을 갱신</b>하는 것이다. 형사처벌 대상은 문언상 "건축주 및 공사시공자"라 낙찰자는 원칙적으로 제외되지만, 용도변경 계속 사용자의 형사책임은 열린 쟁점으로 남아 있다.
+    </span></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Demolition</p><h2 class="s-title">철거(강제집행) 리스크 — 분기점은 "합법화 가능성"</h2></div>
+    <div class="grid g2">
+      <div class="stepcard green">
+        <div class="ico">🛡️</div>
+        <h4>통상의 위반: 철거까지 가기 어렵다</h4>
+        <p>행정대집행은 "다른 수단으로 곤란 + 방치가 심히 공익을 해할 것"을 <b>행정청이 주장·입증</b>해야 하며, 통상의 구조변경 철거는 재량권 일탈로 판단된 선례가 있다.</p>
+        <div class="cite"><span>행정대집행법 §2</span><span>대법원 96누8086</span></div>
+      </div>
+      <div class="stepcard red">
+        <div class="ico">🚨</div>
+        <h4>합법화 불가능 구역: 철거가 인정된다</h4>
+        <p>개발제한구역·도시공원처럼 <b>양성화가 원천 봉쇄된 구역</b>에서는 대집행이 인정됐고(98두3112), 대법원은 2022년 GB 무단 형질변경 사건에서 재량권 일탈을 인정한 원심을 <b>파기</b>하며 행정청 손을 들었다(2022두35008 — 시정명령은 재량행위라는 판시). 철거 비용은 <b>그 시점의 소유자(낙찰자)에게서 징수</b>된다.</p>
+        <div class="cite"><span>대법원 98두3112 · 2022두35008</span><span class="idb">232895</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">★ Legalization window</p><h2 class="s-title">2026.12.17 — 양성화 한시 창구가 열린다</h2>
+      <p class="s-desc">「특정건축물 정리에 관한 특별조치법」 2026.6.16 제정, 2026.12.17 시행, 유효기간 18개월. 무기한 이행강제금을 유한한 금액으로 바꾸는 제도적 이벤트입니다.</p></div>
+    <div class="grid g3">
+      <div class="stepcard">
+        <div class="ico">🏠</div><span class="num">1</span>
+        <h4>누가 들어가나</h4>
+        <p>연면적 50% 이상 주거용 + <b>2023.12.31 당시 사실상 완공</b> + 규모 요건(다세대 세대당 전용 85㎡ 이하 / 단독 165㎡ / 다가구 660㎡). <b>근생→주거(근생빌라)가 §3①3호로 명시 포함</b> — 2023.12.31 이전부터 주택 사용이 조건.</p>
+        <p><b>낙찰자 본인이 신고 주체</b>가 될 수 있다(§4① "건축주 또는 소유자").</p>
+      </div>
+      <div class="stepcard green">
+        <div class="ico">🧮</div><span class="num">2</span>
+        <h4>가격표 — 5회분에서 끝난다</h4>
+        <p>과태료 = <b>이행강제금 5회분 − 이미 납부한 금액</b>(§9①·②, "부과하여야 한다" — 기속). 오래 이행강제금을 내온 물건일수록 추가 부담이 작다.</p>
+        <p>+ 체납 이행강제금 완납(1년 분납 가능, §6①4호) + 쪼개기·근생빌라는 <b>주차장 설치비</b>(§7①) + 피난·내화·소방 기준 공사비(§6①3호 — <b>과소평가 주의</b>).</p>
+      </div>
+      <div class="stepcard red">
+        <div class="ico">⛔</div><span class="num">3</span>
+        <h4>못 들어가는 물건</h4>
+        <p>정비구역·개발제한구역·도시공원·보전산지 등 §3② 배제구역. <b>★GB는 "지정 전에 지었다"로 통과가 안 된다 — 지정 후 대수선 이력이 있으면 배제</b>(법제처 14-0417, 2013년법 해석·신법 단서 문언 동일). 노후 GB 주택 대부분이 여기 걸리고, 걸리면 곧바로 철거 리스크 구간으로 이동한다.</p>
+      </div>
+    </div>
+    <div class="disc red" style="margin-top:16px"><span class="ic">⏰</span><span>
+      <b>시행령이 아직 없다 — 신고기간 미정.</b> §4의 신고기간은 시행령 위임 사항인데 시행령이 미제정 상태다(2026.9 기준). 신고기간을 놓치면 유효기간 내라도 창구를 쓰지 못할 수 있으므로, <b>2026.12.17 시행 전 시행령 제정 여부를 반드시 재확인</b>해야 한다. 또한 특조법 사용승인은 지구단위계획·농지전용·산지전용 위반까지 치유하지 않는다(법제처 14-0678·14-0477 — 2013년법 해석례).
+    </span></div>
+    <div class="disc green"><span class="ic">★</span><span>
+      <b>숨은 투자 포인트 — 3m 도로 특례.</b> 특조법 §6은 접도 요건(건축법 §44·§46·§47) 적용 시 <b>도로 최소너비를 3m로 완화</b>하고, 소방에 지장이 없다고 인정되면(시행령 위임) 그 조항들을 아예 적용하지 않을 수도 있다. <b>접도 문제로 수십 년 기피되던 구도심 물건이 이 창구에서 "가능"으로 바뀔 수 있다</b> — 비용을 줄이는 조항이 아니라 가능/불가능을 바꾸는 조항이다. 전세사기 피해자가 매수한 피해주택은 과태료·주차장 의무도 면제된다(§9①·§7②).
+    </span></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Risk matrix</p><h2 class="s-title">유형별 리스크 매트릭스</h2>
+      <p class="s-desc">출발점용 일반 등급입니다 — 소재지·용도지역·조례·위반 규모에 따라 달라집니다.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th style="width:4%">#</th><th style="width:20%">유형</th><th style="width:14%">양성화(특조법)</th><th style="width:12%">철거 리스크</th><th style="width:12%">종합 등급</th><th>권장 전략</th></tr></thead>
+      <tbody>
+        <tr class="ok"><td>①</td><td><b>경미 증축</b><br><span style="font-size:12px;color:var(--muted)">옥탑·베란다 확장</span></td><td>가능(요건 통과 쉬움)</td><td><span class="pill ok">낮음</span></td><td><span class="pill ok">낮음~중간</span></td><td><b>시정 후 표기 말소</b>가 최적일 때가 많다. 단 §79② 제한은 면적에 비례하지 않음 — 상가 혼합 건물 주의</td></tr>
+        <tr class="on"><td>②</td><td><b>근생→주거</b><br><span style="font-size:12px;color:var(--muted)">근생빌라</span></td><td><span class="pill ok">★명시 포함</span></td><td><span class="pill ok">낮음</span></td><td><span class="pill mid">중간</span></td><td><b>양성화 최우선 검토</b> — 특조법 최대 수혜 유형. 단 피난·내화·소방 공사비 견적을 입찰 전 확보. 현상 유지는 "사용 자체가 위반"(2017두30764)</td></tr>
+        <tr class="on"><td>③</td><td><b>무단 대수선·쪼개기</b><br><span style="font-size:12px;color:var(--muted)">세대·가구수 증가</span></td><td>가능(주차장·공사비 큼)</td><td><span class="pill mid">낮음~중간</span></td><td><span class="pill mid">중간~높음</span></td><td>낙찰자 이점(가중 제외)이 가장 큰 유형이나, <b>최대 리스크는 임차인</b> — 세대 수 × 보증금 권리분석 최우선</td></tr>
+        <tr class="no"><td>④</td><td><b>무허가 신축</b></td><td>조건부(대지 권원·도로 3m 관문)</td><td><span class="pill mid">중간~높음</span></td><td><span class="pill no">높음</span></td><td>대지 권원 확인이 선결. 타인 토지 위 무허가는 <b>원칙 회피</b>. 이행강제금 요율 최고(100%)</td></tr>
+        <tr class="no"><td>⑤</td><td><b>GB·공원·정비구역 등</b></td><td><span class="pill no">불가(§3② 배제)</span></td><td><span class="pill no">★높음</span></td><td><span class="pill no">★최고</span></td><td><b>원칙 입찰 회피.</b> 98두3112·2022두35008 — 합법화 불가는 철거 인정 구간. 대지 가치만으로 채산이 서는 경우만 예외</td></tr>
+      </tbody>
+    </table></div>
+    <div class="disc" style="margin-top:16px"><span class="ic">🎚️</span><span>
+      <b>등급을 실제로 움직이는 3개 변수</b>: ① §3② 배제구역 여부(양성화와 철거 리스크를 동시에 판정) ② <b>소재지 건축조례</b>(가중·감경 기간·부과 횟수·비율 하향이 전부 조례 사항 — 조례를 읽지 않고 이행강제금을 추정하지 말 것) ③ 임차인 현황.
+    </span></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Checklist</p><h2 class="s-title">입찰 전 체크리스트</h2></div>
+    <div class="card" style="padding:8px 18px"><ul class="check" style="margin:0;padding:0">
+      <li><span class="box"></span><span class="txt"><b>① 건축물대장 — 표기 유무가 아니라 "변동사항란"을 본다</b>
+        <span class="why">위반일자·위반내용·시정명령 이력. 표기가 없어도 안전하지 않다(89누7955)</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>② ★건축물현황도(평면도) 원도면 vs 현황 대조 — 위반 범위 특정</b>
+        <span class="why">낙찰자는 <b>잔금 납부 전에도</b> 소유자 동의 없이 발급 가능(건축물대장규칙 §11③3호 "경매 중" + 법제처 12-0577). 증축·쪼개기·용도변경을 도면으로 확정</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>③ 구청 건축과 직접 확인 — 서류로는 절대 안 나오는 것들</b>
+        <span class="why">시정명령 최초 발령일 / 이행강제금 부과 횟수·총액·<b>처분 명의인</b> / 체납액 + <b>납부고지서 송달 여부</b>(미송달 처분은 효력 없음, 06-0151) / 가중 적용 여부(적용됐다면 낙찰 후 예상액은 그보다 작을 수 있음) / 대집행 계고 이력</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>④ 토지이용계획확인원 — §3② 배제구역 8종 전수 확인</b>
+        <span class="why">GB·도시공원·정비구역·보전산지 등. GB는 <b>지정 후 대수선 이력</b>까지 확인(14-0417)</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>⑤ 소재지 건축조례 — 이행강제금 산정의 절반은 조례다</b>
+        <span class="why">가중 비율·감경 적용기간·연간 부과 횟수(최대 2회)·비율 하향(최저 60%)·60㎡ 이하 주거용 1/2 감액 금액</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>⑥ 특조법 5단계 게이트 판정 (2026.12.17 이후)</b>
+        <span class="why">주거용 50%↑ → 2023.12.31 완공 → 규모 요건 → 배제구역 아님 → §3③ 무관. 하나라도 탈락 시 양성화를 가격에서 제외. <b>+시행령(신고기간) 제정 여부 재확인</b></span></span></li>
+      <li><span class="box"></span><span class="txt"><b>⑦ 권리분석 — 위반건축물이라고 생략하면 안 된다</b>
+        <span class="why">미등기·무허가에도 주임법 적용(2004다26133). 쪼개기는 실제 세대 수 × 보증금 총액이 낙찰가를 넘을 수 있음</span></span></li>
+      <li><span class="box"></span><span class="txt"><b>⑧ 매각물건명세서·감정평가서 — 위반 부분의 평가 포함 여부</b>
+        <span class="why">위반건축물은 법정 기재사항이 아니다(민집법 §105①). 미기재를 이유로 한 매각불허가는 "매수희망자의 의사·가격 결정에 영향" 기준(2023마7896)을 개별 입증해야 하고, 문턱이 낮지 않다</span></span></li>
+    </ul></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Calculation</p><h2 class="s-title">이행강제금은 이렇게 계산된다 — 트랙 판별이 5배를 가른다</h2>
+      <p class="s-desc">별표 15 원문·행안부 훈령 제417호·고시 제2025-82호를 직접 확보해 검증한 체계입니다(2026년 기준).</p></div>
+    <div class="quote tnum">
+      <b>㎡당 시가표준액</b> = 건물신축가격기준액(2026년 주거용 <b>860,000원/㎡</b>, 행안부고시 제2025-82호) × 구조지수(철근콘크리트 1.00) × 용도지수(다세대·단독·다가구 0.91) × 위치지수(개별공시지가 구간별 0.80~1.69) × 잔가율(1 − 연간상각률 × 경과연수) — ㎡당 금액 천원 미만 절사
+    </div>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="stepcard red">
+        <div class="ico">🧱</div>
+        <h4>1호 트랙 — 무허가·무신고 건축(증축)</h4>
+        <p><b>㎡당 시가표준액 × 50% × 위반면적 × 비율</b><br>(무허가 100% / 무신고 70% / 건폐율초과 80% / 용적률초과 90% — 조례로 60%까지 하향 가능)</p>
+        <p class="tnum">예시(무허가 증축 25.47㎡, ㎡당 715,000원): 715,000 × 25.47 × 50% × 100% ≈ <b>1회 911만원</b></p>
+        <div class="cite"><span>건축법 §80①1호</span><span>시행령 §115조의3①</span></div>
+      </div>
+      <div class="stepcard navy">
+        <div class="ico">🔀</div>
+        <h4>2호 트랙 — 용도변경 등(별표 15)</h4>
+        <p><b>위반 부분의 시가표준액 × 별표 15 요율</b> — 무단 용도변경 10%(용도변경을 한 "부분" 한정), 사용승인 없이 사용 2%, 건축선·구조·피난·내화 등 각 10%, 그 밖의 위반 3% 이하.</p>
+        <p class="tnum">같은 25.47㎡가 용도변경 위반이면: 위반 부분 시가표준액 × 10% ≈ <b>1회 182만원</b></p>
+        <div class="cite"><span>건축법 §80①2호</span><span>시행령 별표 15 (개정 2020.10.8, 원문 확보)</span></div>
+      </div>
+    </div>
+    <div class="disc red" style="margin-top:16px"><span class="ic">🚨</span><span>
+      <b>시중 강의자료에서 실제로 발견된 5배 오류.</b> 무허가 증축(1호 트랙) 사례에 별표 15의 10%(2호 전용 요율)를 적용해 1회분을 182만원으로 계산한 자료가 있다 — 조문대로면 <b>911만원</b>이다. 1/2 감액과 75% 감경을 곱셈으로 중첩한 것도 근거가 없다(시행령 §115조의4② 단서는 "치환" 구조). <b>위반 유형이 1호 트랙인지 2호 트랙인지 판별이 계산의 첫 단추</b>이며, 이것을 틀리면 보유 비용이 수 배 어긋난다. 산정 근거 자료를 쓸 때는 지수표 함정도 주의 — "기타 주거용 0.87"은 농어가·광산주택 등 한정이고, 구조지수 별표와 잔가율 별표의 구조 분류가 서로 다르다(목구조 1.25 ≠ 목조 0.83).
+    </span></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Pricing</p><h2 class="s-title">가격 반영식 — 세 가지 비용의 최솟값을 차감한다</h2></div>
+    <div class="grid g3">
+      <div class="stepcard red">
+        <div class="ico">🔄</div>
+        <h4>(A) 현상 유지 비용</h4>
+        <p>회당 이행강제금 × 연간 횟수(조례, 최대 2회) × <b>예상 보유 연수</b> — 총 횟수 상한이 없으므로 보유 기간 전체에 걸린다.</p>
+        <p>감경(75% 또는 60㎡ 이하 주거용 50%)은 재량 + 미검증이므로 <b>감경 있음/없음 두 값을 범위로</b> 계산.</p>
+      </div>
+      <div class="stepcard green">
+        <div class="ico">✅</div>
+        <h4>(B) 양성화 비용</h4>
+        <p>(이행강제금 5회분 − 기납부액) + 체납 정리액 + 주차장 설치비 + 설계·조사비 + 피난·내화·소방 공사비.</p>
+        <p><b>A가 B를 넘는 순간부터 양성화가 지배전략.</b></p>
+      </div>
+      <div class="stepcard navy">
+        <div class="ico">🔨</div>
+        <h4>(C) 시정(원상복구) 비용</h4>
+        <p>철거·복구 견적 + <b>임대 면적·세대 수 감소의 현재가치</b>. 시정하면 신규 부과는 즉시 중지되지만 기부과분은 사라지지 않는다(§80⑥ 후단).</p>
+      </div>
+    </div>
+    <div class="disc" style="margin-top:16px"><span class="ic">🧮</span><span>
+      <b>판정: min(A, B, C)를 낙찰가 상한에서 차감한다.</b> 위 계산 예시는 일반화된 가정값 기준이다 — 실제 1회분은 시가표준액·위반면적·위반유형·<b>지자체 조례</b>(비율 하향·횟수·감경 기간)에 따라 달라지므로, 최종 숫자는 물건별로 관할 구청·조례·건축사 확인으로 채워야 한다.
+    </span></div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Decision flow</p><h2 class="s-title">전략 선택 흐름</h2></div>
+    <div class="flow">
+      <p class="q">1) §3② 배제구역인가? (GB는 지정 후 대수선 이력까지)</p>
+      <p class="a">예 → <b>철거 전제 채산 또는 입찰 회피</b> [유형 ⑤] · 아니오 ↓</p>
+      <p class="q">2) 원상복구 비용이 낮고 수익 손실이 작은가?</p>
+      <p class="a">예 → <b>(b) 시정 후 표기 말소</b> [주로 유형 ①] — 시정 시 신규 부과 즉시 중지 + 대장 표기 삭제는 기속 · 아니오 ↓</p>
+      <p class="q">3) 특조법 5단계 게이트 통과 + 신고기간 내인가?</p>
+      <p class="a">예 → <b>(a) 양성화</b> ★ [유형 ②·③, 조건부 ④] — 2026.12.17~약 2028.6월 한정 · 아니오 ↓</p>
+      <p class="q">4) 회당 이행강제금 × 보유기간 &lt; 물건의 초과수익인가?</p>
+      <p class="a">예 → <b>(c) 현상 유지</b> — 단 무기한 반복·사용 자체 위반(2017두30764)·임대 제약·매도 시 설명의무를 명시적으로 수용하고 75% 감경 신청 병행 · 아니오 → <b>입찰 회피</b></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head"><p class="s-eyebrow">Verification & limits</p><h2 class="s-title">이 자료의 검증과 한계</h2></div>
+    <div class="grid g2">
+      <div class="stepcard navy">
+        <div class="ico">🛡️</div>
+        <h4>어떻게 검증됐나</h4>
+        <p>법령·판례 조사관 2명이 law.go.kr 원문을 병렬 실조회하고, 작성에 관여하지 않은 독립 검증관이 전 인용을 재조회해 판정했다. 1차 검증에서 <b>소형 주거용 보유비용을 절반으로 과소추정한 산식 오류</b> 등 3건이 적발·수정됐고, 2차 검증 <b>PASS</b>. "5회 상한 폐지"와 GB 대집행 판례(2022두35008)는 검증 과정에서 오히려 보강된 결론이다.</p>
+      </div>
+      <div class="stepcard red">
+        <div class="ico">⬜</div>
+        <h4>확인되지 않은 것 (그대로 믿지 말 것)</h4>
+        <p>① 특조법 <b>시행령·신고기간</b>(미제정 — 2026.12.17 시행 전 재확인 필수) ② 낙찰자 <b>가중 제외·75% 감경 조항의 해석례·판례 전무</b> ③ 기부과분 비승계는 <b>판례 아닌 반대해석</b> ④ HUG 전세보증·담보대출의 위반건축물 실무 취급(법령 아닌 기관 기준 — 수익 구조 최대 불확실 요인) ⑤ 위반건축물 특화 매각불허가 판례 부존재 ⑥ "위반건축물" 대장 표시 자체의 처분성 대법원 판례 미확인.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="disc"><span class="ic">ℹ</span><span>
+    본 자료는 law.go.kr 공개 법령·판례 원문에 기초한 <b>일반 법률정보</b>이며 특정 물건에 대한 법률자문이나 투자 권유가 아니다. 이행강제금·양성화 비용은 물건별 조례·시가표준액에 따라 전혀 달라지고, 특조법은 시행 전(시행령 미제정)이므로 <b>입찰 전 관할 구청·조례 확인과 변호사·건축사 상담</b>을 반드시 거칠 것. 법령은 개정이 잦으므로 실행 시점의 시행일을 재확인할 것.
+  </span></div>
+
+  <div class="footerbar"><span>auction-law · 위반건축물 경매 전략 가이드 (투자자용)</span><span class="tnum">작성 2026-09-18 · 독립 인용검증 PASS</span></div>
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement,btn=document.getElementById('themeBtn'),
+      icon=document.getElementById('themeIcon'),label=document.getElementById('themeLabel');
+  function cur(){var a=root.getAttribute('data-theme');return a?a:(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');}
+  function paint(t){icon.textContent=t==='dark'?'☾':'☀';label.textContent=t==='dark'?'다크':'라이트';}
+  paint(cur());
+  btn.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';root.setAttribute('data-theme',n);paint(n);});
+  window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(){if(!root.getAttribute('data-theme'))paint(cur());});
+})();
+</script>
