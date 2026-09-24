@@ -1,0 +1,612 @@
+<title>위반건축물 양성화 투자 브리핑 — 12년 만의 창구</title>
+<style>
+:root{
+  --dark:#141413; --light:#faf9f5; --light-gray:#e8e6dc; --mid-gray:#b0aea5;
+  --orange:#d97757; --blue:#6a9bcc; --green:#788c5d;
+  --mute:rgba(20,20,19,0.62); --on-dark-mute:rgba(250,249,245,0.6); --line:rgba(20,20,19,0.1);
+  --heading:'Poppins','Apple SD Gothic Neo','Pretendard',Arial,sans-serif;
+  --body:'Lora',Georgia,'Apple SD Gothic Neo',serif;
+  --label:'Poppins','Apple SD Gothic Neo',Arial,sans-serif;
+  --maxw:1100px; --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--light);color:var(--dark);font-family:var(--body);-webkit-font-smoothing:antialiased;line-height:1.65}
+h1,h2,h3{margin:0;font-family:var(--heading);font-weight:600;letter-spacing:-0.01em}
+a{color:var(--orange)}
+::selection{background:var(--orange);color:var(--light)}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+section{padding:80px 0}
+section.on-dark{background:var(--dark);color:var(--light)}
+section.bg-soft{background:var(--light-gray)}
+.eyebrow{font-family:var(--label);font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--mute);display:inline-flex;align-items:center;gap:0.5em;background:var(--light-gray);padding:6px 14px;border-radius:999px}
+.eyebrow.on-dark{background:rgba(250,249,245,0.08);color:var(--on-dark-mute)}
+.eyebrow::before{content:'';width:6px;height:6px;background:var(--orange);border-radius:50%;display:inline-block}
+.card{background:var(--light);border:1px solid var(--line);border-radius:16px;padding:22px 20px;transition:transform 0.3s var(--ease),box-shadow 0.3s ease,border-color 0.3s ease}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 32px -16px rgba(20,20,19,0.18);border-color:rgba(217,119,87,0.35)}
+.compare{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media (max-width:820px){.compare{grid-template-columns:1fr}}
+.compare > div{border-radius:22px;padding:30px 26px;background:var(--light)}
+.compare .muted{border:1px solid var(--line)}
+.compare .emphasis{border:2px solid var(--orange)}
+.pill{font-family:var(--label);font-size:0.68rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:6px 12px;border-radius:999px;display:inline-block}
+.pill.neutral{background:var(--light-gray);color:var(--mute)}
+.pill.active{background:var(--orange);color:var(--light)}
+.pill.warn{background:rgba(217,119,87,0.14);color:var(--orange)}
+.progress{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--orange),var(--blue));z-index:100}
+nav.topnav{position:fixed;top:0;left:0;right:0;height:56px;z-index:90;display:flex;align-items:center;justify-content:center;background:rgba(250,249,245,0);border-bottom:1px solid transparent;transition:all 0.3s ease}
+nav.topnav.scrolled{background:rgba(250,249,245,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+nav.topnav .links{display:flex;gap:20px;font-family:var(--label);font-size:0.8rem;font-weight:500;flex-wrap:wrap;justify-content:center}
+nav.topnav a{color:var(--mute);text-decoration:none}
+nav.topnav a:hover{color:var(--orange)}
+.blob{position:absolute;border-radius:50%;filter:blur(50px);pointer-events:none}
+@keyframes driftA{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,30px) scale(1.12)}}
+@keyframes driftB{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-36px,24px) scale(1.08)}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s var(--ease),transform 0.6s var(--ease)}
+.reveal.in-view{opacity:1;transform:translateY(0)}
+.hero{position:relative;overflow:hidden;padding:140px 0 80px;text-align:center}
+.hero h1{font-size:clamp(1.9rem,5vw,3.2rem);line-height:1.18;margin:22px auto 16px;max-width:820px;text-wrap:balance}
+.hero .lead{font-style:italic;color:var(--mute);font-size:1.1rem;max-width:640px;margin:0 auto 40px}
+.timeline{position:relative;max-width:780px;margin:0 auto;padding:18px 0 46px}
+.timeline .bar{height:6px;border-radius:999px;background:var(--light-gray);position:relative;overflow:visible}
+.timeline .fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--orange));}
+.timeline .tick{position:absolute;top:-7px;width:20px;height:20px;border-radius:50%;background:var(--light);border:3px solid var(--orange);transform:translateX(-50%)}
+.timeline .lbl{position:absolute;top:24px;transform:translateX(-50%);font-family:var(--label);font-size:0.72rem;font-weight:600;color:var(--mute);white-space:nowrap}
+.timeline .today{position:absolute;top:-16px;transform:translateX(-50%);font-family:var(--label);font-size:0.66rem;font-weight:600;color:var(--light);background:var(--dark);border-radius:999px;padding:3px 9px}
+.sec-head{max-width:760px;margin-bottom:40px}
+.sec-head h2{font-size:clamp(1.4rem,3.2vw,2rem);margin:14px 0 12px;text-wrap:balance}
+.sec-head p{color:var(--mute);margin:0}
+.on-dark .sec-head p{color:var(--on-dark-mute)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:860px;margin:0 auto}
+@media (max-width:720px){.stats{grid-template-columns:1fr}}
+.stat{background:var(--light);border:1px solid var(--line);border-radius:16px;padding:20px}
+.stat .v{font-family:var(--heading);font-weight:600;font-size:1.35rem;color:var(--orange)}
+.stat .k{font-family:var(--label);font-size:0.72rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+.flowrow{display:grid;grid-template-columns:1fr 30px 1fr 30px 1fr 30px 1fr;align-items:center;gap:8px}
+@media (max-width:860px){.flowrow{grid-template-columns:1fr}.flowrow .fa{transform:rotate(90deg);margin:2px auto}}
+.flowrow .fs{background:var(--light);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;font-size:0.92rem}
+.flowrow .fs b{font-family:var(--heading);display:block;margin-bottom:4px}
+.flowrow .fa{color:var(--orange);font-family:var(--heading);text-align:center;font-size:1.1rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+.dk{background:rgba(250,249,245,0.05);border:1px solid rgba(250,249,245,0.13);border-radius:16px;padding:22px}
+.dk .t{font-family:var(--label);font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
+.dk p{margin:0;font-size:0.95rem;color:rgba(250,249,245,0.88)}
+.quote{border-left:3px solid var(--orange);padding:4px 0 4px 18px;font-style:italic;color:var(--on-dark-mute);margin:26px 0 0;max-width:820px;font-size:0.95rem}
+.quote b{color:var(--light);font-style:normal}
+/* calculator */
+.calc{background:var(--light);border:2px solid var(--orange);border-radius:22px;padding:34px 30px}
+.calc .cgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 22px}
+@media (max-width:720px){.calc .cgrid{grid-template-columns:1fr}}
+.calc label{display:block;font-family:var(--label);font-size:0.72rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.calc select,.calc input[type=number]{width:100%;font-family:var(--heading);font-size:1rem;padding:11px 13px;border:1px solid var(--mid-gray);border-radius:10px;background:var(--light);color:var(--dark)}
+.calc .chk{display:flex;align-items:center;gap:9px;font-size:0.9rem;color:var(--dark);font-family:var(--body)}
+.calc .chk input{accent-color:var(--orange);width:16px;height:16px}
+.cres{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:720px){.cres{grid-template-columns:1fr}}
+.cres .r{background:var(--light-gray);border-radius:14px;padding:16px}
+.cres .r .rv{font-family:var(--heading);font-weight:600;font-size:1.25rem;font-variant-numeric:tabular-nums}
+.cres .r.hot{background:var(--dark);color:var(--light)}
+.cres .r.hot .rv{color:var(--orange)}
+.cres .r .rk{font-family:var(--label);font-size:0.68rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.cres .r.hot .rk{color:var(--on-dark-mute)}
+.cnote{margin-top:16px;font-size:0.82rem;color:var(--mute);line-height:1.6}
+/* examples */
+.ex{background:var(--light);border:1px solid var(--line);border-radius:18px;padding:26px 24px}
+.ex + .ex{margin-top:18px}
+.ex h3{font-size:1.08rem;margin-bottom:4px}
+.ex .sub{font-size:0.85rem;color:var(--mute);margin:0 0 14px}
+.ex table{width:100%;border-collapse:collapse;font-size:0.9rem}
+.ex td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.ex td:first-child{color:var(--mute);width:34%}
+.ex td b{font-variant-numeric:tabular-nums}
+.ex .verdict{margin:14px 0 0;padding:12px 16px;border-radius:12px;background:var(--light-gray);font-size:0.92rem}
+.ex .verdict b{color:var(--orange)}
+.check{display:flex;align-items:flex-start;gap:12px;padding:13px 18px;background:var(--light);border:1px solid var(--line);border-radius:12px;cursor:pointer}
+.check:hover{border-color:rgba(217,119,87,0.4)}
+.check + .check{margin-top:8px}
+.check input{accent-color:var(--orange);width:17px;height:17px;margin-top:3px;flex:none;cursor:pointer}
+.check span{font-size:0.93rem}
+ul.tight{margin:8px 0 0;padding-left:20px}
+ul.tight li{margin:6px 0;font-size:0.93rem}
+.risk{border-left:3px solid var(--orange);background:var(--light);border-radius:0 14px 14px 0;padding:16px 20px}
+.risk + .risk{margin-top:12px}
+.risk b{font-family:var(--heading)}
+.risk p{margin:4px 0 0;font-size:0.9rem;color:var(--mute)}
+.viz{background:var(--light);border:1px solid var(--line);border-radius:18px;padding:14px 14px 6px;overflow:hidden}
+.viz canvas{width:100%;height:auto;display:block}
+.viz .cap{font-family:var(--label);font-size:0.74rem;color:var(--mute);text-align:center;padding:8px 6px 10px;letter-spacing:0.02em}
+.vgrid{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;align-items:start}
+@media (max-width:900px){.vgrid{grid-template-columns:1fr}}
+.imp table{width:100%;border-collapse:collapse;font-size:0.9rem;font-variant-numeric:tabular-nums}
+.imp th{font-family:var(--label);font-size:0.66rem;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:var(--mute);text-align:right;padding:9px 10px;border-bottom:1px solid var(--line)}
+.imp th:first-child,.imp td:first-child{text-align:left}
+.imp td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right}
+.imp tr:last-child td{border-bottom:none}
+.imp .hl{color:var(--orange);font-weight:600;font-family:var(--heading)}
+.board{background:var(--light);border:2px solid var(--orange);border-radius:22px;padding:8px 26px 20px;box-shadow:0 20px 44px -28px rgba(217,119,87,0.4)}
+.board table{width:100%;border-collapse:collapse;font-size:0.93rem}
+.board th{font-family:var(--label);font-size:0.68rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--mute);text-align:left;padding:12px 10px;border-bottom:1px solid var(--line)}
+.board td{padding:13px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.board tr:last-child td{border-bottom:none}
+.board td:first-child{font-family:var(--heading);font-weight:600;width:26%}
+.board .d{font-family:var(--label);font-size:0.78rem;color:var(--mute);white-space:nowrap}
+.newbadge{font-family:var(--label);font-size:0.62rem;font-weight:700;letter-spacing:0.08em;background:var(--orange);color:var(--light);border-radius:999px;padding:3px 9px;vertical-align:middle;margin-left:8px}
+footer{background:var(--dark);color:var(--on-dark-mute);padding:50px 0;font-size:0.84rem;line-height:1.8}
+.srcs{font-size:0.82rem;color:var(--mute);line-height:1.9}
+</style>
+
+<div class="progress" id="progress"></div>
+<nav class="topnav" id="topnav"><div class="links">
+  <a href="#update">입법 업데이트</a><a href="#impact">사업성</a><a href="#why">투자 논리</a><a href="#target">대상 판별</a><a href="#risk-core">이행강제금</a><a href="#calc">계산기</a><a href="#cases">사용 예</a><a href="#check">체크리스트</a><a href="#risks">리스크</a>
+</div></nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="blob" style="width:420px;height:420px;background:rgba(217,119,87,0.15);top:-80px;left:8%;animation:driftA 17s ease-in-out infinite"></div>
+  <div class="blob" style="width:340px;height:340px;background:rgba(120,140,93,0.13);bottom:-40px;right:10%;animation:driftB 20s ease-in-out infinite"></div>
+  <div class="wrap" style="position:relative">
+    <span class="eyebrow">auction-law 투자 브리핑 · 2026-09-18 작성 · 2026-09-24 개정 반영 갱신 · 검증 게이트 통과본</span>
+    <h1>12년 만의 위반건축물 양성화 창구,<br>경매 다세대의 기회로</h1>
+    <p class="lead">「특정건축물 정리에 관한 특별조치법」(법률 제21820호)이 2026년 12월 17일 시행됩니다.<br>위반 리스크로 유찰된 다세대를 "계산 가능한 비용"으로 합법화하는 18개월의 창.</p>
+    <div class="timeline">
+      <div class="bar">
+        <div class="fill" style="width:13%"></div>
+        <div class="tick" style="left:0%"></div><div class="lbl" style="left:0%">2026.6.16 공포</div>
+        <div class="today" style="left:13%">오늘</div>
+        <div class="tick" style="left:26%"></div><div class="lbl" style="left:26%">2026.12.17 시행</div>
+        <div class="tick" style="left:100%;border-color:var(--mid-gray)"></div><div class="lbl" style="left:100%">2028.6.16 종료</div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="v">18개월 한시</div><div class="k">2026.12.17 ~ 2028.6.16 (기간 내 신고분은 이후에도 적용)</div></div>
+      <div class="stat"><div class="v">85㎡ 이하 다세대</div><div class="k">세대당 전용면적 기준 · 근생빌라도 대상 (2023.12.31 이전 완공)</div></div>
+      <div class="stat"><div class="v">이행강제금 5회분</div><div class="k">양성화 비용(과태료) — 부과 이력에 따라 차감·면제</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- 입법 업데이트 상황판 -->
+<section id="update" style="padding-top:56px">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-bottom:26px"><span class="eyebrow">입법 업데이트 상황판</span>
+      <h2>2026.9.24 확인 — 무엇이 바뀌었나<span class="newbadge">NEW</span></h2>
+      <p>8·13 대책의 다세대·다가구 완화가 3개 트랙으로 진행 중이고, 같은 개정에 이행강제금 강화가 함께 실렸습니다. 투자 판단 전 이 상황판부터 확인하세요.</p></div>
+    <div class="board reveal">
+      <table>
+        <tr><th>항목</th><th>내용</th><th>상태</th></tr>
+        <tr><td>일조권 완화</td><td>높이제한 → <b>이격거리 방식</b>: 10m 이하 부분 1.5m / <b>10~17m 부분 5m 고정</b> / 17m 초과 부분 높이의 ½ (건축법 §61, 허가 신청분부터)</td><td><span class="pill active">공포 완료</span><div class="d">2026.11.12 시행</div></td></tr>
+        <tr><td>다세대 6개층</td><td><b>주택법 시행령</b> 트랙 — 단지형 다세대(도시형생활주택), 건축위 심의 전제, 1종전용·1종일반주거지역 <b>외</b> 지역 (영 제36657호)</td><td><span class="pill active">시행 중</span><div class="d">2026.9.8~</div></td></tr>
+        <tr><td>다가구 4층 · 1,000㎡</td><td>다세대·다가구 바닥면적 660→<b>1,000㎡ 미만</b>, 다가구 3→<b>4층 이하</b>, 다세대 주민공동시설 용적률 제외 (건축법 시행령 개정안 — 공고 제2026-1191호)</td><td><span class="pill neutral">입법예고 중</span><div class="d">의견제출 ~10.26 · 미공포</div></td></tr>
+        <tr><td>⚠ 이행강제금 강화</td><td>반복 징수 <b>기속화</b> + 다음 연도부터 <b>금액 가중 의무</b> + 실태조사 연 1회 의무 + 가중 하한 50%. 단 시행 전 시정명령분은 종전 규정(경과조치). 시정 소유자의 <b>구상권 신설</b></td><td><span class="pill warn">공포 완료</span><div class="d">2027.2.12 시행</div></td></tr>
+      </table>
+    </div>
+    <p style="font-size:0.85rem;color:var(--mute);margin-top:14px">투자 함의: ①신축·재축조 경로(B) 사업성 개선 ②"버티기"(C경로) 비용은 2027.2.12 이후 신규 시정명령분부터 구조적 상승 — <b>양성화 창구(12.17~)와 이행강제금 강화(27.2.12) 사이 5개월이 의사결정 골든타임</b>. 상세는 아래 각 섹션에 반영되어 있습니다.</p>
+  </div>
+</section>
+
+<!-- 사업성 임팩트 -->
+<section class="bg-soft" id="impact">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">사업성 임팩트 · 2026.9.24 추가 분석</span>
+      <h2>용적률 한도는 그대로다 — 완화가 올리는 건 "실현 용적률"이다</h2>
+      <p>건축사들이 유튜브에서 반복하는 포인트가 이것입니다: 허용 용적률 200%는 예나 지금이나 같지만, <b>일조사선이 4·5층을 깎아 실제로는 못 채웠다</b>. 이번 완화는 그 갭을 닫습니다. 아래는 동일 예시 필지(가정 명시)에 구법·신법을 그대로 적용한 결과입니다.</p></div>
+
+    <div class="vgrid reveal">
+      <div class="viz"><canvas id="vizSun" width="1040" height="640"></canvas>
+        <div class="cap">단면 비교 — 정북 일조 이격: 구법(10m 초과분 높이½)은 4·5층이 계단형으로 깎이고, 신법(10~17m 구간 5m 고정)은 5층까지 수직벽. 빗금 = 회복되는 바닥면적</div></div>
+      <div class="viz"><canvas id="vizStack" width="760" height="640"></canvas>
+        <div class="cap">층수 완화 — 다가구 3→4개층(임대면적 +33%) · 단지형 다세대 5→6개층(세대 +20%, 건축위 심의)</div></div>
+    </div>
+
+    <div class="ex reveal imp" style="margin-top:18px">
+      <span class="pill active">예시 필지 시뮬레이션</span>
+      <h3>2종일반주거 132㎡ (11×12m) · 건폐율 60% · 용적률 200% · 1층 필로티 주차</h3>
+      <p class="sub">가정: 층고 3m, 남측 도로(이격 1m)·측면 0.5m, 정북 인접대지. 분양 ㎡당 900만원·총원가 19.5억 고정 가정 — 전부 예시값</p>
+      <table>
+        <tr><th>층 (상단 높이)</th><th>구법 이격</th><th>구법 바닥</th><th>신법 이격</th><th>신법 바닥</th><th>변화</th></tr>
+        <tr><td>2·3층 (6·9m)</td><td>1.5m</td><td>79.2㎡</td><td>1.5m</td><td>79.2㎡</td><td>— (건폐율 캡)</td></tr>
+        <tr><td>4층 (12m)</td><td>6.0m</td><td>50.0㎡</td><td>5.0m</td><td>60.0㎡</td><td class="hl">+10㎡</td></tr>
+        <tr><td>5층 (15m)</td><td>7.5m</td><td>35.0㎡</td><td>5.0m</td><td>60.0㎡</td><td class="hl">+25㎡ (+71%)</td></tr>
+        <tr><td><b>실현 연면적</b> (한도 264㎡)</td><td></td><td>243.4㎡ <span style="color:var(--mute)">(92%)</span></td><td></td><td class="hl">264.0㎡ (100%)</td><td class="hl">한도 도달</td></tr>
+        <tr><td><b>분양수입</b> (㎡당 900만 가정)</td><td></td><td>21.9억</td><td></td><td>23.8억</td><td class="hl">+1.85억 (+8.5%)</td></tr>
+        <tr><td><b>이익</b> (원가 19.5억 고정 가정)</td><td></td><td>2.41억</td><td></td><td class="hl">4.26억</td><td class="hl">+77%</td></tr>
+      </table>
+      <div class="verdict"><b>레버리지 구조</b>: 연면적은 +8.5%인데 이익은 +77% — 토지비·공사비가 고정된 위에 얹히는 증가분이라서다. 특히 <b>"깎인 5층"(35㎡ 다락형)이 60㎡ 정상 세대가 되는 것</b>이 상품성의 본체다.</div>
+    </div>
+
+    <div class="grid2 reveal" style="margin-top:16px">
+      <div class="card"><span class="pill active">다가구 3→4개층 · 1,000㎡</span>
+        <ul class="tight">
+          <li><b>임대면적 +33%</b> — 주택층이 하나 더 (예: 층당 원룸 6실 × 3→4개층 = 18→24실)</li>
+          <li>연면적 660→1,000㎡ 미만: 종전엔 다세대(구분소유)로 쪼개야 했던 규모를 <b>단독 소유 임대건물</b>로</li>
+          <li>세무 포인트: 다가구는 <b>단독주택 — 1세대 1주택 지위를 유지</b>하면서 임대 규모 확대 (구분등기 시 다세대 전환 주의)</li>
+          <li>⚠ 시행령 <b>입법예고 중(미공포)</b> — 19세대 이하 한도 변경 여부 미확인</li>
+        </ul></div>
+      <div class="card"><span class="pill active">다세대 5→6개층 (단지형·도생)</span>
+        <ul class="tight">
+          <li><b>세대수 +20%</b> — 용적률 여유 필지(3종일반 등)에서 층수 병목 해소</li>
+          <li>요건: 도시형생활주택(단지형 다세대), <b>건축위원회 심의</b>, 1종전용·1종일반주거지역 제외</li>
+          <li><b>2026.9.8 이미 시행</b> — 3트랙 중 유일하게 지금 바로 설계 반영 가능</li>
+          <li>일조 완화(11.12~)와 결합 시 6층 수직벽 실현 — 두 완화의 <b>곱셈 효과</b></li>
+        </ul></div>
+    </div>
+
+    <div class="reveal" style="margin-top:16px">
+      <div class="risk"><b>경매 투자 연계 3가지</b><p>①<b>노후 단독·다가구 부지의 재평가</b> — 신축 사업성이 오르면 대지 가치가 지지된다(감정가가 구법 기준이면 갭 기회) ②위반건축물 <b>B경로(철거 후 재축조)의 가치 상승</b> — 재축조 시 신 기준 적용 ③기존 "깎인 5층" 구축 빌라는 신축 공급 증가로 <b>상대 경쟁력 하락 압력</b> — 보유 물건 매도 타이밍 변수.</p></div>
+      <div class="risk"><b>주의 — 단정 금지 3가지</b><p>①신법 이격거리는 "각 호 범위에서 <b>조례로 정하는 거리 이상</b>" — 지자체 조례가 확정해야 실측 가능(정북 인접대지 용도지역 예외 단서도 있음) ②다가구 4층·1,000㎡는 <b>입법예고 단계(미공포)</b> ③위 시뮬레이션은 예시 필지·가정값 — 실제 필지는 도로·형상·조례로 결과가 달라진다. 설계 검토는 건축사 확인 필수.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">투자 논리</span>
+      <h2>위반 물건이 싸게 나오는 이유가, 이번엔 수익의 원천이 된다</h2>
+      <p>건축물대장에 "위반건축물"이 찍히면 대출·전세보증이 막히고 이행강제금이 반복 부과됩니다. 그래서 유찰되고 저감됩니다. 신법은 이 "무한 리스크"를 <b>상한이 계산되는 일회성 비용</b>으로 바꿔 줍니다.</p>
+    </div>
+    <div class="flowrow reveal">
+      <div class="fs"><b>① 저가 매수</b>위반 리스크로 유찰·저감된 다세대를 경매 취득</div>
+      <div class="fa">→</div>
+      <div class="fs"><b>② 양성화 신고</b>2026.12.17 이후 건축사 설계도서 첨부 신고(§4)</div>
+      <div class="fa">→</div>
+      <div class="fs"><b>③ 사용승인</b>요건 충족 시 30일 내 승인 기속(§6) + 과태료 납부</div>
+      <div class="fa">→</div>
+      <div class="fs"><b>④ 가치 회복</b>대장 위반표시 말소 → 합법 임대·매도</div>
+    </div>
+  </div>
+</section>
+
+<!-- TARGET -->
+<section class="bg-soft" id="target">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">대상 판별</span>
+      <h2>어떤 물건이 양성화되는가 (§2·§3)</h2></div>
+    <div class="grid2 reveal">
+      <div class="card"><span class="pill active">대상</span>
+        <ul class="tight">
+          <li><b>2023.12.31 당시 사실상 완공</b>된 주거용(연면적 50%↑ 주거)</li>
+          <li><b>세대당 전용 85㎡ 이하 다세대</b> — 무승인 증축·대수선 부분 포함</li>
+          <li>단독 165㎡ 이하(조례로 330㎡까지) · 다가구 660㎡ 이하</li>
+          <li><b>근생 허가 후 사실상 주택 사용</b>(근생빌라 — 2023.12.31 이전부터)</li>
+          <li>유형: 무허가·무신고 건축/대수선 · 사용승인 미취득 · 무단 용도변경</li>
+        </ul>
+      </div>
+      <div class="card"><span class="pill neutral">배제·관문</span>
+        <ul class="tight">
+          <li>도시·군계획시설 부지 / GB(지정 전 건축 예외) / 접도구역 / 보전산지</li>
+          <li><b>정비구역</b> — "사업에 지장 없으면 예외"라 판단 불확실</li>
+          <li><b>자기 소유 대지</b> 필요(§6①1호) — <b>대지권 미등기 다세대는 사용승낙 관문</b></li>
+          <li>도로 최소 3m(완화 기준) · 구조안전·일조 지장 없을 것</li>
+          <li>세대증가·근생형: <b>피난·내화·소방 준수 + 주차장 설치 또는 비용 납부</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DARK: 이행강제금 -->
+<section class="on-dark" id="risk-core">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow on-dark">낙찰자가 반드시 알아야 할 구조</span>
+      <h2>이행강제금 — "승계는 없다, 그러나 새로 시작된다"</h2></div>
+    <div class="grid2 reveal">
+      <div class="dk"><div class="t">승계 X</div><p>전 소유자에게 부과된 이행강제금은 <b>일신전속</b> — 낙찰자에게 넘어오지 않는다 (대법원 2006마470).</p></div>
+      <div class="dk"><div class="t">신규 부과 O</div><p>낙찰자는 "소유자"로서 <b>새 시정명령 → 새 부과 사이클</b>의 대상. 고의·과실 불요 (대법원 2012두20137 → 2026.1.8. 2022두48653).</p></div>
+      <div class="dk"><div class="t">상한 없음 → 더 강화</div><p>2019년 개정으로 총 5회 상한 삭제 — <b>시정할 때까지 연 1~2회 무한 반복</b>. 나아가 2026.8.11 공포 개정으로 <b>2027.2.12부터 반복 징수가 기속화되고 다음 연도부터 금액 가중 의무</b>(신규 시정명령분 — 경과조치 있음).</p></div>
+      <div class="dk"><div class="t">낙찰자 우대 2개</div><p>소유권 변경 시 ①영리·상습 <b>가중 배제</b> ②<b>75% 감경 가능</b>(재량 — 조례 기간 내 시정 조건).</p></div>
+    </div>
+    <div class="quote reveal">실제 경매 낙찰자의 항변과 결과 — <b>"위반사실은 알았지만 이행강제금이 2천4백만원이나 될 것은 몰랐다"</b> → 기각. 낙찰 10년 전 위반이라도 새 소유자에게 새 사이클이 적법하게 시작됐다 (경기도행심위 2022경기행심1486).</div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section id="calc">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">시뮬레이터</span>
+      <h2>이행강제금 · 양성화 비용 계산기</h2>
+      <p>검증된 산식(건축법 §80·시행령 §115의3·별표 15) 그대로 계산합니다. 물건 검토 때 투자자와 함께 돌려보세요.</p></div>
+    <div class="calc reveal">
+      <div class="cgrid">
+        <div><label>위반 유형</label>
+          <select id="vtype">
+            <option value="a100">무허가 건축 (㎡당 시가표준액×50%×100%)</option>
+            <option value="a70">무신고 건축 (×50%×70%)</option>
+            <option value="a90">용적률 초과 (×50%×90%)</option>
+            <option value="a80">건폐율 초과 (×50%×80%)</option>
+            <option value="b10">무단 용도변경·대수선 (위반부분 시가표준액×10%)</option>
+          </select></div>
+        <div id="inA1"><label>위반면적 (㎡)</label><input type="number" id="area" value="20" min="0"></div>
+        <div id="inA2"><label>㎡당 시가표준액 (만원)</label><input type="number" id="unit" value="200" min="0"></div>
+        <div id="inB" style="display:none"><label>위반부분 시가표준액 총액 (만원)</label><input type="number" id="total" value="15000" min="0"></div>
+        <div><label>기존 부과 이력 (회)</label>
+          <select id="paid"><option value="0">없음 (과태료 전액)</option><option value="1">1회</option><option value="2">2회</option><option value="3">3회</option><option value="4">4회</option><option value="5">5회 이상 (과태료 없음)</option></select></div>
+        <div style="display:flex;flex-direction:column;gap:10px;justify-content:end">
+          <label class="chk"><input type="checkbox" id="small"> 세대 전용 60㎡ 이하 (조례 1/2 감액 가정)</label>
+          <label class="chk"><input type="checkbox" id="reduce"> 소유권 변경 75% 감경 반영 (재량·조건부)</label>
+        </div>
+      </div>
+      <div class="cres">
+        <div class="r"><div class="rv" id="rPer">—</div><div class="rk">회당 이행강제금</div></div>
+        <div class="r"><div class="rv" id="rYear">—</div><div class="rk">연간 노출액 (연 2회 가정)</div></div>
+        <div class="r hot"><div class="rv" id="rAmn">—</div><div class="rk">양성화 과태료 (이행강제금 5회분 기준)</div></div>
+      </div>
+      <p class="cnote">※ 가정·한계: ①기납부 차감은 "5회 미만 부과" 시 <b>기납부 금액</b> 기준(§9②)인데 여기서는 회당 금액×횟수로 근사 ②60㎡ 감액·감경이 §9 과태료 산정에 반영되는지는 <b>시행령 미제정으로 미확정</b> — 본 계산기는 감액·감경을 이행강제금에는 반영하되 과태료는 감액 전·후 병기 ③조례로 비율(60%까지)·횟수·감경조건이 달라짐 → 물건 소재지 건축조례 확인 필수 ④세대증가·근생형은 피난·소방 보강비 + 주차장 비용 별도.</p>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section class="bg-soft" id="cases">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">사용 예</span>
+      <h2>물건 유형별 시뮬레이션 3건 <span style="font-size:0.75em;color:var(--mute)">(모든 금액은 가정값)</span></h2></div>
+
+    <div class="ex reveal">
+      <span class="pill active">사용 예 1</span>
+      <h3>옥탑 무허가 증축 다세대 — "감액 세대"의 전형</h3>
+      <p class="sub">감정가 3.2억 → 2회 유찰 후 최저가 2.05억(64%). 대장에 옥탑 20㎡ 무허가 증축 등재. 세대 전용 52㎡(60㎡ 이하 감액 대상 가정). ㎡당 시가표준액 200만원 가정.</p>
+      <table>
+        <tr><td>회당 이행강제금</td><td>200만 × 50% × 20㎡ × 100% = 2,000만 → 60㎡ 이하 조례 1/2 감액 = <b>회당 1,000만원</b> (연 2회 시 2,000만/년)</td></tr>
+        <tr><td>양성화 과태료 (부과 이력 없음)</td><td>5회분 = <b>5,000만원</b> (감액 산정 가정 — 감액 미반영 시 1억: 시행령 확정 전 범위로 인지)</td></tr>
+        <tr><td>부대비용</td><td>건축사 설계도서·현장조사서 + 구조안전 확인 ≈ 수백만원대 가정</td></tr>
+        <tr><td>입찰 판단 프레임</td><td>정상화 시세 3.2억 − (낙찰가 + 과태료 0.5~1억 + 부대비용 + 버퍼) &gt; 목표수익이면 GO</td></tr>
+      </table>
+      <div class="verdict"><b>포인트</b>: 유찰 할인 1.15억이 양성화 총비용 상한(약 1억+α)을 넘는지가 전부다. 12.17 시행 전 낙찰 → 시행 직후 신고 타이밍이 가능하다.</div>
+    </div>
+
+    <div class="ex reveal">
+      <span class="pill active">사용 예 2</span>
+      <h3>근생빌라 (근생→주택 무단 용도변경) — 비용이 큰 대신 할인도 크다</h3>
+      <p class="sub">근생 허가 후 2020년부터 주택 임대(2023.12.31 이전 사용 요건 충족). 위반부분(주택 전용층) 시가표준액 1.5억 가정. 전세보증 불가로 임차 수요 제한 → 깊은 유찰.</p>
+      <table>
+        <tr><td>회당 이행강제금</td><td>1.5억 × 10%(별표 15 무단 용도변경) = <b>회당 1,500만원</b> (연 2회 시 3,000만/년)</td></tr>
+        <tr><td>양성화 과태료</td><td>5회분 = <b>7,500만원</b> (기부과 2회·납부 3,000만 이력이 있다면 §9②로 차감 → 4,500만)</td></tr>
+        <tr><td>추가 관문 (§6①3호·§7)</td><td><b>피난·내화·마감재·소방시설 준수 공사</b> + <b>주차장 설치 또는 비용 납부</b> — 근생형의 실질 비용은 여기서 갈린다 (현장 견적 필수)</td></tr>
+        <tr><td>양성화 후</td><td>주택으로 사용승인 → 전세보증 정상화 → 임대수익률·매도가 회복</td></tr>
+      </table>
+      <div class="verdict"><b>포인트</b>: 근생빌라는 과태료보다 <b>피난·소방·주차장 비용이 본체</b>. 입찰 전 건축사 동행 실사로 보강비를 견적한 뒤 입찰가 상한을 정한다.</div>
+    </div>
+
+    <div class="ex reveal">
+      <span class="pill active">사용 예 3</span>
+      <h3>이행강제금 5회 이상 기부과 물건 — "숨은 보석" 유형</h3>
+      <p class="sub">수년간 이행강제금이 5회 이상 부과된 채 방치·경매로 나온 다세대. 전 소유자 체납 다수.</p>
+      <table>
+        <tr><td>체납 이행강제금</td><td><b>낙찰자에게 승계되지 않음</b>(일신전속) — 전 소유자 상대 징수로 남는다</td></tr>
+        <tr><td>양성화 과태료</td><td>§9①(부과 이력 없음/추가 위반)·§9②(5회 미만 부과) 어디에도 해당 없음 → <b>문언상 추가 과태료 없이 신고 가능</b></td></tr>
+        <tr><td>단서</td><td>§6①4호 "체납 없을 것" — <b>전 소유자 체납분의 처리 방식이 시행령·실무 미확정</b>(1년 내 완납 조건부 규정 존재). 이 물건 유형의 유일한 불확실성</td></tr>
+      </table>
+      <div class="verdict"><b>포인트</b>: 부과 횟수는 허가권자(구청 건축과) 조회로 입찰 전에 확인 가능하다. 5회 이상 부과 이력 = 양성화 비용 구조가 가장 유리한 후보군.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="check">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">실사</span>
+      <h2>입찰 전 체크리스트 <span style="font-size:0.7em;color:var(--orange)" id="ckCount">0/8</span></h2></div>
+    <div class="reveal">
+      <label class="check"><input type="checkbox"><span><b>건축물대장</b> — 위반표시·위반내용·시정명령 이력 (위반 유형이 산식을 결정: 무허가 100% vs 무신고 70% vs 용도변경 10%)</span></label>
+      <label class="check"><input type="checkbox"><span><b>이행강제금 부과 이력</b> 조회(허가권자 건축과) — 부과 횟수가 과태료를 좌우 (5회↑ = 과태료 없음 후보)</span></label>
+      <label class="check"><input type="checkbox"><span><b>2023.12.31 이전 완공 입증자료</b> — 항공사진·재산세 부과 이력·전입 기록</span></label>
+      <label class="check"><input type="checkbox"><span><b>세대당 전용 85㎡ 이하</b> 여부 + 60㎡ 이하 감액 해당 여부</span></label>
+      <label class="check"><input type="checkbox"><span><b>정비구역·GB·계획시설 부지</b> 여부 — 배제 구역이면 양성화 불가 방향</span></label>
+      <label class="check"><input type="checkbox"><span><b>대지권·대지 소유관계</b> — 대지권 미등기·타인 대지면 사용승낙 관문(§6①1호)</span></label>
+      <label class="check"><input type="checkbox"><span><b>근생·세대증가형이면 보강비 견적</b> — 피난·내화·소방 + 주차장 설치/비용</span></label>
+      <label class="check"><input type="checkbox"><span><b>낙찰 후 대금 납부 전 도면 열람</b>으로 실제 구조 대조 (법제처 12-0577) — 매각불허가 구제는 기대하지 말 것</span></label>
+    </div>
+  </div>
+</section>
+
+<!-- PATHS -->
+<section class="bg-soft">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">낙찰 후 경로</span><h2>세 갈래 — 그리고 왜 A인가</h2></div>
+    <div class="compare reveal">
+      <div class="emphasis"><span class="pill active">A. 양성화</span>
+        <ul class="tight"><li>12.17 이후 신고 → 30일 내 승인(기속)</li><li>비용 = 과태료 5회분±차감 + 보강비</li><li>위반표시 말소 → 합법 임대·매도</li><li>⚠ 건축법 치유만 — 타법 위반은 잔존</li></ul></div>
+      <div class="muted"><span class="pill neutral">B. 원상복구</span>
+        <ul class="tight"><li>양성화 부적격 물건의 유일한 자력 해소</li><li>철거·원복 → 부과 중지 + 표시 삭제</li><li>세대 쪼개기 물건은 수익 구조 붕괴 — 입찰가에 반영</li></ul></div>
+      <div class="muted"><span class="pill neutral">C. 보유·감내</span>
+        <ul class="tight"><li>상한 없는 반복 부과</li><li>위반상태 사용 자체가 위법 계속(2017두30764)</li><li><b>2027.2.12부터</b>: 정기조사 연 1회 의무 + 기속 징수 + 연도별 금액 가중 (신규 시정명령분)</li><li>임대 목적이면 감경 통로 협소 — <b>비추천</b></li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- RISKS -->
+<section id="risks">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">투자자에게 반드시 고지할 것</span><h2>미확정 변수 4가지</h2></div>
+    <div class="reveal">
+      <div class="risk"><b>① 시행령 미제정 (최대 변수)</b><p>신고기간·서식·소방 예외가 아직 없다. 공포 즉시 재검토 예정(11월 자동 점검 루틴 가동 중). 시행령 확인 전에는 "신고 가능 기간"을 전제로 한 자금 계획을 확정하지 말 것.</p></div>
+      <div class="risk"><b>② 조례 변수</b><p>이행강제금 비율(60%까지 인하)·연 부과횟수·감경 조건·60㎡ 감액 금액이 전부 시·군·구 조례 위임 — 물건 소재지별로 다르다.</p></div>
+      <div class="risk"><b>③ 치유 범위의 한계</b><p>양성화는 건축법상 사용승인만 — 지구단위계획·농지·산지 등 타법 위반은 그대로 남는다(법제처 14-0678·14-0477). 대출·보증 정상화는 금융기관 실무 확인 필요.</p></div>
+      <div class="risk"><b>④ 정비구역·대지권 관문</b><p>정비구역 물건은 "사업에 지장 없으면 예외"의 판단이 불확실하고, 대지권 미등기 다세대는 대지 사용승낙이 필요하다.</p></div>
+      <div class="risk"><b>⑤ 2027.2.12 이행강제금 강화 (2026.8.11 공포 확정)</b><p>반복 징수 재량→기속 + 최초 부과 다음 연도부터 금액 가중 의무(대통령령) + 가중 하한 50% + 실태조사 연 1회 의무화. 단 <b>시행 전 시정명령을 받은 위반내용은 종전 규정</b>(부칙 §5) — "버티기"의 비용이 구조적으로 상승하므로 양성화·시정 결정을 미루지 말 것. 한편 시정한 소유자의 <b>구상권이 신설</b>(§79⑦)돼 낙찰자에게 유리한 명문 근거도 생겼다.</p></div>
+      <div class="risk" style="border-left-color:var(--green)"><b>⑥ 기회 요인 — 신축 기준 완화 3종 (병행 추적)</b><p>①일조: 높이제한→이격거리 방식, 10~17m 구간 5m 고정(건축법 §61, 2026.11.12 시행 — 허가 신청분부터) ②다세대·다가구 바닥면적 660→1,000㎡·다가구 4층(시행령 개정안 입법예고 중, 공고 2026-1191호) ③단지형 다세대 6개층(1종전용·1종일반 외, 건축위 심의 — 주택법 시행령, 2026.9.8 이미 시행). <b>원상복구 후 재축조(B경로)나 노후 다세대 신축 전환의 사업성이 개선</b>된다 — 단 ②는 미공포이므로 확정 전 전제 금지.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div style="color:var(--light);font-family:var(--heading);margin-bottom:8px">근거 (전건 law.go.kr 원문 재조회 — citation-verifier 검증 통과)</div>
+    <div class="srcs" style="color:var(--on-dark-mute)">
+      특정건축물 정리에 관한 특별조치법(법률 제21820호, 2026.6.16 공포·2026.12.17 시행) §2·§3·§4·§6·§7·§9·부칙 §1~§3 ·
+      건축법 §79·§80·§80의2 + 시행령 §115의2~§115의4·별표 15 · 건축물대장 규칙 §8 ·
+      대법원 2006마470(일신전속) · 2012두20137 · 2021두45008 · 2026.1.8. 2022두48653 · 2017두30764 ·
+      경기행심 2022경기행심1486(경매 낙찰자 기각) · 청주지법 2017구합2894(양수인 승, 극단 사안) ·
+      법제처 12-0577 · 14-0417 · 14-0477 · 14-0678 · 06-0152 · 07-0280 ·
+      건축법 개정법률(2026.8.11 공포 — §61 일조 2026.11.12 시행 / §79·§80 강화 2027.2.12 시행, 부칙 §5 경과조치) ·
+      건축법 시행령 개정안 입법예고(국토교통부공고 제2026-1191호, 2026.9.17~10.26 — 미공포) · 주택법 시행령(영 제36657호, 2026.9.8 시행 — 단지형 다세대 6개층)
+    </div>
+    <div style="margin-top:16px;border-top:1px solid rgba(250,249,245,0.15);padding-top:14px">
+      ⚠ 본 자료는 조문·판례·재결에 근거한 <b style="color:var(--light)">일반 법률정보</b>이며 투자 권유가 아닙니다. 사용 예의 금액은 전부 가정값입니다.
+      개별 물건의 입찰·양성화 판단은 변호사·건축사·세무사 확인이 필요하며, 신법은 시행 전(시행령 미제정)이므로 실행 시점에 하위법령·소재지 조례를 반드시 재확인하십시오.
+      <span style="opacity:0.6">· auction-law 하네스 · 상세 근거: _workspace/03_analyst_report.md · 2026-09-18</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+var nav=document.getElementById('topnav'),bar=document.getElementById('progress');
+addEventListener('scroll',function(){var h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';nav.classList.toggle('scrolled',h.scrollTop>30);},{passive:true});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in-view');});},{threshold:0.12,rootMargin:'0px 0px -5% 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+function sweep(){document.querySelectorAll('.reveal:not(.in-view)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)el.classList.add('in-view');});}
+addEventListener('scroll',sweep,{passive:true});document.addEventListener('visibilitychange',sweep);setTimeout(sweep,600);
+
+// ---- 계산기 (산식: 건축법 §80①1호·시행령 §115의3① / §80①2호·별표15) ----
+var RATES={a100:1.0,a70:0.7,a90:0.9,a80:0.8};
+function won(x){if(x>=1e8){return (x/1e8).toFixed(x%1e8?2:0).replace(/\.00$/,'')+'억원';}return Math.round(x/1e4).toLocaleString()+'만원';}
+function calc(){
+  var t=document.getElementById('vtype').value;
+  var small=document.getElementById('small').checked, red=document.getElementById('reduce').checked;
+  var paid=+document.getElementById('paid').value;
+  var per; // 원 단위
+  if(t==='b10'){ per=(+document.getElementById('total').value||0)*1e4*0.10; }
+  else{ per=(+document.getElementById('unit').value||0)*1e4*0.5*(+document.getElementById('area').value||0)*RATES[t]; }
+  var base5=per*5; // 감액·감경 전 5회분
+  if(small) per=per*0.5;
+  if(red) per=per*0.25;
+  var per5=per*5;
+  var amnesty;
+  if(paid>=5){amnesty=0;}
+  else{amnesty=Math.max(per5-per*paid,0);} // 근사: 기납부 = 회당×횟수
+  document.getElementById('rPer').textContent=won(per);
+  document.getElementById('rYear').textContent=won(per*2);
+  document.getElementById('rAmn').textContent=(paid>=5)?'0원 (문언상)':won(amnesty)+(small||red?' ~ '+won(base5):'');
+  document.getElementById('inA1').style.display=(t==='b10')?'none':'';
+  document.getElementById('inA2').style.display=(t==='b10')?'none':'';
+  document.getElementById('inB').style.display=(t==='b10')?'':'none';
+}
+['vtype','area','unit','total','paid','small','reduce'].forEach(function(id){document.getElementById(id).addEventListener('input',calc);document.getElementById(id).addEventListener('change',calc);});
+calc();
+
+
+// ===== 사업성 시각화 — opus55 손그림 캔버스 기법 이식 (mulberry PRNG + BOIL 끓는 선) =====
+(function(){
+var CV={ink:'#141413',bg:'#faf9f5',or:'#d97757',bl:'#6a9bcc',gr:'#788c5d',mut:'rgba(20,20,19,0.55)'};
+function mb(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var BOIL=0;
+function mk(cv){var c=document.getElementById(cv);if(!c)return null;var x=c.getContext('2d');
+  var api={c:c,x:x,W:+c.width,H:+c.height};
+  api.R=function(seed){return mb(seed*9973+BOIL*7919+13)};
+  api.rline=function(x1,y1,x2,y2,o){o=o||{};var w=o.w||3,col=o.col||CV.ink,seed=o.seed||1,j=o.j||1.8,ps=o.passes||2,al=o.alpha==null?1:o.alpha;
+    var r=api.R(seed),dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy)||1,nx=-dy/len,ny=dx/len,jj=Math.min(j,len*.08+.4);
+    x.save();x.globalAlpha*=al;x.strokeStyle=col;x.lineCap='round';
+    for(var p=0;p<ps;p++){var ax=x1+(r()-.5)*jj*2,ay=y1+(r()-.5)*jj*2,bx=x2+(r()-.5)*jj*2,by=y2+(r()-.5)*jj*2;
+      var bow=(r()-.5)*jj*2.2+(len>200?(r()-.5)*len*.012:0),mx=(ax+bx)/2+nx*bow,my=(ay+by)/2+ny*bow;
+      x.lineWidth=p?w*.55:w;x.beginPath();x.moveTo(ax,ay);x.quadraticCurveTo(mx,my,bx,by);x.stroke();}
+    x.restore();};
+  api.rrect=function(px,py,w,h,o){api.rline(px,py,px+w,py,o);api.rline(px+w,py,px+w,py+h,o);api.rline(px+w,py+h,px,py+h,o);api.rline(px,py+h,px,py,o);};
+  api.frect=function(px,py,w,h,col,o){o=o||{};var r=api.R(o.seed||5),j=o.j||1.6;x.save();x.globalAlpha*=(o.alpha==null?1:o.alpha);x.fillStyle=col;
+    x.beginPath();[[px,py],[px+w,py],[px+w,py+h],[px,py+h]].forEach(function(pt,i){var a=pt[0]+(r()-.5)*j*2,b=pt[1]+(r()-.5)*j*2;i?x.lineTo(a,b):x.moveTo(a,b);});x.closePath();x.fill();x.restore();};
+  api.hatch=function(px,py,w,h,col,o){o=o||{};var sp=o.sp||13;x.save();x.beginPath();x.rect(px,py,w,h);x.clip();x.globalAlpha*=(o.alpha||.55);
+    var L=Math.hypot(w,h);for(var k=-L,i=0;k<L;k+=sp,i++){api.rline(px+k,py+h+8,px+k+L,py+h-L+8,{w:2,col:col,seed:(o.seed||9)*31+i,passes:1,j:1.2});}x.restore();};
+  api.dash=function(x1,y1,x2,y2,o){o=o||{};var n=Math.floor(Math.hypot(x2-x1,y2-y1)/16);
+    for(var i=0;i<n;i+=2){var t1=i/n,t2=Math.min((i+1)/n,1);
+      api.rline(x1+(x2-x1)*t1,y1+(y2-y1)*t1,x1+(x2-x1)*t2,y1+(y2-y1)*t2,{w:o.w||2.5,col:o.col||CV.mut,seed:(o.seed||41)+i,passes:1});}};
+  api.txt=function(t,px,py,o){o=o||{};x.save();x.fillStyle=o.col||CV.ink;x.globalAlpha=o.alpha==null?1:o.alpha;
+    x.font=(o.wt||600)+' '+(o.sz||22)+'px Poppins, "Apple SD Gothic Neo", sans-serif';x.textAlign=o.align||'left';x.fillText(t,px,py);x.restore();};
+  return api;}
+function ease(v){return v<0?0:v>1?1:v*v*(3-2*v);}
+
+// ---- Canvas A: 일조사선 단면 비교 ----
+var A=mk('vizSun');
+// 기하: m→px 스케일. 패널당 대지 깊이 12m
+function panel(a,ox,title,isNew,t){
+  var S=26, gy=560, bx0=ox+40;                    // 대지 시작 x (북측 경계)
+  var depth=12, south=ox+40+depth*S;             // 남측 끝
+  // 지면·경계
+  a.rline(ox+10,gy,ox+40+12*S+30,gy,{w:5,seed:isNew?61:21});
+  a.dash(bx0,gy-15*S-40,bx0,gy+14,{seed:isNew?63:23});
+  a.txt('정북 인접대지 경계선',bx0-8,gy-15*S-52,{sz:15,col:CV.mut,align:'left'});
+  a.txt(title,ox+40+6*S,120,{sz:24,align:'center',col:isNew?CV.or:CV.ink});
+  // 층 데이터: [층, depth(m)] — 남측 고정, 북측으로 전개. 필로티+2~5층
+  var floors=isNew?[[1,7.92],[2,7.92],[3,7.92],[4,6.0],[5,6.0]]:[[1,7.92],[2,7.92],[3,7.92],[4,5.0],[5,3.5]];
+  var n=Math.floor(t*7);                          // 시차 등장
+  for(var i=0;i<floors.length&&i<n;i++){
+    var f=floors[i][0],d=floors[i][1],fy=gy-f*3*S,fh=3*S;
+    var fx=south-1*S-d*S;                         // 남측이격 1m
+    if(f===1){ // 필로티: 기둥만
+      a.rline(fx+8,gy,fx+8,gy-fh+6,{w:6,seed:100+i});a.rline(south-1*S-8,gy,south-1*S-8,gy-fh+6,{w:6,seed:101+i});
+      a.txt('필로티 주차',fx+d*S/2-40,gy-28,{sz:14,col:CV.mut});
+    }else{
+      a.frect(fx,fy,d*S,fh,isNew?'rgba(217,119,87,0.10)':'rgba(20,20,19,0.05)',{seed:110+i});
+      a.rrect(fx,fy,d*S,fh,{w:4,seed:120+i*7+(isNew?300:0)});
+      a.txt(f+'층',fx+10,fy+fh/2+7,{sz:16,col:CV.mut,wt:500});
+    }
+  }
+  // 일조 이격선 (envelope) — 등장 후반
+  if(t>0.72){
+    var col=isNew?CV.gr:CV.or;
+    if(isNew){ // 1.5m까지 10m 수직 → 5m 수직 17m까지
+      a.rline(bx0+1.5*S,gy,bx0+1.5*S,gy-10*S,{w:4,col:col,seed:77});
+      a.rline(bx0+1.5*S,gy-10*S,bx0+5*S,gy-10*S,{w:4,col:col,seed:78});
+      a.rline(bx0+5*S,gy-10*S,bx0+5*S,gy-15*S-20,{w:4,col:col,seed:79});
+      a.txt('이격 5m 고정 (10~17m)',bx0+5*S+10,gy-13*S,{sz:15,col:col});
+    }else{ // 1.5m 수직 10m → 사선 h/2
+      a.rline(bx0+1.5*S,gy,bx0+1.5*S,gy-10*S,{w:4,col:col,seed:71});
+      a.rline(bx0+1.5*S,gy-10*S,bx0+8*S,gy-16*S,{w:4,col:col,seed:72});
+      a.txt('h/2 사선',bx0+5.6*S,gy-13.4*S,{sz:15,col:col});
+      a.txt('5층 이격 7.5m',bx0+1.2*S,gy-15.6*S,{sz:15,col:col});
+    }
+  }
+  // 신법 패널: 회복 면적 빗금 (구법 대비)
+  if(isNew&&t>0.85){
+    var y4=gy-4*3*S, y3=gy-3*3*S;
+    a.hatch(south-1*S-6*S,y4,1*S,3*S,CV.or,{seed:91});                  // 4층 +1m
+    a.hatch(south-1*S-6*S,y4+0,0,0,CV.or,{});
+    a.hatch(south-1*S-6*S,gy-5*3*S,2.5*S,3*S,CV.or,{seed:92});          // 5층 +2.5m
+    a.txt('+10㎡',south-1*S-6*S-64,y4+2*S-14,{sz:15,col:CV.or});
+    a.txt('+25㎡',south-1*S-6*S-64,gy-5*3*S+2*S-14,{sz:15,col:CV.or});
+  }
+  // 태양
+  var sx=ox+18,sy=150;
+  a.rline(sx-10,sy,sx+10,sy,{w:3,col:CV.or,seed:131,passes:1});
+  for(var r2=0;r2<6;r2++){var an=r2/6*Math.PI*2;a.rline(sx+Math.cos(an)*16,sy+Math.sin(an)*16,sx+Math.cos(an)*24,sy+Math.sin(an)*24,{w:2.5,col:CV.or,seed:140+r2,passes:1});}
+}
+// ---- Canvas B: 층수 스택 ----
+var B=mk('vizStack');
+function stack(b,ox,base,floors,extra,label,badge,t){
+  var S=30,w=150,gy=560;
+  b.rline(ox-20,gy,ox+w+40,gy,{w:5,seed:211});
+  var total=floors+ (t>0.55?1:0);
+  for(var i=0;i<floors;i++){
+    b.frect(ox,gy-(i+1)*S*1.4,w,S*1.4,'rgba(20,20,19,0.05)',{seed:220+i});
+    b.rrect(ox,gy-(i+1)*S*1.4,w,S*1.4,{w:3.5,seed:230+i});
+  }
+  if(t>0.55){ // +1층 낙하
+    var k=ease((t-0.55)/0.18), yF=gy-(floors+1)*S*1.4, yStart=yF-140;
+    var y=yStart+(yF-yStart)*k;
+    b.frect(ox,y,w,S*1.4,'rgba(217,119,87,0.18)',{seed:240});
+    b.rrect(ox,y,w,S*1.4,{w:4,seed:241,col:CV.or});
+    b.txt('+1',ox+w/2-12,y+S*0.95,{sz:20,col:CV.or});
+  }
+  b.txt(label,ox+w/2,gy+34,{sz:17,align:'center'});
+  if(t>0.8) b.txt(badge,ox+w/2,gy-(floors+1)*S*1.4-160+130,{sz:17,align:'center',col:CV.or});
+}
+var T0=performance.now();
+function loop(now){
+  var t=((now-T0)/1000)%9/9;                      // 9초 루프
+  BOIL=Math.floor(now/130);                        // 끓는 선
+  if(A){A.x.clearRect(0,0,A.W,A.H);A.x.fillStyle=CV.bg;A.x.fillRect(0,0,A.W,A.H);
+    panel(A,10,'구법 (현행)',false,ease(t/0.95));
+    panel(A,530,'신법 (2026.11.12~)',true,ease(t/0.95));}
+  if(B){B.x.clearRect(0,0,B.W,B.H);B.x.fillStyle=CV.bg;B.x.fillRect(0,0,B.W,B.H);
+    B.txt('층수 완화',B.W/2,110,{sz:24,align:'center'});
+    stack(B,110,0,3,1,'다가구 3→4개층','임대면적 +33%',ease(t/0.9));
+    stack(B,450,0,5,1,'단지형 다세대 5→6개층','세대 +20%',ease(Math.max(0,(t-0.12))/0.9));}
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+})();
+
+// checklist counter
+var boxes=document.querySelectorAll('.check input');
+boxes.forEach(function(b){b.addEventListener('change',function(){document.getElementById('ckCount').textContent=document.querySelectorAll('.check input:checked').length+'/8';});});
+</script>
