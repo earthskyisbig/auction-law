@@ -49,7 +49,7 @@ law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조
 | 25 | 유체동산(이삿짐) 처리 절차 | 명도절차 | [25-yuchedongsan-cheori.md](auction/25-yuchedongsan-cheori.md) | 완료 | 2026-08-10 |
 | 26 | 상가건물 임대차보호법상 경매 시 임차권 소멸/인수 | 명도절차 | [26-sangga-imdaeeup-somyeol.md](auction/26-sangga-imdaeeup-somyeol.md) | 완료 | 2026-08-10 |
 | 27 | 위반건축물과 이행강제금 (낙찰자 부담 구조·가중 제외·75% 감경·무기한 반복 + **별표15 요율표·시가표준액 산정체계·두 트랙 계산예시**) | 위반건축물 | [27-wiban-ihaenggangjegeum.md](auction/27-wiban-ihaenggangjegeum.md) | 완료 (citation-verifier PASS, **수치 전건 검증**) | 2026-09-18 |
-| 28 | **특정건축물 정리에 관한 특별조치법 — 양성화** (2026.12.17 시행·18개월 한시법) | 위반건축물 | [28-teukjo-beop-yangseonghwa.md](auction/28-teukjo-beop-yangseonghwa.md) | 완료 (citation-verifier PASS) **⚠시행 전·시행령 미제정(§4 신고기간 미정) — 3개월 주기 재검증** | 2026-09-18 |
+| 28 | **특정건축물 정리에 관한 특별조치법 — 양성화** (2026.12.17 시행·18개월 한시법) | 위반건축물 | [28-teukjo-beop-yangseonghwa.md](auction/28-teukjo-beop-yangseonghwa.md) | 완료 (citation-verifier PASS) **⚠시행 전·시행령 미제정(§4 신고기간 미정) — 3개월 주기 재검증** · **+10절 국토부 업무처리 가이드(2026.06 초안) 운용 기준·문답 26개·가이드↔법문 충돌표** | 2026-09-26 |
 | 29 | 위반건축물의 철거(행정대집행) 리스크 — 합법화 가능성이 분기점 | 위반건축물 | [29-cheolgeo-daejiphaeng.md](auction/29-cheolgeo-daejiphaeng.md) | 완료 (citation-verifier PASS, 2022두35008 반대 흐름 반영) | 2026-09-18 |
 
 ## 경매 3차 확장 후보 (아직 조사 안 함)
