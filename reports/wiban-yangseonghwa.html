@@ -124,6 +124,18 @@ ul.tight li{margin:6px 0;font-size:0.93rem}
 .imp td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right}
 .imp tr:last-child td{border-bottom:none}
 .imp .hl{color:var(--orange);font-weight:600;font-family:var(--heading)}
+.mtx{width:100%;border-collapse:collapse;font-size:0.88rem}
+.mtx th{font-family:var(--label);font-size:0.66rem;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:var(--mute);text-align:left;padding:10px;border-bottom:1px solid var(--line)}
+.mtx td{padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.mtx td:first-child{font-family:var(--heading);font-weight:600;white-space:nowrap}
+.flow{counter-reset:fl;display:flex;flex-direction:column;gap:10px}
+.flow .st{background:var(--light);border:1px solid var(--line);border-radius:14px;padding:14px 18px;font-size:0.92rem}
+.flow .st b.q{font-family:var(--heading)}
+.flow .st .y{color:var(--orange);font-weight:600}
+.myth{background:var(--light);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+.myth .m{font-family:var(--heading);font-weight:600;text-decoration:line-through;text-decoration-color:rgba(217,119,87,0.6);color:var(--mute)}
+.myth .f{margin:8px 0 4px;font-size:0.93rem}
+.myth .src{font-size:0.78rem;color:var(--mute)}
 .board{background:var(--light);border:2px solid var(--orange);border-radius:22px;padding:8px 26px 20px;box-shadow:0 20px 44px -28px rgba(217,119,87,0.4)}
 .board table{width:100%;border-collapse:collapse;font-size:0.93rem}
 .board th{font-family:var(--label);font-size:0.68rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--mute);text-align:left;padding:12px 10px;border-bottom:1px solid var(--line)}
@@ -138,7 +150,7 @@ footer{background:var(--dark);color:var(--on-dark-mute);padding:50px 0;font-size
 
 <div class="progress" id="progress"></div>
 <nav class="topnav" id="topnav"><div class="links">
-  <a href="#update">입법 업데이트</a><a href="#impact">사업성</a><a href="#why">투자 논리</a><a href="#target">대상 판별</a><a href="#guide">가이드</a><a href="#risk-core">이행강제금</a><a href="#calc">계산기</a><a href="#cases">사용 예</a><a href="#check">체크리스트</a><a href="#risks">리스크</a>
+  <a href="#update">입법 업데이트</a><a href="#impact">사업성</a><a href="#why">투자 논리</a><a href="#myths">통념 5가지</a><a href="#target">대상 판별</a><a href="#guide">가이드</a><a href="#risk-core">이행강제금</a><a href="#demolish">철거</a><a href="#calc">계산기</a><a href="#matrix">유형별</a><a href="#cases">사용 예</a><a href="#check">체크리스트</a><a href="#pricing">가격 반영</a><a href="#risks">리스크</a>
 </div></nav>
 
 <!-- HERO -->
@@ -146,7 +158,7 @@ footer{background:var(--dark);color:var(--on-dark-mute);padding:50px 0;font-size
   <div class="blob" style="width:420px;height:420px;background:rgba(217,119,87,0.15);top:-80px;left:8%;animation:driftA 17s ease-in-out infinite"></div>
   <div class="blob" style="width:340px;height:340px;background:rgba(120,140,93,0.13);bottom:-40px;right:10%;animation:driftB 20s ease-in-out infinite"></div>
   <div class="wrap" style="position:relative">
-    <span class="eyebrow">auction-law 투자 브리핑 · 2026-09-18 작성 · 2026-09-26 국토부 가이드 반영 갱신 · 검증 게이트 통과본</span>
+    <span class="eyebrow">auction-law 투자 브리핑 · 2026-09-18 작성 · 2026-09-26 경매 전략 가이드 통합·국토부 가이드 반영 · 검증 게이트 통과본</span>
     <h1>12년 만의 위반건축물 양성화 창구,<br>경매 다세대의 기회로</h1>
     <p class="lead">「특정건축물 정리에 관한 특별조치법」(법률 제21820호)이 2026년 12월 17일 시행됩니다.<br>위반 리스크로 유찰된 다세대를 "계산 가능한 비용"으로 합법화하는 18개월의 창.</p>
     <div class="timeline">
@@ -259,6 +271,22 @@ footer{background:var(--dark);color:var(--on-dark-mute);padding:50px 0;font-size
   </div>
 </section>
 
+<!-- MYTHS -->
+<section id="myths" style="padding-top:30px">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">Myth vs Fact</span>
+      <h2>시장의 통념 5개 — 전부 틀렸다</h2>
+      <p>위반건축물 경매의 통념 상당수는 폐지된 옛 법에 근거합니다. 각 사실은 law.go.kr 원문 조회와 독립 검증을 거쳤습니다.</p></div>
+    <div class="grid2 reveal">
+      <div class="myth"><div class="m">"85㎡ 이하 주거용은 이행강제금 5회면 끝난다"</div><p class="f">그 5회 상한은 <b>2019.4.23. 법률 제16380호로 폐지</b>된 옛 조항이다. 현행 §80⑤에는 총 부과횟수 상한이 없고, 위반이 계속되는 한 연 2회 이내로 <b>무기한 반복</b>된다.</p><div class="src">헌재 2020헌바558(폐지 사실 확인) · 2009헌바140(상한 없음 합헌)</div></div>
+      <div class="myth"><div class="m">"오래 방치된 위반은 시간이 지나 소멸했다"</div><p class="f">건축법에는 이행강제금의 <b>제척기간·소멸시효 조항이 없고</b> 그 부작위는 합헌이다. 위법 상태가 계속되는 한 새 시정명령·새 부과가 언제든 시작된다. 단 이미 발생한 개별 부과권은 5년 소멸시효.</p><div class="src">헌재 2020헌바501 · 법제처 06-0152(현행 근거 지방재정법 §82①)</div></div>
+      <div class="myth"><div class="m">"주택은 영업허가 제한과 무관하다"</div><p class="f">§79②의 허가·면허 제한에서 주택은 자동 예외가 아니다 — "허가권자가 기간을 정해 사용을 허용한 주택"만 예외. 게다가 <b>위반과 무관한 임차인·위반 없는 층에까지</b> 미친다. 옥탑 하나로 건물 전체 상가 임대가 막힐 수 있다.</p><div class="src">법제처 16-0663 · 08-0209</div></div>
+      <div class="myth"><div class="m">"위반건축물엔 임차인 보호가 없으니 명도가 쉽다"</div><p class="f">미등기·무허가 건물에도 <b>주택임대차보호법이 적용</b>되고, 미등기 주택 임차인은 대지 환가대금에서도 우선변제받는다. 쪼개기 물건은 세대 수 × 보증금 인수가 낙찰가를 넘을 수 있다 — 권리분석 생략 금지.</p><div class="src">대법원 2004다26133 전원합의체</div></div>
+      <div class="myth" style="grid-column:1/-1"><div class="m">"대장에 위반 표기가 없으면 안전한 물건이다"</div><p class="f">대장 기재는 적법성을 만들지 않는다 — 허위 준공검사필증으로 대장에 적법하게 올라가 있어도 무단증축 부분의 준공처분은 <b>부존재</b>다. 확인할 것은 표기가 아니라 <b>건축물현황도 원도면과 실제 현황의 대조</b>다. 반대로 낙찰 후 대장이 불리하게 정정되면 다툴 길은 있다(대장 작성거부·직권말소는 처분).</p><div class="src">대법원 89누7955 · 2007두17359 · 2008두22655 · 낙찰자는 잔금 전에도 평면도 발급 가능(법제처 12-0577)</div></div>
+    </div>
+  </div>
+</section>
+
 <!-- TARGET -->
 <section class="bg-soft" id="target">
   <div class="wrap">
@@ -311,12 +339,27 @@ footer{background:var(--dark);color:var(--on-dark-mute);padding:50px 0;font-size
     <div class="sec-head reveal"><span class="eyebrow on-dark">낙찰자가 반드시 알아야 할 구조</span>
       <h2>이행강제금 — "승계는 없다, 그러나 새로 시작된다"</h2></div>
     <div class="grid2 reveal">
-      <div class="dk"><div class="t">승계 X</div><p>전 소유자에게 부과된 이행강제금은 <b>일신전속</b> — 낙찰자에게 넘어오지 않는다 (대법원 2006마470).</p></div>
+      <div class="dk"><div class="t">승계 X (반대해석 🟡)</div><p>징수 상대방은 "부과처분을 받은 자"(법제처 07-0280)이고, 공법상 체납액 승계에는 명문 규정이 필요한데(14-0478) 건축법엔 없다 → <b>종전 소유자 체납분은 낙찰자에게 넘어오지 않는다.</b> 단 정면 판례는 없다 — 입찰 전 <b>부과처분 명의인</b>과 <b>납부고지서 송달 여부</b>(미송달 처분은 효력 없음, 06-0151)를 확인.</p></div>
       <div class="dk"><div class="t">신규 부과 O</div><p>낙찰자는 "소유자"로서 <b>새 시정명령 → 새 부과 사이클</b>의 대상. 고의·과실 불요 (대법원 2012두20137 → 2026.1.8. 2022두48653).</p></div>
       <div class="dk"><div class="t">상한 없음 → 더 강화</div><p>2019년 개정으로 총 5회 상한 삭제 — <b>시정할 때까지 연 1~2회 무한 반복</b>. 나아가 2026.8.11 공포 개정으로 <b>2027.2.12부터 반복 징수가 기속화되고 다음 연도부터 금액 가중 의무</b>(신규 시정명령분 — 경과조치 있음).</p></div>
-      <div class="dk"><div class="t">낙찰자 우대 2개</div><p>소유권 변경 시 ①영리·상습 <b>가중 배제</b> ②<b>75% 감경 가능</b>(재량 — 조례 기간 내 시정 조건).</p></div>
+      <div class="dk"><div class="t">낙찰자 우대 2개 — 단, 검증 전</div><p>소유권 변경 시 ①영리·상습 <b>가중 배제</b>(영 §115의3② 단서) ②<b>75% 감경 가능</b>(§115의4①1호, 재량 + 조례 기간 내 시정 조건). ⚠ <b>60㎡ 이하 주거용이면 감경은 75%가 아니라 "1/2 감액 금액의 50%"</b> — 곱하지 않고 비율이 바뀐다(§115의4② 단서). 두 조항 모두 해석례·판례 전무 → 감경 있음/없음을 범위로 계산.</p></div>
+      <div class="dk"><div class="t">협상은 성립하지 않는다</div><p>허가권자에게 부과금액·감경비율을 달리 정할 재량이 없다 — 법정 금액 이하로 부과할 수도, 법정 비율을 넘겨 감경할 수도 없다(법제처 25-0146). 감경 사유가 여럿이어도 <b>중첩 불가</b>(18-0466). 뒤집어 말하면 <b>조례와 시가표준액만 확보하면 금액은 예측 가능</b>하다.</p></div>
+      <div class="dk"><div class="t">가만히 있어도 위반이 갱신된다</div><p>무단 용도변경 건물은 <b>그대로 사용하는 행위 자체가 위반의 계속</b>이다(대법원 2017두30764). 근생빌라를 주거로 쓰는 한 "동결"이 아니라 매일 위반을 갱신하는 것. 형사처벌 대상은 문언상 "건축주 및 공사시공자"라 낙찰자는 원칙적으로 제외되나, 용도변경 계속 사용자의 형사책임은 열린 쟁점이다.</p></div>
     </div>
     <div class="quote reveal">실제 경매 낙찰자의 항변과 결과 — <b>"위반사실은 알았지만 이행강제금이 2천4백만원이나 될 것은 몰랐다"</b> → 기각. 낙찰 10년 전 위반이라도 새 소유자에게 새 사이클이 적법하게 시작됐다 (경기도행심위 2022경기행심1486).</div>
+  </div>
+</section>
+
+<!-- DEMOLISH -->
+<section id="demolish">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">철거(강제집행) 리스크</span>
+      <h2>분기점은 "합법화 가능성"이다</h2>
+      <p>진짜 리스크는 철거가 아니라 무기한 반복되는 이행강제금입니다 — 단, 합법화가 원천 봉쇄된 구역에서는 철거가 현실이 됩니다.</p></div>
+    <div class="grid2 reveal">
+      <div class="card"><span class="pill neutral">통상의 위반 — 철거까지 가기 어렵다</span><p style="margin:10px 0 0">행정대집행은 "다른 수단으로 곤란 + 방치가 심히 공익을 해할 것"을 <b>행정청이 주장·입증</b>해야 하고, 통상의 구조변경 철거는 재량권 일탈로 판단된 선례가 있다.</p><p style="font-size:0.8rem;color:var(--mute)">행정대집행법 §2 · 대법원 96누8086</p></div>
+      <div class="card" style="border-color:rgba(217,119,87,0.5)"><span class="pill warn">합법화 불가 구역 — 철거가 인정된다</span><p style="margin:10px 0 0">개발제한구역·도시공원처럼 양성화가 봉쇄된 구역에서는 대집행이 인정됐고(98두3112), 2022년 GB 무단 형질변경 사건에서 대법원은 재량권 일탈을 인정한 원심을 파기했다(2022두35008 — 시정명령은 재량행위). <b>철거 비용은 그 시점의 소유자(낙찰자)에게서 징수</b>된다.</p><p style="font-size:0.8rem;color:var(--mute)">대법원 98두3112 · 2022두35008</p></div>
+    </div>
   </div>
 </section>
 
@@ -325,7 +368,12 @@ footer{background:var(--dark);color:var(--on-dark-mute);padding:50px 0;font-size
   <div class="wrap">
     <div class="sec-head reveal"><span class="eyebrow">시뮬레이터</span>
       <h2>이행강제금 · 양성화 비용 계산기</h2>
-      <p>검증된 산식(건축법 §80·시행령 §115의3·별표 15) 그대로 계산합니다. 물건 검토 때 투자자와 함께 돌려보세요.</p></div>
+      <p>검증된 산식(건축법 §80·시행령 §115의3·§115의4·별표 15) 그대로 계산합니다. 물건 검토 때 투자자와 함께 돌려보세요.</p></div>
+    <div class="ex reveal" style="margin-bottom:16px">
+      <span class="pill neutral">입력값 산정 — ㎡당 시가표준액</span>
+      <p style="margin:10px 0 6px;font-size:0.92rem">㎡당 시가표준액 = 건물신축가격기준액(2026년 주거용 <b>860,000원/㎡</b>, 행안부고시 제2025-82호) × 구조지수(철근콘크리트 1.00) × 용도지수(다세대·단독·다가구 0.91) × 위치지수(개별공시지가 구간별 0.80~1.69) × 잔가율(1 − 연간상각률 × 경과연수, 최종잔가율 하한) — <b>㎡당 금액 1,000원 미만 절사</b>(행안부 훈령 제417호).</p>
+      <p style="margin:0;font-size:0.9rem"><b>트랙 판별이 5배를 가른다</b>: 같은 25.47㎡(㎡당 715,000원)라도 <b>무허가 증축(1호)</b>이면 715,000 × 25.47 × 50% × 100% ≈ <b>회당 911만원</b>, <b>무단 용도변경(2호)</b>이면 위반부분 시가표준액 × 10% ≈ <b>회당 182만원</b>. 시중 강의자료에서 무허가 증축에 2호 요율(10%)을 적용해 5배 과소 계산한 실례가 있다. 함정 둘 더: "기타 주거용 0.87"은 농어가·광산주택 한정, 구조지수 별표와 잔가율 별표의 구조 분류는 서로 다르다.</p>
+    </div>
     <div class="calc reveal">
       <div class="cgrid">
         <div><label>위반 유형</label>
@@ -343,7 +391,7 @@ footer{background:var(--dark);color:var(--on-dark-mute);padding:50px 0;font-size
           <select id="paid"><option value="0">없음 (과태료 전액)</option><option value="1">1회</option><option value="2">2회</option><option value="3">3회</option><option value="4">4회</option><option value="5">5회 이상 (과태료 없음)</option></select></div>
         <div style="display:flex;flex-direction:column;gap:10px;justify-content:end">
           <label class="chk"><input type="checkbox" id="small"> 세대 전용 60㎡ 이하 (조례 1/2 감액 가정)</label>
-          <label class="chk"><input type="checkbox" id="reduce"> 소유권 변경 75% 감경 반영 (재량·조건부)</label>
+          <label class="chk"><input type="checkbox" id="reduce"> 소유권 변경 감경 반영 (75% · 60㎡ 이하 체크 시 1/2 금액의 50%로 치환 — 재량·조건부)</label>
         </div>
       </div>
       <div class="cres">
@@ -351,7 +399,7 @@ footer{background:var(--dark);color:var(--on-dark-mute);padding:50px 0;font-size
         <div class="r"><div class="rv" id="rYear">—</div><div class="rk">연간 노출액 (연 2회 가정)</div></div>
         <div class="r hot"><div class="rv" id="rAmn">—</div><div class="rk">양성화 과태료 (이행강제금 5회분 기준)</div></div>
       </div>
-      <p class="cnote">※ 가정·한계: ①기납부 차감은 "5회 미만 부과" 시 <b>기납부 금액</b> 기준(§9②)인데 여기서는 회당 금액×횟수로 근사 ②60㎡ 감액·감경이 §9 과태료 산정에 반영되는지는 <b>시행령 미제정으로 미확정</b> — 본 계산기는 감액·감경을 이행강제금에는 반영하되 과태료는 감액 전·후 병기 ③조례로 비율(60%까지)·횟수·감경조건이 달라짐 → 물건 소재지 건축조례 확인 필수 ④세대증가·근생형은 피난·소방 보강비 + 주차장 비용 별도 ⑤<b>부과 이력이 있어도 이후 추가 위반이 있으면 5회분 전액</b>(§9①2호) ⑥국토부 가이드 Q21 문구는 §9②와 충돌 — 본 계산은 법문 기준.</p>
+      <p class="cnote">※ 가정·한계: ①기납부 차감은 "5회 미만 부과" 시 <b>기납부 금액</b> 기준(§9②)인데 여기서는 회당 금액×횟수로 근사 ②60㎡ 감액·감경이 §9 과태료 산정에 반영되는지는 <b>시행령 미제정으로 미확정</b> — 본 계산기는 감액·감경을 이행강제금에는 반영하되 과태료는 감액 전·후 병기 ③조례로 비율(60%까지)·횟수·감경조건이 달라짐 → 물건 소재지 건축조례 확인 필수 ④세대증가·근생형은 피난·소방 보강비 + 주차장 비용 별도 ⑤<b>부과 이력이 있어도 이후 추가 위반이 있으면 5회분 전액</b>(§9①2호) ⑥국토부 가이드 Q21 문구는 §9②와 충돌 — 본 계산은 법문 기준 ⑦감경은 <b>중첩 불가</b>(18-0466) — 60㎡ 이하면 1/2 감액 금액의 50%(최종 원금의 25%)이지 12.5%가 아니다.</p>
     </div>
   </div>
 </section>
@@ -402,21 +450,44 @@ footer{background:var(--dark);color:var(--on-dark-mute);padding:50px 0;font-size
   </div>
 </section>
 
+<!-- MATRIX -->
+<section id="matrix">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">유형별 리스크 매트릭스</span>
+      <h2>물건 유형마다 답이 다르다</h2>
+      <p>출발점용 일반 등급입니다 — 소재지·용도지역·조례·위반 규모에 따라 달라집니다. 국토부 가이드(2026.06) 판단을 함께 반영했습니다.</p></div>
+    <div class="ex reveal" style="overflow-x:auto">
+      <table class="mtx">
+        <tr><th>유형</th><th>양성화(특조법)</th><th>철거 리스크</th><th>등급</th><th>권장 전략</th></tr>
+        <tr><td>① 경미 증축<br><span style="font-weight:400;color:var(--mute)">옥탑·베란다·최상층 발코니</span></td><td>가능 — 발코니 일조 위반도 원칙 가능(가이드 Q8, 심의)</td><td>낮음</td><td>낮음~중간</td><td><b>시정 후 표기 말소</b>가 최적일 때가 많다. 단 §79② 영업 제한은 면적에 비례하지 않음 — 상가 혼합 건물 주의</td></tr>
+        <tr><td>② 근생→주거<br><span style="font-weight:400;color:var(--mute)">근생빌라</span></td><td><b>★명시 포함</b>(§3①3호, 2023.12.31 이전부터 주거 사용)</td><td>낮음</td><td>중간</td><td><b>양성화 최우선</b> — 최대 수혜 유형. 피난·내화·소방 공사비 + 주차장 비용 견적을 입찰 전 확보. 현상 유지는 "사용 자체가 위반"</td></tr>
+        <tr><td>③ 쪼개기·대수선<br><span style="font-weight:400;color:var(--mute)">세대·가구수 증가·분할</span></td><td>가능(가이드 Q9·Q10·Q16) — 세대별 85㎡ 이하·피난·소방·주차장</td><td>낮음~중간</td><td>중간~높음</td><td>낙찰자 이점(가중 제외)이 가장 큰 유형이나 <b>최대 리스크는 임차인</b> — 세대 수 × 보증금 권리분석 최우선</td></tr>
+        <tr><td>④ 무허가 신축</td><td>조건부 — 나대지 무허가 신축도 대상(가이드 Q25)이나 <b>대지 권원·도로 3m(또는 소방 3요건)</b> 관문</td><td>중간~높음</td><td>높음</td><td>대지 권원 확인이 선결. <b>타인 토지·인접부지 침범은 원칙 회피</b>(Q22). 요율 최고(100%)</td></tr>
+        <tr><td>⑤ GB·공원·정비구역 등</td><td><b>불가</b>(§3② 배제 — GB는 지정 후 대수선 이력이 있으면 배제, 14-0417)</td><td><b>★높음</b></td><td><b>★최고</b></td><td><b>원칙 입찰 회피.</b> 합법화 불가 = 철거 인정 구간(98두3112·2022두35008). 대지 가치만으로 채산이 서는 경우만 예외</td></tr>
+      </table>
+      <p style="font-size:0.84rem;color:var(--mute);margin:12px 0 0">등급을 실제로 움직이는 3개 변수: ①§3② 배제구역 여부(양성화와 철거 리스크를 동시에 판정) ②<b>소재지 건축조례</b>(가중·감경 기간·부과 횟수·비율 하향이 전부 조례 사항) ③임차인 현황.</p>
+    </div>
+  </div>
+</section>
+
 <!-- CHECKLIST -->
 <section id="check">
   <div class="wrap">
     <div class="sec-head reveal"><span class="eyebrow">실사</span>
-      <h2>입찰 전 체크리스트 <span style="font-size:0.7em;color:var(--orange)" id="ckCount">0/9</span></h2></div>
+      <h2>입찰 전 체크리스트 <span style="font-size:0.7em;color:var(--orange)" id="ckCount">0/12</span></h2></div>
     <div class="reveal">
-      <label class="check"><input type="checkbox"><span><b>건축물대장</b> — 위반표시·위반내용·시정명령 이력 (위반 유형이 산식을 결정: 무허가 100% vs 무신고 70% vs 용도변경 10%)</span></label>
-      <label class="check"><input type="checkbox"><span><b>이행강제금 부과 이력</b> 조회(허가권자 건축과) — 부과 횟수가 과태료를 좌우 (5회↑ = 과태료 없음 후보)</span></label>
+      <label class="check"><input type="checkbox"><span><b>건축물대장 — 표기 유무가 아니라 "변동사항란"</b>을 본다: 위반일자·위반내용·시정명령 이력. 위반 유형이 산식을 결정(무허가 100% vs 무신고 70% vs 용도변경 10%). 표기가 없어도 안전하지 않다(89누7955)</span></label>
+      <label class="check"><input type="checkbox"><span><b>구청 건축과 직접 확인</b> — 최초 시정명령일 / 부과 <b>횟수·총액·처분 명의인</b> / 체납액 + <b>납부고지서 송달 여부</b>(미송달 처분 무효, 06-0151) / 가중 적용 여부 / 대집행 계고 이력. 부과 횟수가 과태료를 좌우(5회↑ = 과태료 없음 후보)</span></label>
       <label class="check"><input type="checkbox"><span><b>2023.12.31 이전 완공 입증자료</b> — 항공사진·재산세 부과 이력·전입 기록</span></label>
       <label class="check"><input type="checkbox"><span><b>세대당 전용 85㎡ 이하</b> 여부 + 60㎡ 이하 감액 해당 여부</span></label>
-      <label class="check"><input type="checkbox"><span><b>정비구역·GB·계획시설 부지</b> 여부 — 배제 구역이면 양성화 불가 방향</span></label>
+      <label class="check"><input type="checkbox"><span><b>토지이용계획확인원</b> — §3② 배제구역 8종 전수(정비구역·GB·계획시설·보전산지 등). GB는 지정 후 대수선 이력까지(14-0417)</span></label>
+      <label class="check"><input type="checkbox"><span><b>소재지 건축조례</b> — 가중 비율·감경 적용기간·연간 부과 횟수(최대 2회)·비율 하향(최저 60%)·60㎡ 이하 1/2 감액 금액. 조례 없이 이행강제금을 추정하지 말 것</span></label>
       <label class="check"><input type="checkbox"><span><b>대지권·대지 소유관계</b> — 대지권 미등기·타인 대지면 사용승낙 관문(§6①1호)</span></label>
       <label class="check"><input type="checkbox"><span><b>근생·세대증가형이면 보강비 견적</b> — 피난·내화·소방 + 주차장 설치/비용</span></label>
       <label class="check"><input type="checkbox"><span><b>세대별 전용면적표·측량</b> — 85㎡ 초과 세대 확인(세대별 판단), 인접부지 침범 여부, 공용부분 증축이면 집합건물법 결의록</span></label>
-      <label class="check"><input type="checkbox"><span><b>낙찰 후 대금 납부 전 도면 열람</b>으로 실제 구조 대조 (법제처 12-0577) — 매각불허가 구제는 기대하지 말 것</span></label>
+      <label class="check"><input type="checkbox"><span><b>건축물현황도 원도면 vs 현황 대조</b> — 낙찰자는 잔금 전에도 소유자 동의 없이 평면도 발급 가능(법제처 12-0577). 증축·쪼개기·용도변경 범위를 도면으로 확정</span></label>
+      <label class="check"><input type="checkbox"><span><b>권리분석 생략 금지</b> — 미등기·무허가에도 주임법 적용(2004다26133). 쪼개기는 실제 세대 수 × 보증금 총액이 낙찰가를 넘을 수 있다</span></label>
+      <label class="check"><input type="checkbox"><span><b>매각물건명세서·감정평가서</b> — 위반 부분 평가 포함 여부. 위반건축물은 법정 기재사항이 아니고(민집법 §105①), 미기재 이유 매각불허가는 "매수희망자 의사·가격 결정 영향" 기준(2023마7896)을 개별 입증해야 한다 — 기대하지 말 것</span></label>
     </div>
   </div>
 </section>
@@ -424,7 +495,7 @@ footer{background:var(--dark);color:var(--on-dark-mute);padding:50px 0;font-size
 <!-- PATHS -->
 <section class="bg-soft">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="eyebrow">낙찰 후 경로</span><h2>세 갈래 — 그리고 왜 A인가</h2></div>
+    <div class="sec-head reveal" id="pricing"><span class="eyebrow">낙찰 후 경로 · 가격 반영</span><h2>세 갈래 — 그리고 비용의 최솟값을 차감한다</h2></div>
     <div class="compare reveal">
       <div class="emphasis"><span class="pill active">A. 양성화</span>
         <ul class="tight"><li>12.17 이후 신고 → 30일 내 승인(기속)</li><li>비용 = 과태료 5회분±차감 + 보강비</li><li>위반표시 말소 → 합법 임대·매도</li><li>⚠ 건축법 치유만 — 타법 위반은 잔존</li></ul></div>
@@ -433,19 +504,38 @@ footer{background:var(--dark);color:var(--on-dark-mute);padding:50px 0;font-size
       <div class="muted"><span class="pill neutral">C. 보유·감내</span>
         <ul class="tight"><li>상한 없는 반복 부과</li><li>위반상태 사용 자체가 위법 계속(2017두30764)</li><li><b>2027.2.12부터</b>: 정기조사 연 1회 의무 + 기속 징수 + 연도별 금액 가중 (신규 시정명령분)</li><li>임대 목적이면 감경 통로 협소 — <b>비추천</b></li></ul></div>
     </div>
+    <div class="grid2 reveal" style="margin-top:18px">
+      <div class="ex"><span class="pill active">가격 반영식</span>
+        <ul class="tight">
+          <li><b>(A) 현상 유지</b> = 회당 이행강제금 × 연간 횟수(조례, 최대 2회) × 예상 보유 연수 — 총 횟수 상한 없음. 감경 있음/없음을 범위로</li>
+          <li><b>(B) 양성화</b> = §9 과태료(5회분 전액 / 5회 미만 부과 시 기납부 차감 / 5회↑ 없음) + 체납 정리 + 주차장 + 설계·조사비 + 피난·내화·소방 공사비</li>
+          <li><b>(C) 원상복구</b> = 철거·복구 견적 + 임대 면적·세대 감소의 현재가치 (시정하면 신규 부과 중지, 기부과분은 남음 — §80⑥)</li>
+        </ul>
+        <div class="verdict"><b>판정</b>: 낙찰가 상한에서 <b>min(A, B, C)</b>를 차감한다. A가 B를 넘는 순간부터 양성화가 지배전략.</div>
+      </div>
+      <div class="ex"><span class="pill active">전략 선택 흐름</span>
+        <div class="flow" style="margin-top:10px">
+          <div class="st"><b class="q">1) §3② 배제구역인가?</b> (GB는 지정 후 대수선까지) <span class="y">예 →</span> 철거 전제 채산 또는 입찰 회피 [유형 ⑤]</div>
+          <div class="st"><b class="q">2) 원상복구 비용이 낮고 수익 손실이 작은가?</b> <span class="y">예 →</span> 시정 후 표기 말소 [주로 ①] — 신규 부과 즉시 중지 + 표기 삭제 기속</div>
+          <div class="st"><b class="q">3) 특조법 게이트 통과 + 신고기간 내인가?</b> <span class="y">예 →</span> <b>양성화 ★</b> [②·③, 조건부 ④] — 2026.12.17~2028.6.16</div>
+          <div class="st"><b class="q">4) 회당 이행강제금 × 보유기간 &lt; 초과수익인가?</b> <span class="y">예 →</span> 현상 유지(무기한 반복·사용 자체 위반·매도 시 설명의무 수용, 감경 신청 병행) · <span class="y">아니오 →</span> 입찰 회피</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- RISKS -->
 <section id="risks">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="eyebrow">투자자에게 반드시 고지할 것</span><h2>미확정 변수 4가지</h2></div>
+    <div class="sec-head reveal"><span class="eyebrow">투자자에게 반드시 고지할 것</span><h2>미확정 변수와 한계</h2></div>
     <div class="reveal">
       <div class="risk"><b>① 시행령 미제정 (최대 변수)</b><p>신고기간·서식·소방 예외가 아직 없다. 공포 즉시 재검토 예정(11월 자동 점검 루틴 가동 중). 국토부 가이드(2026.06 초안)의 시행령 칸은 2014년 구 시행령 문안에 "수정 예정" 표시 — 구조 예상에는 쓰되 확정치로 쓰지 말 것. 시행령 확인 전에는 "신고 가능 기간"을 전제로 한 자금 계획을 확정하지 말 것.</p></div>
       <div class="risk"><b>② 조례 변수</b><p>이행강제금 비율(60%까지 인하)·연 부과횟수·감경 조건·60㎡ 감액 금액이 전부 시·군·구 조례 위임 — 물건 소재지별로 다르다.</p></div>
       <div class="risk"><b>③ 치유 범위의 한계</b><p>양성화는 건축법상 사용승인만 — 지구단위계획·농지·산지 등 타법 위반은 그대로 남는다(법제처 14-0678·14-0477). 대출·보증 정상화는 금융기관 실무 확인 필요.</p></div>
       <div class="risk"><b>④ 정비구역·대지권 관문</b><p>정비구역 물건은 "사업에 지장 없으면 예외"의 판단이 불확실하고, 대지권 미등기 다세대는 대지 사용승낙이 필요하다.</p></div>
       <div class="risk"><b>⑤ 2027.2.12 이행강제금 강화 (2026.8.11 공포 확정)</b><p>반복 징수 재량→기속 + 최초 부과 다음 연도부터 금액 가중 의무(대통령령) + 가중 하한 50% + 실태조사 연 1회 의무화. 단 <b>시행 전 시정명령을 받은 위반내용은 종전 규정</b>(부칙 §5) — "버티기"의 비용이 구조적으로 상승하므로 양성화·시정 결정을 미루지 말 것. 한편 시정한 소유자의 <b>구상권이 신설</b>(§79⑦)돼 낙찰자에게 유리한 명문 근거도 생겼다.</p></div>
+      <div class="risk"><b>⑦ 확인되지 않은 것 — 그대로 믿지 말 것</b><p>①특조법 시행령·신고기간(미제정) ②낙찰자 가중 제외·75% 감경의 해석례·판례 전무 ③종전 소유자 체납 비승계는 판례가 아닌 반대해석 ④<b>HUG 전세보증·담보대출의 위반건축물 취급</b>(기관 기준 — 수익 구조 최대 불확실 요인) ⑤위반건축물 특화 매각불허가 판례 부존재 ⑥대장 "위반건축물" 표시 자체의 처분성 대법원 판례 미확인 ⑦국토부 가이드는 초안이며 법문과 충돌하는 문구가 있음.</p></div>
       <div class="risk" style="border-left-color:var(--green)"><b>⑥ 기회 요인 — 신축 기준 완화 3종 (병행 추적)</b><p>①일조: 높이제한→이격거리 방식, 10~17m 구간 5m 고정(건축법 §61, 2026.11.12 시행 — 허가 신청분부터) ②다세대·다가구 바닥면적 660→1,000㎡·다가구 4층(시행령 개정안 입법예고 중, 공고 2026-1191호) ③단지형 다세대 6개층(1종전용·1종일반 외, 건축위 심의 — 주택법 시행령, 2026.9.8 이미 시행). <b>원상복구 후 재축조(B경로)나 노후 다세대 신축 전환의 사업성이 개선</b>된다 — 단 ②는 미공포이므로 확정 전 전제 금지.</p></div>
     </div>
   </div>
@@ -457,9 +547,11 @@ footer{background:var(--dark);color:var(--on-dark-mute);padding:50px 0;font-size
     <div class="srcs" style="color:var(--on-dark-mute)">
       특정건축물 정리에 관한 특별조치법(법률 제21820호, 2026.6.16 공포·2026.12.17 시행) §2·§3·§4·§6·§7·§9·부칙 §1~§3 ·
       건축법 §79·§80·§80의2 + 시행령 §115의2~§115의4·별표 15 · 건축물대장 규칙 §8 ·
-      대법원 2006마470(일신전속) · 2012두20137 · 2021두45008 · 2026.1.8. 2022두48653 · 2017두30764 ·
+      대법원 2012두20137 · 2021두45008 · 2026.1.8. 2022두48653 · 2017두30764 · 96누8086 · 98두3112 · 2022두35008 · 89누7955 · 2007두17359 · 2008두22655 · 2004다26133(전합) · 2023마7896 ·
+      헌재 2009헌바140 · 2020헌바501 · 2020헌바558 ·
       경기행심 2022경기행심1486(경매 낙찰자 기각) · 청주지법 2017구합2894(양수인 승, 극단 사안) ·
-      법제처 12-0577 · 14-0417 · 14-0477 · 14-0678 · 06-0152 · 07-0280 ·
+      법제처 06-0151 · 06-0152 · 07-0280 · 08-0209 · 12-0577 · 14-0417 · 14-0477 · 14-0478 · 14-0678 · 16-0663 · 18-0466 · 21-0027 · 25-0146 · 서울행심 2025-00031 ·
+      행안부고시 제2025-82호(건물신축가격기준액) · 행안부 훈령 제417호(시가표준액 조정기준) ·
       건축법 개정법률(2026.8.11 공포 — §61 일조 2026.11.12 시행 / §79·§80 강화 2027.2.12 시행, 부칙 §5 경과조치) ·
       국토부 「특정건축물 정리에 관한 특별조치법」 업무처리 가이드(2026.06 초안, 건축정책과 — 행정 가이드·구속력 없음, 법문과 충돌 시 법문 우선) ·
       건축법 시행령 개정안 입법예고(국토교통부공고 제2026-1191호, 2026.9.17~10.26 — 미공포) · 주택법 시행령(영 제36657호, 2026.9.8 시행 — 단지형 다세대 6개층)
@@ -467,7 +559,7 @@ footer{background:var(--dark);color:var(--on-dark-mute);padding:50px 0;font-size
     <div style="margin-top:16px;border-top:1px solid rgba(250,249,245,0.15);padding-top:14px">
       ⚠ 본 자료는 조문·판례·재결에 근거한 <b style="color:var(--light)">일반 법률정보</b>이며 투자 권유가 아닙니다. 사용 예의 금액은 전부 가정값입니다.
       개별 물건의 입찰·양성화 판단은 변호사·건축사·세무사 확인이 필요하며, 신법은 시행 전(시행령 미제정)이므로 실행 시점에 하위법령·소재지 조례를 반드시 재확인하십시오.
-      <span style="opacity:0.6">· auction-law 하네스 · 상세 근거: _workspace/03_analyst_report.md · 2026-09-18</span>
+      <span style="opacity:0.6">· auction-law 하네스 · 구 「위반건축물 경매 전략 가이드」(2026-09-18) 통합본 · 법리 SSOT: wiki/auction/27·28·29</span>
     </div>
   </div>
 </footer>
@@ -492,7 +584,7 @@ function calc(){
   else{ per=(+document.getElementById('unit').value||0)*1e4*0.5*(+document.getElementById('area').value||0)*RATES[t]; }
   var base5=per*5; // 감액·감경 전 5회분
   if(small) per=per*0.5;
-  if(red) per=per*0.25;
+  if(red) per=per*(small?0.5:0.25); // §115의4② 단서: 60㎡ 이하 단서 대상은 75%가 아니라 단서금액의 50% — 곱하지 않고 치환
   var per5=per*5;
   var amnesty;
   if(paid>=5){amnesty=0;}
@@ -629,5 +721,5 @@ requestAnimationFrame(loop);
 
 // checklist counter
 var boxes=document.querySelectorAll('.check input');
-boxes.forEach(function(b){b.addEventListener('change',function(){document.getElementById('ckCount').textContent=document.querySelectorAll('.check input:checked').length+'/9';});});
+boxes.forEach(function(b){b.addEventListener('change',function(){document.getElementById('ckCount').textContent=document.querySelectorAll('.check input:checked').length+'/12';});});
 </script>
