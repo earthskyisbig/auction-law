@@ -14,7 +14,7 @@ law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조
 
 | 발표일 | 대책 | 파일 | 상태 | 갱신일 |
 |---|------|------|------|--------|
-| 2026-08-13 | 8·13 대책 — 수도권 23만호+α 공급·금융 47.8조·이주비대출 개선·소형신축 주택수특례 연장·전세대출보증 제한 확대·토지보상법 개정 발의(조합원 지위양도 완화는 제외) | [policy/2026-0813-daechaek.md](policy/2026-0813-daechaek.md) | ⚠ 발표 기준(국토부·금융위 **안건 원문 PDF** 확인) — 입법·시행령 개정 추적 중 | 2026-08-30 |
+| 2026-08-13 | 8·13 대책 — 수도권 23만호+α 공급·금융 47.8조·이주비대출 개선·소형신축 주택수특례 연장·전세대출보증 제한 확대·토지보상법 개정 발의(조합원 지위양도 완화는 제외) | [policy/2026-0813-daechaek.md](policy/2026-0813-daechaek.md) | ⚠ 발표 기준(국토부·금융위 **안건 원문 PDF** 확인) — 입법·시행령 개정 추적 중 | 2026-09-27 |
 
 > 정책 노트 작성 원칙: 언론 요약이 아니라 **국토부(molit.go.kr)·금융위(fsc.go.kr) 보도자료·안건 원문을 직접 확보**해 정리한다. 과제별 조치사항(법 개정/시행령/행정지도)과 시행시기를 반드시 병기한다.
 
@@ -32,7 +32,7 @@ law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조
 | 8 | 매각불허가 사유(민사집행법 §121·§123) | 절차·매각 | [08-maegak-bulheoga.md](auction/08-maegak-bulheoga.md) | 완료 | 2026-07-27 |
 | 9 | 인도명령 대상·요건 vs 명도소송 | 절차·매각 | [09-indomyeongryeong.md](auction/09-indomyeongryeong.md) | 완료 | 2026-07-27 |
 | 10 | 체납관리비(공용부분) 낙찰자 인수 여부 | 조세·공과금 | [10-chenap-gwanribi.md](auction/10-chenap-gwanribi.md) | 완료 | 2026-07-27 |
-| 11 | 선순위 가압류·가처분·가등기의 인수 여부 | 권리분석 기본 | [11-seonsunwi-gaapryu-gacheobun.md](auction/11-seonsunwi-gaapryu-gacheobun.md) | 완료 | 2026-07-27 |
+| 11 | 선순위 가압류·가처분·가등기의 인수 여부 | 권리분석 기본 | [11-seonsunwi-gaapryu-gacheobun.md](auction/11-seonsunwi-gaapryu-gacheobun.md) | 완료 | 2026-09-27 |
 | 12 | 배당요구종기와 배당요구의 효력(실권 여부) | 배당 | [12-baedangyogu-jonggi.md](auction/12-baedangyogu-jonggi.md) | 완료 | 2026-07-27 |
 | 13 | 상가임차인 대항력·권리금 회수기회 보호 | 임차인 권리 | [13-sangga-daehangryeok-gwonrigeum.md](auction/13-sangga-daehangryeok-gwonrigeum.md) | 완료 | 2026-07-27 |
 | 14 | 재매각 절차(대금미납·보증금 처리) | 절차·매각 | [14-jaemaegak.md](auction/14-jaemaegak.md) | 완료 | 2026-07-27 |
@@ -48,7 +48,7 @@ law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조
 | 24 | 부동산 인도 강제집행 절차 | 명도절차 | [24-budongsan-indojipaeng.md](auction/24-budongsan-indojipaeng.md) | 완료 | 2026-08-10 |
 | 25 | 유체동산(이삿짐) 처리 절차 | 명도절차 | [25-yuchedongsan-cheori.md](auction/25-yuchedongsan-cheori.md) | 완료 | 2026-08-10 |
 | 26 | 상가건물 임대차보호법상 경매 시 임차권 소멸/인수 | 명도절차 | [26-sangga-imdaeeup-somyeol.md](auction/26-sangga-imdaeeup-somyeol.md) | 완료 | 2026-08-10 |
-| 27 | 위반건축물과 이행강제금 (낙찰자 부담 구조·가중 제외·75% 감경·무기한 반복 + **별표15 요율표·시가표준액 산정체계·두 트랙 계산예시**) | 위반건축물 | [27-wiban-ihaenggangjegeum.md](auction/27-wiban-ihaenggangjegeum.md) | 완료 (citation-verifier PASS, **수치 전건 검증**) | 2026-09-18 |
+| 27 | 위반건축물과 이행강제금 (낙찰자 부담 구조·가중 제외·75% 감경·무기한 반복 + **별표15 요율표·시가표준액 산정체계·두 트랙 계산예시**) | 위반건축물 | [27-wiban-ihaenggangjegeum.md](auction/27-wiban-ihaenggangjegeum.md) | 완료 (citation-verifier PASS, **수치 전건 검증**) | 2026-09-27 |
 | 28 | **특정건축물 정리에 관한 특별조치법 — 양성화** (2026.12.17 시행·18개월 한시법) | 위반건축물 | [28-teukjo-beop-yangseonghwa.md](auction/28-teukjo-beop-yangseonghwa.md) | 완료 (citation-verifier PASS) **⚠시행 전·시행령 미제정(§4 신고기간 미정) — 3개월 주기 재검증** · **+10절 국토부 업무처리 가이드(2026.06 초안) 운용 기준·문답 26개·가이드↔법문 충돌표** | 2026-09-26 |
 | 29 | 위반건축물의 철거(행정대집행) 리스크 — 합법화 가능성이 분기점 | 위반건축물 | [29-cheolgeo-daejiphaeng.md](auction/29-cheolgeo-daejiphaeng.md) | 완료 (citation-verifier PASS, 2022두35008 반대 흐름 반영) | 2026-09-18 |
 
@@ -60,15 +60,18 @@ law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조
 - **#28 특조법**: 시행일 **2026.12.17** 전에 **시행령 제정 여부·§4 신고기간**을 반드시 재조회할 것. 유효기간은 시행일부터 18개월(약 2028.6.16.경)이며, 만료 전 **신고 접수**가 기준이다.
 - **#27 건물신축가격기준액 고시**: 행안부고시 제2025-82호는 **시행 2026.6.1**이며 매년 갱신된다. 연도가 바뀌면 기준액(현 주거용 860,000원/㎡)을 재확인할 것.
 - **#27 시가표준액 훈령**: 행안부 훈령 제417호(시행 2026.1.1) 별표 4~7도 개정 주기가 있다.
+- **#27 건축법 §22의2 사후관리 조사**(2027.2.12 시행): 대상 건축물 범위가 시행령 위임 — 시행령 공포 시 반영.
+- **8·13 노트 토허 개정**(부동산거래신고법 법률 제21900호, 2026.12.9 시행): §10①2호 단서 가·나목 대통령령 기준 공포 추적.
+- **원문 미확보 판례 2묶음(2026-09-27 3개월 점검)** — 결론 등재 보류: ① 세법 #16 상증령 §49① 단서 평가기간 밖 감정가액(대법원 2026.7~9월 2024두56641·2025두33867·2024두63625·2026두30892 등 15건 안팎, 국세 출처 사건명만) ② 경매 #27 세무 파급 — 무허가 증축 옥탑의 층수 산입과 1세대1주택 고가주택 판정(대법원 2026.8.21. 2026두30944 심리불속행, 수원고법 2025누981, 의정부지법 2025구단5225 — 결론 방향 미확인). 판결요지 원문 확보 후 등재.
 
 ## 세법 목록
 
 | # | 쟁점 | 카테고리 | 파일 | 상태 | 갱신일 |
 |---|------|---------|------|------|--------|
 | 0 | 세율·조문 확인 로그(auction-tax2 엔진 연계 — 조문 재질문 시 API 전에 먼저 볼 것) | 공통 | [00-verification-log.md](tax/00-verification-log.md) | 운영 중 | 2026-08-16 |
-| 1 | 다주택자 취득세 중과(조정대상지역·법인) | 취득세 | [01-chwideukse-jungwa.md](tax/01-chwideukse-jungwa.md) | 완료 | 2026-08-10 |
-| 2 | 주택 수 산정 기준(분양권·입주권·오피스텔) | 취득세 | [02-jutaeksu-sanjeong.md](tax/02-jutaeksu-sanjeong.md) | 완료 (8·13 소형신축 특례 연장 발표 노트 — 시행령 개정 추적 중) | 2026-08-30 |
-| 3 | 생애최초 취득세 감면 요건 | 취득세 | [03-saengaechoicho-gammyeon.md](tax/03-saengaechoicho-gammyeon.md) | 완료 | 2026-08-10 |
+| 1 | 다주택자 취득세 중과(조정대상지역·법인) | 취득세 | [01-chwideukse-jungwa.md](tax/01-chwideukse-jungwa.md) | 완료 | 2026-09-27 |
+| 2 | 주택 수 산정 기준(분양권·입주권·오피스텔) | 취득세 | [02-jutaeksu-sanjeong.md](tax/02-jutaeksu-sanjeong.md) | 완료 (8·13 소형신축 특례 연장 발표 노트 — 시행령 개정 추적 중) | 2026-09-27 |
+| 3 | 생애최초 취득세 감면 요건 | 취득세 | [03-saengaechoicho-gammyeon.md](tax/03-saengaechoicho-gammyeon.md) | 완료 | 2026-09-27 |
 | 4 | 경매·공매 낙찰의 취득세 과세표준·유상취득 판단 | 취득세 | [04-gyeongmae-chwideukse.md](tax/04-gyeongmae-chwideukse.md) | 완료 | 2026-08-10 |
 | 5 | 종부세 1세대1주택 특례(12억 공제·세액공제) | 재산세·종부세 | [05-jongbuse-1sedae1jutaek.md](tax/05-jongbuse-1sedae1jutaek.md) | 완료 | 2026-08-10 |
 | 6 | 종부세 합산배제 임대주택 요건 | 재산세·종부세 | [06-jongbuse-imdaejutaek.md](tax/06-jongbuse-imdaejutaek.md) | 완료 | 2026-08-10 |
