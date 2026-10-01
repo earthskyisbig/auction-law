@@ -105,6 +105,7 @@ law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조
 | 3 | 현금청산(§73) — 청산금 산정·지연이자·인도 동시이행 | 현금청산 | [03-hyeongeum-cheongsan-sangga.md](redev/03-hyeongeum-cheongsan-sangga.md) | 완료 (citation-verifier PASS) | 2026-08-13 |
 | 4 | 투기과열지구 양도제한의 상가 적용(§39②, 예외 규정 사각지대, 재개발/재건축 기산점 차이) | 양도제한 | [04-tugigwayeol-sangga-yangdo.md](redev/04-tugigwayeol-sangga-yangdo.md) | 완료 (citation-verifier PASS, 시행령 §37③ 2026.2.3 개정 반영, 8·13 대책 미변경 확인) | 2026-08-30 |
 | 5 | 임차인 리스크 — 보증금 구상·압류(§70②~④), 영업보상(공람공고일 기준), 권리금 배제 | 임차인·보상 | [05-sangga-imchain-bosang.md](redev/05-sangga-imchain-bosang.md) | 완료 (citation-verifier PASS) | 2026-08-13 |
+| 6 | 투기과열지구 재당첨 제한(§72⑥) — 5년 분양신청 금지·공유자 연좌·상속 예외 시점·청약 재당첨 병발 | 분양자격·현금청산 | [06-tugigwayeol-jaedangcheom-jehan.md](redev/06-tugigwayeol-jaedangcheom-jehan.md) | 완료 (citation-verifier PASS) | 2026-10-01 |
 
 세무는 별도 항목을 만들지 않고 세법 위키에 연결했다 — 상가는 취득세 주택 수에 미산입이나 **관리처분계획인가로 입주권이
 되는 순간 소득세법상 주택 수에 산입**된다(조심 2020구1136). → [tax/13 "F. 상가에서 전환된 입주권"](tax/13-ipjugwon-yangdose.md)
