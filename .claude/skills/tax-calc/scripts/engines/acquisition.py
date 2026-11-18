@@ -15,6 +15,8 @@
   household_house_count_before: int — 취득 직전 세대 주택수
       (조합원입주권·주택분양권·주택과세 오피스텔 포함 — §13의3)
   temporary_2house: bool — 일시적 2주택 주장 여부(이사·학업·취업·직장이전 등 사유 전제)
+  prior_house_regulated: bool|null — 종전 주택등의 조정대상지역 소재 여부
+      (종전·신규 모두 조정이면 처분기한 2년, 그 외 3년 — 영 §28의5①, 2026.10.01 시행)
   exclusive_area_m2: float|null — 전용면적(농특세 85㎡ 판정)
   first_time_buyer: bool — 생애최초 감면 신청
   acquired_via_presale_right: bool — 분양권에 의한 주택 취득 여부(기산일 함정 경고용)
@@ -116,16 +118,40 @@ def calculate(facts):
 
             temp2 = bool(f.get("temporary_2house")) and count_after == 2
 
+            # 생애최초 감면 대상이면 §13의2 중과세율을 적용하지 않는다(지특법 §36의3① 후단)
+            ftb = rules["first_time_buyer"]
+            ftb_exempts_heavy = (bool(f.get("first_time_buyer"))
+                                 and cause in ("PURCHASE", "AUCTION")
+                                 and price <= ftb["price_cap"])
+
             if low_price_ok:
                 track_rule(res, low)
                 rate = _standard_house_rate(price, std)
                 rate_basis = std["basis"] + " (저가주택 중과 제외: " + low["basis"] + ")"
                 res.step("② 판정: 저가주택 중과 제외", "시가표준액 {} ≤ 기준".format(fmt_won(sigajun)), low["basis"])
-            elif temp2 and regulated:
-                track_rule(res, rules["temporary_2house"])
+            elif ftb_exempts_heavy and count_after >= 2:
+                track_rule(res, ftb)
                 rate = _standard_house_rate(price, std)
-                rate_basis = std["basis"] + " (일시적 2주택: " + rules["temporary_2house"]["basis"] + ")"
-                res.warn("일시적 2주택 사후요건: 신규주택 취득일부터 3년 내 종전 주택등 처분 + 이사·학업·취업·직장이전 등 사유 필요(영 §28의5). 미이행 시 8%와의 차액 + 가산세 추징.")
+                rate_basis = std["basis"] + " (생애최초 감면 대상 — §13의2 중과 배제: " + ftb["basis"] + "①)"
+                res.step("② 판정: 생애최초 감면 대상 → 중과 배제",
+                         "입력 세대 주택수 {}이지만 표준세율 적용".format(count_after), ftb["basis"] + "①")
+                res.warn("세대 주택수가 2 이상인데 생애최초 감면을 신청했다: 감면 요건은 '본인 및 배우자' 무주택이므로 부모 등 세대원 보유 주택은 무관하나, 3년 내 매각·증여·임대 시 추징되며 추징 세액은 중과세율 기준으로 재산정될 수 있다(조심 2022지1179, 구법 사안 🟡).")
+            elif temp2 and regulated:
+                t2 = rules["temporary_2house"]
+                track_rule(res, t2)
+                rate = _standard_house_rate(price, std)
+                rate_basis = std["basis"] + " (일시적 2주택: " + t2["basis"] + ")"
+                prior_reg = f.get("prior_house_regulated")
+                if prior_reg is True:
+                    years = t2["disposal_years_both_regulated"]
+                    years_note = "종전·신규 모두 조정대상지역"
+                elif prior_reg is False:
+                    years = t2["disposal_years"]
+                    years_note = "종전 주택 비조정지역"
+                else:
+                    years = t2["disposal_years_both_regulated"]
+                    years_note = "종전 주택 소재지 미입력 — 보수적으로 2년 가정"
+                res.warn("일시적 2주택 사후요건: 신규주택 취득일부터 {}년 내 종전 주택등 처분({}) + 이사·학업·취업·직장이전 등 사유 필요(영 §28의5①, 2026.10.01 시행본). 미이행 시 8%와의 차액 + 가산세 추징.".format(years, years_note))
             elif count_after <= 1 or (count_after == 2 and not regulated):
                 rate = _standard_house_rate(price, std)
                 rate_basis = std["basis"]
@@ -155,7 +181,7 @@ def calculate(facts):
 
     # ── 감면(생애최초, 지특법 §36의3) ──────────────────
     reduction = 0
-    if f.get("first_time_buyer") and is_house and cause in ("PURCHASE", "AUCTION"):
+    if f.get("first_time_buyer") and is_house and cause in ("PURCHASE", "AUCTION") and f.get("acquirer", "INDIVIDUAL") != "CORPORATION":
         ftb = rules["first_time_buyer"]
         track_rule(res, ftb)
         if price <= ftb["price_cap"]:

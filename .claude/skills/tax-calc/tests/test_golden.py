@@ -51,10 +51,42 @@ class TestAcquisition(unittest.TestCase):
     def test_temporary_2house_standard_rate(self):
         # 조정지역 2주택째지만 일시적 2주택 → 표준세율 1% (6억 이하)
         r = acquisition.calculate(self.base(price=600000000, is_regulated_area=True,
-                                            household_house_count_before=1, temporary_2house=True))
+                                            household_house_count_before=1, temporary_2house=True,
+                                            prior_house_regulated=False))
         self.assertIsNone(r.extra["중과단계"])
         self.assertEqual(r.extra["본세"], 6000000)
         self.assertTrue(any("3년" in w for w in r.warnings))
+
+    def test_temporary_2house_both_regulated_2years(self):
+        # 영 §28의5①(2026.10.01 시행본): 종전·신규 모두 조정대상지역이면 처분기한 2년
+        r = acquisition.calculate(self.base(price=600000000, is_regulated_area=True,
+                                            household_house_count_before=1, temporary_2house=True,
+                                            prior_house_regulated=True))
+        self.assertIsNone(r.extra["중과단계"])
+        self.assertTrue(any("2년 내 종전" in w for w in r.warnings))
+        # 종전 주택 소재지 미입력 → 보수적으로 2년
+        r2 = acquisition.calculate(self.base(price=600000000, is_regulated_area=True,
+                                             household_house_count_before=1, temporary_2house=True))
+        self.assertTrue(any("2년 내 종전" in w and "미입력" in w for w in r2.warnings))
+
+    def test_first_time_buyer_overrides_household_heavy(self):
+        # 지특법 §36의3① 후단 "「지방세법」 제13조의2의 세율을 적용하지 아니한다".
+        # 부모 세대 2주택(세대분리 안 함) + 아들 생애최초, 조정지역 9억 경매:
+        # 종전 엔진은 12% 중과 후 200만 감면(버그). 정답: 표준 3% = 2,700만, 감면 200만,
+        # 교육세 3%×50%×20% = 0.3% = 270만, 84㎡ 농특세 0 → 합계 2,770만
+        r = acquisition.calculate(self.base(cause="AUCTION", price=900000000, is_regulated_area=True,
+                                            household_house_count_before=2, first_time_buyer=True))
+        self.assertIsNone(r.extra["중과단계"])
+        self.assertAlmostEqual(r.extra["적용세율"], 0.03)
+        self.assertEqual(r.extra["본세"], 27000000)
+        self.assertEqual(r.extra["감면"], 2000000)
+        self.assertEqual(r.extra["지방교육세"], 2700000)
+        self.assertEqual(r.total, 27700000)
+        # 12억 초과면 감면·중과배제 모두 없음 → 12% 중과
+        r2 = acquisition.calculate(self.base(cause="AUCTION", price=1300000000, is_regulated_area=True,
+                                             household_house_count_before=2, first_time_buyer=True))
+        self.assertEqual(r2.extra["중과단계"], 12)
+        self.assertEqual(r2.extra["감면"], 0)
 
     def test_corporation_flat_12(self):
         r = acquisition.calculate(self.base(acquirer="CORPORATION", price=300000000))

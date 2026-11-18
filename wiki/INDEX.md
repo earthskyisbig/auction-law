@@ -71,7 +71,7 @@ law.go.kr 조문·판례(및 조세심판원 결정) 원문 근거로 미리 조
 | # | 쟁점 | 카테고리 | 파일 | 상태 | 갱신일 |
 |---|------|---------|------|------|--------|
 | 0 | 세율·조문 확인 로그(auction-tax2 엔진 연계 — 조문 재질문 시 API 전에 먼저 볼 것) | 공통 | [00-verification-log.md](tax/00-verification-log.md) | 운영 중 | 2026-08-16 |
-| 1 | 다주택자 취득세 중과(조정대상지역·법인) | 취득세 | [01-chwideukse-jungwa.md](tax/01-chwideukse-jungwa.md) | 완료 | 2026-09-27 |
+| 1 | 다주택자 취득세 중과(조정대상지역·법인) | 취득세 | [01-chwideukse-jungwa.md](tax/01-chwideukse-jungwa.md) | 완료 (일시적 2주택 조정→조정 2년 정정, 영 §28의5① 2026.10.01 시행본) | 2026-11-16 |
 | 2 | 주택 수 산정 기준(분양권·입주권·오피스텔) | 취득세 | [02-jutaeksu-sanjeong.md](tax/02-jutaeksu-sanjeong.md) | 완료 (8·13 소형신축 특례 연장 발표 노트 — 시행령 개정 추적 중) | 2026-09-27 |
 | 3 | 생애최초 취득세 감면 요건 | 취득세 | [03-saengaechoicho-gammyeon.md](tax/03-saengaechoicho-gammyeon.md) | 완료 | 2026-09-27 |
 | 4 | 경매·공매 낙찰의 취득세 과세표준·유상취득 판단 | 취득세 | [04-gyeongmae-chwideukse.md](tax/04-gyeongmae-chwideukse.md) | 완료 | 2026-08-10 |
